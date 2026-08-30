@@ -1,0 +1,1368 @@
+/* =========================
+   1. UMUMIY SOZLAMALAR
+   Sahifadagi default bo'shliqlarni olib tashlaydi
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   2. BODY
+   Butun saytning asosiy foni va shriftlari
+========================= */
+
+body {
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background: #f7f8fa;
+    color: #17191c;
+}
+
+
+/* =========================
+   3. ASOSIY SAHIFA
+   Kontentning umumiy kengligi
+========================= */
+
+.reading-page {
+    width: min(100% - 40px, 1200px);
+
+    margin: 0 auto;
+
+    padding: 70px 0 100px;
+}
+
+
+/* =========================
+   4. YUQORIDAGI HEADER
+   HELLOCHIWA + Reading + izoh
+========================= */
+
+.reading-header {
+    text-align: center;
+
+    margin-bottom: 55px;
+}
+
+
+/* HELLOCHIWA yozuvi */
+
+.reading-label {
+    display: inline-block;
+
+    margin-bottom: 16px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #666;
+}
+
+
+/* Reading sarlavhasi */
+
+.reading-header h1 {
+    font-size: clamp(38px, 5vw, 64px);
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 18px;
+}
+
+
+/* Reading ostidagi kichik matn */
+
+.reading-header p {
+    color: #70757c;
+
+    font-size: 17px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   5. TIL BO'LIMI
+========================= */
+
+.language-section {
+    width: 100%;
+}
+
+
+/* "Choose a language" qatori */
+
+.section-title {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 22px;
+}
+
+
+/* Choose a language */
+
+.section-title h2 {
+    font-size: 22px;
+
+    font-weight: 750;
+}
+
+
+/* 10 languages */
+
+.section-title span {
+    font-size: 14px;
+
+    color: #858a91;
+}
+
+
+/* =========================
+   6. TILLAR GRID'I
+   Kompyuterda 2 ta card yonma-yon
+========================= */
+
+.language-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+/* =========================
+   7. TIL CARD'I
+   Har bir tilning kubigi
+========================= */
+
+.language-card {
+    position: relative;
+
+    min-height: 170px;
+
+    padding: 28px;
+
+    /* Card chegarasi */
+    border: 1px solid #e3e5e8;
+
+    border-radius: 20px;
+
+    /* Oddiy holatdagi rang */
+    background: #ffffff;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    text-align: left;
+
+    /* Sichqoncha kelganda qo'lcha chiqadi */
+    cursor: pointer;
+
+    /* Rang va harakatlar silliq bo'ladi */
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+
+    font-family: inherit;
+}
+
+
+/* =========================
+   8. CARD USTIGA MISHKA KELGANDA
+   Qaymoqrang bo'ladi
+========================= */
+
+.language-card:hover {
+    /* Card biroz tepaga ko'tariladi */
+    transform: translateY(-4px);
+
+    /* Yengil qaymoqrang */
+    background: #faf5e9;
+
+    /* Chegarasi ham biroz qaymoqrang */
+    border-color: #e3d7bd;
+
+    /* Yengil soya */
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.07);
+}
+
+
+/* Card bosilayotgan payt */
+
+.language-card:active {
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   9. KOD (JP, US, CN...)
+========================= */
+
+.language-code {
+    font-size: 18px;
+
+    font-weight: 800;
+
+    color: #17191c;
+
+    margin-bottom: 12px;
+
+    display: block;
+}
+
+
+/* =========================
+   10. TIL NOMI
+   Masalan: Japanese
+========================= */
+
+.language-name {
+    font-size: 21px;
+
+    font-weight: 750;
+
+    color: #17191c;
+
+    margin-bottom: 5px;
+}
+
+
+/* =========================
+   11. TILNING O'Z NOMI
+   Masalan: 日本語
+========================= */
+
+.language-native {
+    font-size: 14px;
+
+    color: #858a91;
+}
+
+
+/* =========================
+   12. O'NG TOMONDAGI BAYROQ (SVG)
+   Bo'sh joy markaziga o'rnatildi
+========================= */
+
+.language-flag {
+    position: absolute;
+
+    right: 50px;
+
+    top: 45%;
+
+    transform: translateY(-50%);
+
+    width: 54px;
+
+    height: 36px;
+
+    object-fit: cover;
+
+    border-radius: 6px;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+    transition: transform 0.2s ease;
+}
+
+
+.language-card:hover .language-flag {
+    transform: translateY(-50%) scale(1.05);
+}
+
+
+/* =========================
+   13. O'NG TOMONDAGI STRELKA
+========================= */
+
+.language-arrow {
+    position: absolute;
+
+    right: 25px;
+
+    bottom: 23px;
+
+    font-size: 22px;
+
+    color: #969ba2;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* Card ustiga mishka kelganda strelka */
+
+.language-card:hover .language-arrow {
+    transform: translateX(4px);
+
+    color: #17191c;
+}
+
+
+/* =========================
+   14. TABLET
+   Ekran kichrayganda
+========================= */
+
+@media (max-width: 800px) {
+
+    .reading-page {
+        width: min(100% - 30px, 700px);
+
+        padding-top: 50px;
+    }
+
+
+    .reading-header {
+        margin-bottom: 40px;
+    }
+
+
+    .language-card {
+        min-height: 150px;
+    }
+
+}
+
+
+/* =========================
+   15. TELEFON
+   560px dan kichik ekran
+========================= */
+
+@media (max-width: 560px) {
+
+    .reading-page {
+        width: calc(100% - 24px);
+
+        padding: 38px 0 70px;
+    }
+
+
+    /* Reading sarlavhasini moslashtirish */
+
+    .reading-header h1 {
+        letter-spacing: -1px;
+    }
+
+
+    .reading-header p {
+        font-size: 15px;
+    }
+
+
+    .section-title h2 {
+        font-size: 19px;
+    }
+
+
+    /* Telefonda cardlar bittadan chiqadi */
+
+    .language-grid {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+
+    .language-card {
+        min-height: 125px;
+
+        padding: 22px;
+
+        border-radius: 16px;
+    }
+
+
+    .language-flag {
+        right: 40px;
+
+        width: 44px;
+
+        height: 28px;
+    }
+
+
+    .language-name {
+        font-size: 19px;
+    }
+
+
+    .language-arrow {
+        right: 18px;
+
+        bottom: 18px;
+    }
+
+}
+
+
+/* =========================
+   16. JUDA KICHIK TELEFON
+========================= */
+
+@media (max-width: 360px) {
+
+    .reading-page {
+        width: calc(100% - 20px);
+    }
+
+
+    /* Joy kam bo'lsa "10 languages" yashiriladi */
+
+    .section-title span {
+        display: none;
+    }
+
+}
+
+/* =================================================
+   17. YUQORI MENYU — HEADER
+================================================= */
+
+.main-header {
+    background: #f8f7f2;
+    border-bottom: 1px solid #e4e0d7;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    width: min(100% - 40px, 1200px);
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    min-height: 70px;
+}
+
+
+/* Logo */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    color: #292824;
+    text-decoration: none;
+
+    letter-spacing: 1px;
+}
+
+.logo-img {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+/* Navigation */
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+
+    color: #716d64;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: #292824;
+    font-weight: 700;
+}
+
+
+/* Header o'ng tomoni */
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+/* Orqaga qaytish */
+
+.back-link {
+    color: #756b55;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #403c33;
+}
+
+
+/* =================================================
+   18. FOOTER
+================================================= */
+
+.main-footer {
+    background: #292824;
+
+    border-top: none;
+
+    padding: 45px 20px;
+
+    margin-top: 60px;
+
+    text-align: center;
+}
+
+.footer-container {
+    width: min(100% - 40px, 1200px);
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 20px;
+}
+
+.footer-links {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+    gap: 24px;
+}
+
+.footer-links a {
+    text-decoration: none;
+
+    color: #c5c0b4;
+
+    font-size: 14px;
+
+    transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+}
+
+.copyright {
+    font-size: 13px;
+
+    color: #8f8b81;
+}
+
+
+/* =================================================
+   19. AUTH MODAL
+   Login / Register oynasi
+================================================= */
+
+.nav-auth-btn {
+    background: #292824;
+
+    color: #ffffff;
+
+    border: none;
+
+    padding: 9px 18px;
+
+    border-radius: 20px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease;
+}
+
+.nav-auth-btn:hover {
+    background: #454239;
+}
+
+
+/* Modal orqa fon */
+
+.auth-modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(35, 33, 28, 0.45);
+
+    z-index: 1000;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-modal.show {
+    display: flex;
+}
+
+
+/* Modal oynasi */
+
+.auth-modal-content {
+    background: #fffdf8;
+
+    padding: 30px;
+
+    border-radius: 16px;
+
+    width: min(100% - 30px, 400px);
+
+    position: relative;
+
+    box-shadow:
+        0 15px 40px rgba(35, 33, 28, 0.15);
+}
+
+
+/* Yopish */
+
+.close-auth-modal {
+    position: absolute;
+
+    right: 20px;
+    top: 15px;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    color: #858075;
+}
+
+
+/* Auth tabs */
+
+.auth-tabs {
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+
+    border-bottom: 1px solid #e4e0d7;
+}
+
+.auth-tab-btn {
+    flex: 1;
+
+    padding: 10px;
+
+    border: none;
+
+    background: none;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    color: #807b70;
+
+    cursor: pointer;
+}
+
+.auth-tab-btn.active {
+    color: #292824;
+
+    border-bottom: 2px solid #292824;
+}
+
+
+/* Form */
+
+.auth-form {
+    display: none;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.auth-form.active {
+    display: flex;
+}
+
+.input-group {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.input-group label {
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #403d36;
+}
+
+.input-group input {
+    padding: 11px 14px;
+
+    border: 1px solid #ded9ce;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #302f2b;
+}
+
+.input-group input:focus {
+    border-color: #9b917c;
+}
+
+.auth-submit-btn {
+    background: #292824;
+
+    color: #ffffff;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.auth-message {
+    margin-top: 15px;
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+
+/* =================================================
+   20. LOGO
+================================================= */
+
+.site-logo {
+    width: 36px;
+    height: 36px;
+
+    object-fit: contain;
+
+    border-radius: 8px;
+}
+
+.logo-link {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    text-decoration: none;
+}
+
+.site-name {
+    font-weight: 700;
+
+    font-size: 1.2rem;
+
+    color: #292824;
+}
+
+
+/* =================================================
+   21. ARTICLES — MAQOLALAR RO'YXATI
+================================================= */
+
+.articles-section {
+    width: min(100% - 40px, 1100px);
+
+    margin: 50px auto;
+
+    padding: 0;
+}
+
+.section-title {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 24px;
+}
+
+.articles-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(280px, 1fr));
+
+    gap: 20px;
+}
+
+
+/* Article card */
+
+.article-card {
+    background: #fffefa;
+
+    border: 1px solid #e5e0d5;
+
+    border-radius: 16px;
+
+    padding: 24px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.article-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #d4cbb9;
+
+    box-shadow:
+        0 10px 25px rgba(50, 45, 35, 0.08);
+}
+
+
+/* Level */
+
+.article-badge {
+    align-self: flex-start;
+
+    background: #eee9dd;
+
+    color: #6b624f;
+
+    padding: 5px 10px;
+
+    border-radius: 7px;
+
+    font-size: 0.8rem;
+
+    font-weight: 600;
+
+    margin-bottom: 14px;
+}
+
+.article-title {
+    font-size: 1.2rem;
+
+    color: #292824;
+
+    margin-bottom: 8px;
+}
+
+.article-snippet {
+    color: #625f57;
+
+    font-size: 0.92rem;
+
+    margin-bottom: 18px;
+
+    line-height: 1.6;
+}
+
+.read-more-btn {
+    color: #756b55;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    font-size: 0.95rem;
+}
+
+.read-more-btn:hover {
+    color: #4f493d;
+}
+
+
+/* =================================================
+   22. ARTICLE DETAIL — O'QISH SAHIFASI
+================================================= */
+
+.reader-container {
+    width: min(100% - 40px, 780px);
+
+    margin: 0 auto;
+
+    padding: 70px 0 100px;
+}
+
+
+/* Card emas — toza reading */
+
+.reader-card {
+    background: transparent;
+
+    border: none;
+
+    border-radius: 0;
+
+    padding: 0;
+
+    box-shadow: none;
+}
+
+
+/* Meta */
+
+.article-meta {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+.level-badge {
+    background: #ebe6d9;
+
+    color: #665e4c;
+
+    padding: 6px 11px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.lang-badge {
+    background: transparent;
+
+    color: #817b6e;
+
+    font-size: 14px;
+}
+
+
+/* Title */
+
+.reader-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+
+    line-height: 1.28;
+
+    font-weight: 750;
+
+    color: #292824;
+
+    margin-bottom: 34px;
+
+    letter-spacing: -0.025em;
+}
+
+
+/* Article text */
+
+.reader-body {
+    font-size: 18px;
+
+    line-height: 1.9;
+
+    color: #45433d;
+
+    letter-spacing: 0.005em;
+}
+
+.reader-body p {
+    margin-bottom: 26px;
+}
+
+.reader-body h2 {
+    font-size: 23px;
+
+    line-height: 1.4;
+
+    color: #302f2b;
+
+    margin-top: 55px;
+
+    margin-bottom: 20px;
+}
+
+.reader-body h3 {
+    font-size: 20px;
+
+    line-height: 1.4;
+
+    color: #302f2b;
+
+    margin-top: 40px;
+
+    margin-bottom: 16px;
+}
+
+
+/* =================================================
+   23. C1 / C2 QIYIN SO'ZLAR
+================================================= */
+
+.hard-word {
+    color: #756b55;
+
+    font-weight: 600;
+
+    border-bottom: 2px dashed #d0c5ae;
+
+    cursor: pointer;
+
+    position: relative;
+
+    padding: 0 2px;
+
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.hard-word:hover {
+    background: #f1ecdf;
+
+    color: #5f5644;
+
+    border-radius: 4px;
+}
+
+
+/* So'z izohi */
+
+.hard-word-tooltip {
+    position: absolute;
+
+    bottom: calc(100% + 10px);
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: #35332d;
+
+    color: #faf9f5;
+
+    padding: 9px 14px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: 400;
+
+    line-height: 1.45;
+
+    max-width: 280px;
+
+    width: max-content;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 20px rgba(40, 35, 25, 0.14);
+
+    z-index: 1000;
+
+    pointer-events: none;
+}
+
+
+/* =================================================
+   24. MOBILE
+================================================= */
+
+@media (max-width: 768px) {
+
+    .nav-container {
+        width: calc(100% - 28px);
+    }
+
+    .nav-menu {
+        gap: 12px;
+    }
+
+    .nav-menu a {
+        font-size: 13px;
+    }
+
+    .articles-section {
+        width: calc(100% - 28px);
+
+        margin-top: 35px;
+    }
+
+    .reader-container {
+        width: calc(100% - 36px);
+
+        padding: 45px 0 70px;
+    }
+
+    .reader-title {
+        font-size: 2rem;
+
+        line-height: 1.3;
+
+        margin-bottom: 28px;
+    }
+
+    .reader-body {
+        font-size: 17px;
+
+        line-height: 1.85;
+    }
+
+    .reader-body p {
+        margin-bottom: 22px;
+    }
+
+    .footer-links {
+        gap: 16px;
+    }
+}
+
+
+/* Kichik telefon */
+
+@media (max-width: 420px) {
+
+    .nav-container {
+        width: calc(100% - 20px);
+    }
+
+    .nav-menu {
+        gap: 8px;
+    }
+
+    .nav-menu a {
+        font-size: 12px;
+    }
+
+    .reader-container {
+        width: calc(100% - 28px);
+    }
+
+    .reader-body {
+        font-size: 16px;
+
+        line-height: 1.85;
+    }
+}
+
+/* =================================================
+   25. WORD MODAL / POPUP
+================================================= */
+
+.word-modal, 
+#wordModal, 
+.word-popup {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    background: #ffffff;
+    border: 1px solid #e5e0d5;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    z-index: 9999;
+    max-width: 320px;
+}
+
+/* Faqat .show klassi qo'shilganda ko'rinadi */
+.word-modal.show, 
+#wordModal.show, 
+.word-popup.show {
+    display: block !important;
+}
+
+/* =================================================
+   26. STICKY AUDIO PLAYER
+================================================= */
+.sticky-audio-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-radius: 30px;
+    outline: none;
+    max-width: 350px;
+}
+
+/* =================================================
+   27. USER PROFILE DROPDOWN
+================================================= */
+.user-profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-avatar-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #35332d;
+    color: #ffffff;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.profile-avatar-btn:hover {
+    background: #4f493d;
+}
+
+.user-avatar-placeholder {
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    width: 220px;
+    background: #ffffff;
+    border: 1px solid #e5e0d5;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    padding: 14px;
+    z-index: 1000;
+}
+
+.dropdown-menu.show {
+    display: block !important;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-bottom: 8px;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #292824;
+}
+
+.user-email {
+    font-size: 12px;
+    color: #756b55;
+    word-break: break-all;
+}
+
+.dropdown-divider {
+    border: 0;
+    border-top: 1px solid #eee9dd;
+    margin: 8px 0;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    color: #e53e3e;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: background 0.15s ease;
+}
+
+.dropdown-item:hover {
+    background: #fff5f5;
+}

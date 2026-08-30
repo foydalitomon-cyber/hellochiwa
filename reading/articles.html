@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelloChiwa - Articles</title>
+    <link rel="stylesheet" href="css/reading.css">
+    <link rel="icon" type="image/png" href="images/logo.png">
+</head>
+<body>
+
+    <!-- HEADER / NAVIGATSIYA -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo-link">
+                <span class="site-name">HelloChiwa</span>
+            </a>
+            
+            <div class="header-right">
+                <!-- GOOGLE TRANSLATE WIDGET -->
+                <div id="google_translate_element"></div>
+
+                <!-- Kirish tugmasi -->
+                <button id="authBtn" class="nav-auth-btn">Sign In</button>
+
+                <!-- Tizimga kirgan foydalanuvchi profili va Dropdown menyu -->
+                <div id="userProfile" class="user-profile-dropdown" style="display: none;">
+                    <img id="userAvatar" src="" alt="User Avatar" class="profile-avatar">
+
+                    <!-- Bosilganda ochiladigan menyu -->
+                    <div id="profileDropdown" class="dropdown-menu">
+                        <button id="logoutBtn" class="dropdown-item">Chiqish</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAQOLALAR SECTION -->
+    <main class="main-content">
+        <section class="articles-section">
+            <div class="section-title">
+                <h2 id="selectedLanguageTitle">Articles</h2>
+                <span id="articlesCount">0 articles</span>
+            </div>
+
+            <!-- Maqolalar grid qismi -->
+            <div id="articlesGrid" class="articles-grid">
+                <p class="loading-text">Loading articles...</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- AUTH MODAL (LOGIN / REGISTER) -->
+    <div id="authModal" class="auth-modal">
+        <div class="auth-modal-content">
+            <span class="close-auth-modal" id="closeAuthModal">&times;</span>
+            
+            <div class="auth-tabs">
+                <button id="loginTabBtn" class="auth-tab-btn active">Kirish</button>
+                <button id="registerTabBtn" class="auth-tab-btn">Ro'yxatdan o'tish</button>
+            </div>
+
+            <!-- Login Formasi -->
+            <form id="loginForm" class="auth-form active">
+                <div class="input-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" placeholder="email@example.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="loginPassword">Parol</label>
+                    <input type="password" id="loginPassword" placeholder="******" required>
+                </div>
+                <button type="submit" class="auth-submit-btn">Kirish</button>
+            </form>
+
+            <!-- Register Formasi -->
+            <form id="registerForm" class="auth-form">
+                <div class="input-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" placeholder="email@example.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="regPassword">Parol</label>
+                    <input type="password" id="regPassword" placeholder="Kamida 6 ta belgi" required>
+                </div>
+                <button type="submit" class="auth-submit-btn">Ro'yxatdan o'tish</button>
+            </form>
+            
+            <p id="authMessage" class="auth-message"></p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="../about.html">About Us</a>
+                <a href="../faq.html">FAQ</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../terms.html">Terms of Service</a>
+            </div>
+            <p class="copyright">&copy; 2026 HelloChiwa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- SUPABASE VA ASOSIY SKRIPTLAR -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabaseClient.js"></script>
+    <script src="js/articles.js"></script>
+</body>
+</html>

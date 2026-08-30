@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelloChiwa - Reader</title>
+    <link rel="stylesheet" href="css/reading.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="articles.html" class="back-link">← Back to Articles</a>
+        </div>
+    </header>
+
+    <!-- STANDART EKRAN READ-MODE KONTENT -->
+    <main class="reader-container">
+        <article class="reader-card">
+            <div class="article-meta">
+                <span id="articleLevel" class="level-badge">Level</span>
+                <span id="articleLanguage" class="lang-badge">Language</span>
+            </div>
+            
+            <h1 id="articleTitle" class="reader-title">Loading title...</h1>
+            
+            <!-- NOTRANSLATE: Maqola matni tarjima qilinmaydi, asl holida o'qiladi -->
+            <div id="articleBody" class="reader-body notranslate">
+                <p>Loading text...</p>
+            </div>
+        </article>
+    </main>
+
+    <!-- POP-UP MODAL (So'z tushuntirishi uchun) -->
+    <div id="wordModal" class="word-modal hidden">
+        <div class="word-modal-content">
+            <span id="closeModal" class="close-btn">&times;</span>
+            <h3 id="modalWord" class="modal-word-title">Word</h3>
+    <!--       <div id="modalBody" class="modal-word-body">
+                <p id="modalDefinition">Loading explanation...</p>
+                <p id="modalTranslation" class="modal-translation"></p>
+            </div> --> 
+        </div>
+    </div>
+
+     <!-- STICKY AUDIO PLAYER -->
+    <audio id="articleAudio" controls class="sticky-audio-player"></audio>
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="../about.html">About Us</a>
+                <a href="../faq.html">FAQ</a>
+                <a href="../contact.html">Contact</a>
+                <a href="../privacy.html">Privacy Policy</a>
+            </div>
+            <p class="copyright">&copy; 2026 HelloChiwa. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- SKRIPTLAR -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabaseClient.js"></script>
+    <script src="js/article-detail.js"></script>
+</body>
+</html>
