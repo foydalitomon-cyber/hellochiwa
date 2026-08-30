@@ -1366,3 +1366,166 @@ body {
 .dropdown-item:hover {
     background: #fff5f5;
 }
+
+/* =================================================
+   28. ARTICLE ACTIONS & COMMENTS (LIKE, SHARE, COMMENTS)
+================================================= */
+
+/* Action buttons container */
+.article-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #eee9dd;
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: 1px solid #e5e0d5;
+    border-radius: 20px;
+    background-color: #fffefa;
+    font-size: 14px;
+    font-weight: 600;
+    color: #45433d;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.action-btn:hover {
+    background-color: #f1ecdf;
+    border-color: #d4cbb9;
+}
+
+.action-btn:active {
+    transform: scale(0.97);
+}
+
+.action-btn.liked {
+    background-color: #fce8e6;
+    color: #d93025;
+    border-color: #f5c2c0;
+}
+
+/* Comments Section */
+.comments-section {
+    margin-top: 50px;
+    padding-top: 20px;
+}
+
+.comments-section h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #292824;
+    margin-bottom: 20px;
+}
+
+/* Comment Input Form */
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #e5e0d5;
+    border-radius: 12px;
+    background-color: #fffefa;
+    font-family: inherit;
+    font-size: 15px;
+    color: #292824;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.comment-form textarea:focus {
+    border-color: #756b55;
+    box-shadow: 0 0 0 3px rgba(117, 107, 85, 0.12);
+}
+
+.comment-form button {
+    align-self: flex-end;
+    padding: 10px 22px;
+    background-color: #35332d;
+    color: #faf9f5;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.comment-form button:hover {
+    background-color: #4f493d;
+}
+
+.comment-form button:active {
+    transform: scale(0.98);
+}
+
+/* Comments List & Card */
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.comment-card {
+    padding: 18px 20px;
+    background-color: #fffefa;
+    border: 1px solid #e5e0d5;
+    border-radius: 12px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.comment-author {
+    font-weight: 700;
+    color: #292824;
+}
+
+.comment-date {
+    color: #817b6e;
+    font-size: 12px;
+}
+
+.comment-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #45433d;
+    margin: 0;
+}
+
+/* Mobile responsive o'zgarishlar */
+@media (max-width: 768px) {
+    .article-actions {
+        margin-top: 30px;
+    }
+
+    .action-btn {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+
+    .comments-section {
+        margin-top: 35px;
+    }
+
+    .comment-card {
+        padding: 14px 16px;
+    }
+}

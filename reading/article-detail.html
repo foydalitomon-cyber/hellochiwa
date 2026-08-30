@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HelloChiwa - Reader</title>
     <link rel="stylesheet" href="css/reading.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="reading/images/logo.png">
 </head>
 <body>
 
@@ -29,6 +31,35 @@
             <div id="articleBody" class="reader-body notranslate">
                 <p>Loading text...</p>
             </div>
+
+            <!-- Action Buttons (Like & Share) -->
+            <div class="article-actions">
+                <button class="action-btn like-btn" id="likeBtn">
+                    <span class="icon">❤️</span> 
+                    <span class="label">Like</span> 
+                    <span class="count" id="likeCount">0</span>
+                </button>
+                <button class="action-btn share-btn" id="shareBtn">
+                    <span class="icon">🔗</span> 
+                    <span class="label">Share</span>
+                </button>
+            </div>
+
+            <!-- Comments Section -->
+            <section class="comments-section">
+                <h3>Comments (<span id="commentCount">0</span>)</h3>
+
+                <!-- Comment Form -->
+                <div class="comment-form">
+                    <textarea id="commentInput" placeholder="Write a comment..." rows="3"></textarea>
+                    <button id="submitCommentBtn">Post Comment</button>
+                </div>
+
+                <!-- Comments List -->
+                <div class="comments-list" id="commentsList">
+                    <!-- Izohlar JavaScript orqali shu yerga yuklanadi -->
+                </div>
+            </section>
         </article>
     </main>
 
