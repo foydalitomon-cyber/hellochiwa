@@ -65,8 +65,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.querySelectorAll('.hard-word-tooltip').forEach(el => el.remove());
 
             if (target) {
-                const wordKey = (target.dataset.word || target.innerText).trim().toLowerCase();
-                const definition = wordMap[wordKey] || 'Izoh topilmadi';
+                const rawWord = target.dataset.word || target.innerText;
+                const wordKey = rawWord.replace(/[\s\n\r]+/g, ' ').trim().toLowerCase();
+
+                console.log("Bosilgan so'z (toza):", `"${wordKey}"`); // F12 da ko'rish uchun
+                console.log("Mavjud map:", wordMap);
+
+                const definition = wordMap[wordKey] || wordMap[target.innerText.trim().toLowerCase()] || 'Izoh topilmadi';
 
                 const tooltip = document.createElement('div');
                 tooltip.className = 'hard-word-tooltip';
@@ -252,3 +257,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     fetchLikes();
     fetchComments();
 });
+
+/* =================================================
+    DARK MODE (Article Detail sahifasi uchun)
+================================================= */
+const darkModeToggle = document.getElementById('darkModeToggle');
+const body = document.body;
+
+// Sahifa yuklanganda saqlangan rejimni tekshirish
+if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark-mode');
+    if (darkModeToggle) darkModeToggle.textContent = '☀️';
+}
+
+// Oycha tugmasi bosilganda
+if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+            darkModeToggle.textContent = '☀️';
+        } else {
+            localStorage.setItem('theme', 'light');
+            darkModeToggle.textContent = '🌙';
+        }
+    });
+}

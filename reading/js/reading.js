@@ -194,6 +194,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    
     // Sahifa yuklanganda foydalanuvchini tekshirish
     checkUser();
+});
+
+
+/* =================================================
+    DARK MODE TOGGLE SCRIPT
+================================================= */
+document.addEventListener('DOMContentLoaded', () => {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    // Sahifa ochilganda oldingi saqlangan rejimni tekshirish
+    if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode');
+        if (darkModeToggle) darkModeToggle.textContent = '☀️';
+    }
+
+    // Oycha tugmasi bosilganda
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                darkModeToggle.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'light');
+                darkModeToggle.textContent = '🌙';
+            }
+        });
+    }
 });

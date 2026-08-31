@@ -247,3 +247,30 @@ document.addEventListener('DOMContentLoaded', () => {
     checkUser();
     loadArticles();
 });
+
+/* =================================================
+    DARK MODE (Articles sahifasi uchun)
+================================================= */
+const darkModeToggle = document.getElementById('darkModeToggle');
+const body = document.body;
+
+// Sahifa yuklanganda saqlangan rejimni tekshirish
+if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark-mode');
+    if (darkModeToggle) darkModeToggle.textContent = '☀️';
+}
+
+// Oycha tugmasi bosilganda rejimni o'zgartirish
+if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+            darkModeToggle.textContent = '☀️';
+        } else {
+            localStorage.setItem('theme', 'light');
+            darkModeToggle.textContent = '🌙';
+        }
+    });
+}
