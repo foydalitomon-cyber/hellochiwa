@@ -1202,6 +1202,18 @@ body {
     }
 }
 
+/* Telefonda so'z tushuntirishi oynasi (tooltip/modal) ekrandan chiqib ketmasligi uchun */
+@media (max-width: 768px) {
+    .hard-word-tooltip, 
+    .word-modal-content {
+        max-width: 90vw !important; /* Ekran kengligining 90% dan oshmasin */
+        width: auto !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important; /* Har doim markazda tursin */
+        box-sizing: border-box !important;
+    }
+}
+
 /* =================================================
    25. WORD MODAL / POPUP
 ================================================= */
