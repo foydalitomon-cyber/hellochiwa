@@ -1202,14 +1202,21 @@ body {
     }
 }
 
-/* Telefonda so'z tushuntirishi oynasi (tooltip/modal) ekrandan chiqib ketmasligi uchun */
+/* FAQAT TELEFONLAR UCHUN SO'Z OYNASINI TO'G'RILASH */
 @media (max-width: 768px) {
+    .word-modal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
     .hard-word-tooltip, 
     .word-modal-content {
-        max-width: 90vw !important; /* Ekran kengligining 90% dan oshmasin */
-        width: auto !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important; /* Har doim markazda tursin */
+        max-width: 85vw !important;
+        width: 85vw !important;
+        margin: 0 auto !important;
+        left: auto !important;
+        transform: none !important;
         box-sizing: border-box !important;
     }
 }
