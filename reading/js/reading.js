@@ -2,6 +2,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Supabase client obyektini olish
     const supabase = window.supabaseClient;
 
+    // --- 0. SAHIFA OCHILGANDA DARK MODE'NI TEKSHIRISH ---
+    const body = document.body;
+    const darkModeToggle = document.getElementById('darkModeToggle');
+
+    if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode');
+        if (darkModeToggle) darkModeToggle.textContent = '☀️';
+    }
+
     // --- 1. TIL KARTALARI BOSILGANDA MAQOLALAR SAHIFASIGA O'TISH ---
     const languageCards = document.querySelectorAll(".language-card");
 
@@ -172,48 +181,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateAuthUI(user) {
         if (user) {
-            // Tizimga kirgan bo'lsa: Enter tugmasini yashirish, Dropdownni ko'rsatish
             if (authBtn) authBtn.style.display = 'none';
             if (userProfileDropdown) userProfileDropdown.style.display = 'inline-block';
-
-            // User emailini menyuga yozish
             if (userEmailText) userEmailText.textContent = user.email;
 
-            // Emailning '@' gacha bo'lgan qismini ism sifat ko'rsatish
             const emailUsername = user.email ? user.email.split('@')[0] : 'Foydalanuvchi';
             if (userNameText) userNameText.textContent = emailUsername;
 
-            // Avatarga username'ning birinchi harfini qo'yish
             const firstLetter = emailUsername.charAt(0).toUpperCase();
             const avatarSpan = document.querySelector('.user-avatar-placeholder');
             if (avatarSpan) avatarSpan.textContent = firstLetter;
         } else {
-            // Mehmon holati: Enter tugmasini ko'rsatish, Dropdownni yashirish
             if (authBtn) authBtn.style.display = 'inline-block';
             if (userProfileDropdown) userProfileDropdown.style.display = 'none';
         }
     }
 
-    
-    // Sahifa yuklanganda foydalanuvchini tekshirish
     checkUser();
-});
 
-
-/* =================================================
-    DARK MODE TOGGLE SCRIPT
-================================================= */
-document.addEventListener('DOMContentLoaded', () => {
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const body = document.body;
-
-    // Sahifa ochilganda oldingi saqlangan rejimni tekshirish
-    if (localStorage.getItem('theme') === 'dark') {
-        body.classList.add('dark-mode');
-        if (darkModeToggle) darkModeToggle.textContent = '☀️';
-    }
-
-    // Oycha tugmasi bosilganda
+    // --- 3. DARK MODE (OYCHA) TUGMASI LOGIKASI ---
     if (darkModeToggle) {
         darkModeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-mode');

@@ -2,9 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const supabase = window.supabaseClient;
 
     const authBtn = document.getElementById('authBtn');
-    const userProfile = document.getElementById('userProfile');
-    const userAvatar = document.getElementById('userAvatar');
-    const profileDropdown = document.getElementById('profileDropdown');
+    const userProfile = document.getElementById('userProfileDropdown');
+    const userAvatar = document.getElementById('profileAvatarBtn');
+    const profileDropdown = document.getElementById('dropdownMenu');
     const logoutBtn = document.getElementById('logoutBtn');
 
     const authModal = document.getElementById('authModal');
@@ -21,10 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // URL parametridan tilni olish (?lang=English)
     const urlParams = new URLSearchParams(window.location.search);
-    const selectedLang = urlParams.get('lang') || 'English';
+    const selectedLang = urlParams.get('lang');
 
     if (selectedLanguageTitle) {
-        selectedLanguageTitle.textContent = `${selectedLang} Articles`;
+        selectedLanguageTitle.textContent = selectedLang ? `${selectedLang} Articles` : 'All Articles';
     }
 
     // --- AUTH LOGIKA ---
@@ -177,10 +177,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Til bo'yicha filterlash
-            const filteredArticles = articles.filter(a => {
-                const lang = a.language_code || a.language || a.lang || '';
-                return lang.toLowerCase() === selectedLang.toLowerCase();
-            });
+            const filteredArticles = selectedLang
+                ? articles.filter(a => {
+                    const lang = a.language_code || a.language || a.lang || '';
+                    return lang.toLowerCase() === selectedLang.toLowerCase();
+                })
+                : articles;
 
             if (articlesCount) {
                 articlesCount.textContent = `${filteredArticles.length} articles`;
@@ -193,7 +195,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Maqolalarni chiqarish
             articlesGrid.innerHTML = filteredArticles.map(article => {
-                // HTML teglarni tozalash
                 const cleanTitle = (article.title || 'Sarlavhasiz').replace(/<[^>]*>?/gm, '').replace(/"/g, '&quot;');
                 
                 let rawDescription = article.description || article.content || '';
@@ -202,16 +203,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     ? rawDescription.substring(0, 120) + '...' 
                     : rawDescription;
 
-                let imageUrl = article.image_url || article.image || '';
-                if (!imageUrl || !imageUrl.startsWith('http') || imageUrl.includes('<')) {
-                    imageUrl = 'images/default-article.jpg';
-                }
-
                 return `
                     <div class="article-card" data-id="${article.id}" style="cursor: pointer;">
-                        <div class="article-image-box">
-                            <img src="${imageUrl}" alt="" class="article-image" onerror="this.src='images/default-article.jpg'">
-                        </div>
                         <div class="article-content">
                             <span class="article-category">${article.category || 'General'}</span>
                             <h3 class="article-title">${cleanTitle}</h3>
@@ -222,12 +215,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
             }).join('');
 
-            // Kartochkaga bosish hodisasini toza JS orqali biriktirish (miltillashni oldini oladi)
+            // Kartochkaga bosish hodisasi
             document.querySelectorAll('.article-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const id = card.getAttribute('data-id');
                     if (id) {
-                        window.location.href = `article-detail.html?id=${id}`;
+                        if (selectedLang) {
+                            window.location.href = `article-detail.html?id=${id}&lang=${selectedLang}`;
+                        } else {
+                            window.location.href = `article-detail.html?id=${id}`;
+                        }
                     }
                 });
             });
@@ -246,31 +243,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     checkUser();
     loadArticles();
-});
 
-/* =================================================
-    DARK MODE (Articles sahifasi uchun)
-================================================= */
-const darkModeToggle = document.getElementById('darkModeToggle');
-const body = document.body;
+    /* =================================================
+        DARK MODE (Articles sahifasi uchun)
+    ================================================= */
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
 
-// Sahifa yuklanganda saqlangan rejimni tekshirish
-if (localStorage.getItem('theme') === 'dark') {
-    body.classList.add('dark-mode');
-    if (darkModeToggle) darkModeToggle.textContent = '☀️';
-}
+    if (localStorage.getItem('theme') === 'dark') {
+        body.classList.add('dark-mode');
+        if (darkModeToggle) darkModeToggle.textContent = '☀️';
+    }
 
-// Oycha tugmasi bosilganda rejimni o'zgartirish
-if (darkModeToggle) {
-    darkModeToggle.addEventListener('click', () => {
-        body.classList.toggle('dark-mode');
-        
-        if (body.classList.contains('dark-mode')) {
-            localStorage.setItem('theme', 'dark');
-            darkModeToggle.textContent = '☀️';
-        } else {
-            localStorage.setItem('theme', 'light');
-            darkModeToggle.textContent = '🌙';
-        }
-    });
-}
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                darkModeToggle.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'light');
+                darkModeToggle.textContent = '🌙';
+            }
+        });
+    }
+
+}); // <-- Barcha skriptni o'rab turgan DOMContentLoaded ni yopuvchi yagona oxirgi qavs

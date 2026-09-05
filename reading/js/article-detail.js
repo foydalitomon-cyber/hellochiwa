@@ -27,21 +27,40 @@ document.addEventListener('DOMContentLoaded', async () => {
     async function loadArticle() {
         if (!supabase) return;
 
-        const { data: article, error } = await supabase
-            .from('reading_articles')
-            .select('*')
-            .eq('id', articleId)
-            .single();
+        let article = null;
 
-        if (error || !article) return;
+        try {
+            const { data, error } = await supabase
+                .from('reading_articles')
+                .select('*')
+                .eq('id', articleId)
+                .single();
 
-        if (titleEl) titleEl.innerHTML = article.title;
-        if (bodyEl) bodyEl.innerHTML = article.content.replace(/\n/g, '<br>');
-        if (levelEl) levelEl.textContent = article.level || 'General';
-        if (langEl) langEl.textContent = article.language_code || '';
+            if (error || !data) {
+                console.error("Maqola topilmadi:", error?.message);
+                if (titleEl) titleEl.textContent = "Maqola topilmadi.";
+                return;
+            }
 
-        if (audioEl && article.audio_url) {
-            audioEl.src = article.audio_url;
+            article = data;
+
+            if (titleEl) titleEl.innerHTML = article.title;
+            if (bodyEl) bodyEl.innerHTML = article.content.replace(/\n/g, '<br>');
+            if (levelEl) levelEl.textContent = article.level || 'General';
+            if (langEl) langEl.textContent = article.language_code || '';
+
+            const backLink = document.getElementById('backLink');
+
+            if (backLink && article.language_code) {
+                backLink.href = `articles.html?lang=${encodeURIComponent(article.language_code)}`;
+            }
+
+            if (audioEl && article.audio_url) {
+                audioEl.src = article.audio_url;
+            }
+        } catch (err) {
+            console.error("Maqolani yuklashda xatolik:", err);
+            return;
         }
 
         const { data: words } = await supabase
@@ -252,8 +271,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         return div.innerHTML;
     }
 
-    // 5. ISHGA TUSHIRISH (Ketma-ketlikda)
-    await loadArticle();
+    /// 5. ISHGA TUSHIRISH (Xavfsiz usulda)
+    try {
+        await loadArticle();
+    } catch (e) {
+        console.error("Load article error:", e);
+    }
+    
     fetchLikes();
     fetchComments();
 });

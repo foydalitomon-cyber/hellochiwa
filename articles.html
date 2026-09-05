@@ -4,41 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HelloChiwa - Articles</title>
-    <link rel="stylesheet" href="css/reading.css">
-    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="stylesheet" href="reading/css/reading.css">
+    <link rel="icon" type="image/png" href="reading/images/logo.png">
 </head>
 <body>
 
     <!-- HEADER / NAVIGATSIYA -->
     <header class="main-header">
-        <div class="header-container">
-            <a href="index.html" class="logo-link">
-                <span class="site-name">HelloChiwa</span>
+        <div class="nav-container">
+            <!-- 1. Chap tomonda Logo -->
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="HelloChiwa Logo" class="logo-img">
+                <span>HelloChiwa</span>
             </a>
-            <!-- Tungi rejim tugmasi -->
-            <button id="darkModeToggle" title="Tungi rejim" style="background: none; border: none; cursor: pointer; font-size: 20px; margin-left: 10px;">
-                    🌙
-            </button>
+            
+            <!-- O'ng tomonda tugmalar, tungi rejim va profil -->
             <div class="header-right">
-                <!-- GOOGLE TRANSLATE WIDGET -->
-                <div id="google_translate_element"></div>
-
+                <button id="darkModeToggle" class="dark-mode-btn" style="background: none; border: none; cursor: pointer; font-size: 1.2rem; margin-left: 10px;">🌙</button>
                 <!-- Kirish tugmasi -->
                 <button id="authBtn" class="nav-auth-btn">Sign In</button>
                 
                 <!-- Tizimga kirgan foydalanuvchi profili va Dropdown menyu -->
-                <div id="userProfile" class="user-profile-dropdown" style="display: none;">
-                    <img id="userAvatar" src="" alt="User Avatar" class="profile-avatar">
+                <div id="userProfileDropdown" class="user-profile-dropdown" style="display: none;">
+                    <div id="profileAvatarBtn" class="profile-avatar" style="width: 38px; height: 38px; border-radius: 50%; background: #292824; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer;">
+                        <span class="user-avatar-placeholder">J</span>
+                    </div>
 
-                    <!-- Bosilganda ochiladigan menyu -->
-                    <div id="profileDropdown" class="dropdown-menu">
-                        <button id="logoutBtn" class="dropdown-item">Chiqish</button>
+                    <!-- Bosilganda ochiladigan menyu (Barcha sahifalar va Chiqish shu yerga ko'chirildi) -->
+                    <div id="dropdownMenu" class="dropdown-menu">
+                        <a href="home.html" class="dropdown-item">Home</a>
+                        <a href="index.html" class="dropdown-item">Reading</a>
+                        <a href="about.html" class="dropdown-item">About</a>
+                        <a href="faq.html" class="dropdown-item">FAQ</a>
+                        <a href="contact.html" class="dropdown-item">Contact</a>
+                        <hr style="border: none; border-top: 1px solid #eee; margin: 4px 0;">
+                        <button id="logoutBtn" class="dropdown-item" style="color: #e74c3c;">Chiqish</button>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-
     <!-- MAQOLALAR SECTION -->
     <main class="main-content">
         <section class="articles-section">
@@ -98,11 +103,11 @@
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-links">
-                <a href="../about.html">About Us</a>
-                <a href="../faq.html">FAQ</a>
-                <a href="../contact.html">Contact</a>
-                <a href="../privacy.html">Privacy Policy</a>
-                <a href="../terms.html">Terms of Service</a>
+                <a href="about.html">About Us</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contact.html">Contact</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
             </div>
             <p class="copyright">&copy; 2026 HelloChiwa. All rights reserved.</p>
         </div>
@@ -110,7 +115,8 @@
 
     <!-- SUPABASE VA ASOSIY SKRIPTLAR -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabaseClient.js"></script>
-    <script src="js/articles.js"></script>
+    <script src="reading/js/supabaseClient.js"></script>
+    <script src="reading/js/reading.js"></script>  
+    <script src="reading/js/articles.js"></script>
 </body>
 </html>

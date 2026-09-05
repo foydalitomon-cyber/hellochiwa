@@ -4,22 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HelloChiwa - Reader</title>
-    <link rel="stylesheet" href="css/reading.css">
+    <link rel="stylesheet" href="reading/css/reading.css">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="reading/images/logo.png">
 </head>
 <body>
 
     <!-- HEADER -->
-    <header class="main-header">
-        <div class="header-container">
-            <a href="articles.html" class="back-link">← Back to Articles</a>
-            <!-- Tungi rejim tugmasi chapda -->
-            <button id="darkModeToggle" title="Tungi rejim" style="background: none; border: none; cursor: pointer; font-size: 20px;">
-                🌙
-            </button>
-        </div>
-    </header>
+<header class="main-header">
+    <div class="header-container">
+        <a href="articles.html" id="backLink" class="back-link">
+            <span>←</span> Back to Articles
+        </a>
+        
+        <!-- Tungi rejim tugmasi -->
+        <button id="darkModeToggle" class="dark-mode-btn" title="Tungi rejim">
+            🌙
+        </button>
+    </div>
+</header>
 
     <!-- STANDART EKRAN READ-MODE KONTENT -->
     <main class="reader-container">
@@ -85,10 +88,10 @@
     <footer class="main-footer">
         <div class="footer-container">
             <div class="footer-links">
-                <a href="../about.html">About Us</a>
-                <a href="../faq.html">FAQ</a>
-                <a href="../contact.html">Contact</a>
-                <a href="../privacy.html">Privacy Policy</a>
+                <a href="about.html">About Us</a>
+                <a href="faq.html">FAQ</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="privacy-policy.html">Privacy Policy</a> (yoki privacy.html faylingiz qanday nomlangan bo'lsa)
             </div>
             <p class="copyright">&copy; 2026 HelloChiwa. All rights reserved.</p>
         </div>

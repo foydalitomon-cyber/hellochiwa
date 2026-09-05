@@ -45,61 +45,6 @@ body {
 
 
 /* =========================
-   4. YUQORIDAGI HEADER
-   HELLOCHIWA + Reading + izoh
-========================= */
-
-.reading-header {
-    text-align: center;
-
-    margin-bottom: 55px;
-}
-
-
-/* HELLOCHIWA yozuvi */
-
-.reading-label {
-    display: inline-block;
-
-    margin-bottom: 16px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    letter-spacing: 2px;
-
-    color: #666;
-}
-
-
-/* Reading sarlavhasi */
-
-.reading-header h1 {
-    font-size: clamp(38px, 5vw, 64px);
-
-    line-height: 1.1;
-
-    font-weight: 800;
-
-    letter-spacing: -2px;
-
-    margin-bottom: 18px;
-}
-
-
-/* Reading ostidagi kichik matn */
-
-.reading-header p {
-    color: #70757c;
-
-    font-size: 17px;
-
-    line-height: 1.6;
-}
-
-
-/* =========================
    5. TIL BO'LIMI
 ========================= */
 
@@ -465,42 +410,32 @@ body {
 .nav-container {
     width: min(100% - 40px, 1200px);
     margin: 0 auto;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     min-height: 70px;
 }
 
-
 /* Logo */
-
 .logo {
     display: flex;
     align-items: center;
     gap: 10px;
-
     font-size: 20px;
     font-weight: 800;
-
     color: #292824;
     text-decoration: none;
-
     letter-spacing: 1px;
 }
 
 .logo-img {
     width: 36px;
     height: 36px;
-
     border-radius: 50%;
     object-fit: cover;
 }
 
-
 /* Navigation */
-
 .nav-menu {
     display: flex;
     align-items: center;
@@ -509,15 +444,10 @@ body {
 
 .nav-menu a {
     text-decoration: none;
-
     color: #716d64;
-
     font-size: 15px;
     font-weight: 500;
-
-    transition:
-        color 0.2s ease,
-        background 0.2s ease;
+    transition: color 0.2s ease, background 0.2s ease;
 }
 
 .nav-menu a:hover,
@@ -526,25 +456,18 @@ body {
     font-weight: 700;
 }
 
-
 /* Header o'ng tomoni */
-
 .header-right {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-
 /* Orqaga qaytish */
-
 .back-link {
     color: #756b55;
-
     text-decoration: none;
-
     font-weight: 600;
-
     transition: color 0.2s ease;
 }
 
@@ -552,6 +475,51 @@ body {
     color: #403c33;
 }
 
+/* Profil va Dropdown menyu stillari (Mana shu qism qo'shildi) */
+.user-profile-dropdown {
+    position: relative;
+    cursor: pointer;
+}
+
+.profile-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #4caf50;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    padding: 8px;
+    min-width: 120px;
+    z-index: 100;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-item {
+    width: 100%;
+    padding: 8px 12px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}
 
 /* =================================================
    18. FOOTER
@@ -1649,3 +1617,11 @@ body.dark-mode .main-footer {
 body.dark-mode .footer-links a {
     color: #cccccc !important;
 }
+
+/* 8. Kartochkalar hover (mishka kelganda) effekti tungi rejim uchun */
+body.dark-mode .language-card:hover,
+body.dark-mode .article-card:hover {
+    background-color: #252525 !important;
+    border-color: #444444 !important;
+}
+
