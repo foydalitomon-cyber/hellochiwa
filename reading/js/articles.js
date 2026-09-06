@@ -244,29 +244,4 @@ document.addEventListener('DOMContentLoaded', () => {
     checkUser();
     loadArticles();
 
-    /* =================================================
-        DARK MODE (Articles sahifasi uchun)
-    ================================================= */
-    const darkModeToggle = document.getElementById('darkModeToggle');
-    const body = document.body;
-
-    if (localStorage.getItem('theme') === 'dark') {
-        body.classList.add('dark-mode');
-        if (darkModeToggle) darkModeToggle.textContent = '☀️';
-    }
-
-    if (darkModeToggle) {
-        darkModeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-                darkModeToggle.textContent = '☀️';
-            } else {
-                localStorage.setItem('theme', 'light');
-                darkModeToggle.textContent = '🌙';
-            }
-        });
-    }
-
 }); // <-- Barcha skriptni o'rab turgan DOMContentLoaded ni yopuvchi yagona oxirgi qavs

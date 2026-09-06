@@ -63,10 +63,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
+        const articleLanguage = article.language || 'japanese';
+
         const { data: words } = await supabase
             .from('reading_vocabularies')
             .select('*')
-            .eq('article_id', articleId);
+            .eq('language', articleLanguage); // <-- .eq('article_id', articleId) o'rniga shuni qo'yasiz
 
         const wordMap = {};
         if (words) {
