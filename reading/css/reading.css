@@ -316,104 +316,91 @@ body {
 
 @media (max-width: 560px) {
 
-    /* Header konteynerini ustma-ust tushadigan qilish */
+    /* Header elementlarini bir qatorga ixcham joylash */
     .nav-container {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 12px 15px;
-        gap: 10px;
-        min-height: auto;
+        padding: 0 10px;
+        min-height: 55px;
+        gap: 8px;
     }
 
-    /* Logo va o'ng tarafdagi tugmalar birinchi qatorda turishi uchun */
-    .nav-container > div:first-child,
+    /* Logo hajmini kichraytirish */
     .logo {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
+        font-size: 14px;
+        gap: 5px;
+        letter-spacing: 0.5px;
     }
 
-    /* Menyuni ikkinchi qatorga tushirib, o'rtada chiroyli joylash */
+    .logo-img {
+        width: 26px;
+        height: 26px;
+    }
+
+    /* Menyuni ixchamlash */
     .nav-menu {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px 16px;
-        padding: 10px 0;
-        border-top: 1px solid #e4e0d7;
-        border-bottom: 1px solid #e4e0d7;
-        width: 100%;
+        gap: 8px;
     }
 
     .nav-menu a {
-        font-size: 14px;
+        font-size: 12px;
+    }
+
+    /* O'ng tarafdagi tugma / profil */
+    .header-right {
+        gap: 8px;
+    }
+
+    .nav-auth-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+        border-radius: 14px;
     }
 
     .reading-page {
-        width: calc(100% - 24px);
-
-        padding: 38px 0 70px;
+        width: calc(100% - 20px);
+        padding: 30px 0 60px;
     }
 
-
     /* Reading sarlavhasini moslashtirish */
-
     .reading-header h1 {
         letter-spacing: -1px;
     }
 
-
     .reading-header p {
-        font-size: 15px;
+        font-size: 14px;
     }
-
 
     .section-title h2 {
-        font-size: 19px;
+        font-size: 18px;
     }
 
-
     /* Telefonda cardlar bittadan chiqadi */
-
     .language-grid {
         grid-template-columns: 1fr;
-
         gap: 12px;
     }
 
-
     .language-card {
-        min-height: 125px;
-
-        padding: 22px;
-
-        border-radius: 16px;
+        min-height: 120px;
+        padding: 18px;
+        border-radius: 14px;
     }
-
 
     .language-flag {
-        right: 40px;
-
-        width: 44px;
-
-        height: 28px;
+        right: 35px;
+        width: 40px;
+        height: 26px;
     }
-
 
     .language-name {
-        font-size: 19px;
+        font-size: 18px;
     }
 
-
     .language-arrow {
-        right: 18px;
-
-        bottom: 18px;
+        right: 15px;
+        bottom: 15px;
     }
 
 }
-
 /* =========================
    16. JUDA KICHIK TELEFON
 ========================= */
