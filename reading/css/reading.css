@@ -316,48 +316,46 @@ body {
 
 @media (max-width: 560px) {
 
-    /* Header elementlarini bir qatorga ixcham joylash */
+    /* Header konteynerini bir qatorga qulay joylash */
     .nav-container {
-        padding: 0 10px;
+        padding: 0 12px;
         min-height: 55px;
-        gap: 8px;
+        gap: 10px;
     }
 
-    /* Logo hajmini kichraytirish */
+    /* Telefonda logoning yozuvini (HELLOCHIWA) yashirish, faqat kichik iconi qoladi */
+    .logo span,
+    .logo-text {
+        display: none !important;
+    }
+
+    /* Logo rasmining o'zi qoladi, lekin u ham ixchamlashadi */
     .logo {
-        font-size: 14px;
-        gap: 5px;
-        letter-spacing: 0.5px;
+        gap: 0;
     }
 
     .logo-img {
-        width: 26px;
-        height: 26px;
+        width: 32px;
+        height: 32px;
     }
 
-    /* Menyuni ixchamlash */
+    /* Menyuni ixchamlash va qisqartirish */
     .nav-menu {
-        gap: 8px;
+        gap: 10px;
     }
 
     .nav-menu a {
-        font-size: 12px;
+        font-size: 13px;
     }
 
-    /* O'ng tarafdagi tugma / profil */
+    /* O'ng tarafdagi Enter / profil tugmasi */
     .header-right {
-        gap: 8px;
-    }
-
-    .nav-auth-btn {
-        padding: 6px 12px;
-        font-size: 12px;
-        border-radius: 14px;
+        gap: 10px;
     }
 
     .reading-page {
-        width: calc(100% - 20px);
-        padding: 30px 0 60px;
+        width: calc(100% - 24px);
+        padding: 38px 0 70px;
     }
 
     /* Reading sarlavhasini moslashtirish */
@@ -366,11 +364,11 @@ body {
     }
 
     .reading-header p {
-        font-size: 14px;
+        font-size: 15px;
     }
 
     .section-title h2 {
-        font-size: 18px;
+        font-size: 19px;
     }
 
     /* Telefonda cardlar bittadan chiqadi */
@@ -380,24 +378,24 @@ body {
     }
 
     .language-card {
-        min-height: 120px;
-        padding: 18px;
-        border-radius: 14px;
+        min-height: 125px;
+        padding: 22px;
+        border-radius: 16px;
     }
 
     .language-flag {
-        right: 35px;
-        width: 40px;
-        height: 26px;
+        right: 40px;
+        width: 44px;
+        height: 28px;
     }
 
     .language-name {
-        font-size: 18px;
+        font-size: 19px;
     }
 
     .language-arrow {
-        right: 15px;
-        bottom: 15px;
+        right: 18px;
+        bottom: 18px;
     }
 
 }
