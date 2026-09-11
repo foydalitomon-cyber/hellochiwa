@@ -316,26 +316,34 @@ body {
 
 @media (max-width: 560px) {
 
-    /* Header elementlarini ikkita qatorga bo'lish (Enter va menyu to'liq ko'rinishi uchun) */
+    /* Header konteynerini ustma-ust tushadigan qilish */
     .nav-container {
-        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: stretch;
         padding: 12px 15px;
         gap: 10px;
         min-height: auto;
     }
 
+    /* Logo va o'ng tarafdagi tugmalar birinchi qatorda turishi uchun */
+    .nav-container > div:first-child,
     .logo {
-        font-size: 18px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
     }
 
-    /* Menyuni ikkinchi qatorga tushirib, o'rtaga joylash */
+    /* Menyuni ikkinchi qatorga tushirib, o'rtada chiroyli joylash */
     .nav-menu {
-        order: 3;
-        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
         justify-content: center;
-        gap: 18px;
-        padding-top: 8px;
+        gap: 10px 16px;
+        padding: 10px 0;
         border-top: 1px solid #e4e0d7;
+        border-bottom: 1px solid #e4e0d7;
+        width: 100%;
     }
 
     .nav-menu a {
