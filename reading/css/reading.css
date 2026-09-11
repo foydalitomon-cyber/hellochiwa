@@ -316,28 +316,30 @@ body {
 
 @media (max-width: 560px) {
 
-    /* Yuqori menyu va Enter/Profil tugmasini telefon ekraniga moslash */
+    /* Header elementlarini ikkita qatorga bo'lish (Enter va menyu to'liq ko'rinishi uchun) */
     .nav-container {
-        padding: 0 12px;
-        min-height: 55px;
-    }
-    
-    .nav-menu {
-        gap: 10px; /* So'zlar orasidagi masofa qisqaradi */
-    }
-
-    .nav-menu a {
-        font-size: 13px; /* Shriftlar ixchamlashib, "Enter" va menyu sig'adi */
+        flex-wrap: wrap;
+        padding: 12px 15px;
+        gap: 10px;
+        min-height: auto;
     }
 
     .logo {
-        font-size: 16px;
-        gap: 6px;
+        font-size: 18px;
     }
 
-    .logo-img {
-        width: 28px;
-        height: 28px;
+    /* Menyuni ikkinchi qatorga tushirib, o'rtaga joylash */
+    .nav-menu {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 18px;
+        padding-top: 8px;
+        border-top: 1px solid #e4e0d7;
+    }
+
+    .nav-menu a {
+        font-size: 14px;
     }
 
     .reading-page {
