@@ -316,46 +316,54 @@ body {
 
 @media (max-width: 560px) {
 
-    /* Header konteynerini bir qatorga qulay joylash */
+    /* Header konteyneri */
     .nav-container {
-        padding: 0 12px;
-        min-height: 55px;
-        gap: 10px;
+        padding: 0 10px;
+        min-height: 50px;
+        gap: 8px;
+        overflow: hidden;
     }
 
-    /* Telefonda logoning yozuvini (HELLOCHIWA) yashirish, faqat kichik iconi qoladi */
-    .logo span,
-    .logo-text {
-        display: none !important;
-    }
-
-    /* Logo rasmining o'zi qoladi, lekin u ham ixchamlashadi */
+    /* Logo biroz ixchamlashadi */
     .logo {
-        gap: 0;
+        font-size: 14px;
+        gap: 5px;
     }
 
     .logo-img {
-        width: 32px;
-        height: 32px;
+        width: 26px;
+        height: 26px;
     }
 
-    /* Menyuni ixchamlash va qisqartirish */
+    /* Menyuni gorizontal suriladigan qilish (ustma-ust chiqib xiralashishining oldini oladi) */
     .nav-menu {
-        gap: 10px;
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        gap: 14px;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox uchun skrollni yashirish */
+    }
+
+    /* Chrome va Safari uchun pastdagi skroll chizig'ini yashirish */
+    .nav-menu::-webkit-scrollbar {
+        display: none;
     }
 
     .nav-menu a {
         font-size: 13px;
+        flex-shrink: 0;
     }
 
     /* O'ng tarafdagi Enter / profil tugmasi */
     .header-right {
-        gap: 10px;
+        gap: 6px;
     }
 
     .reading-page {
-        width: calc(100% - 24px);
-        padding: 38px 0 70px;
+        width: calc(100% - 20px);
+        padding: 30px 0 60px;
     }
 
     /* Reading sarlavhasini moslashtirish */
@@ -364,11 +372,11 @@ body {
     }
 
     .reading-header p {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .section-title h2 {
-        font-size: 19px;
+        font-size: 18px;
     }
 
     /* Telefonda cardlar bittadan chiqadi */
@@ -378,24 +386,24 @@ body {
     }
 
     .language-card {
-        min-height: 125px;
-        padding: 22px;
-        border-radius: 16px;
+        min-height: 120px;
+        padding: 18px;
+        border-radius: 14px;
     }
 
     .language-flag {
-        right: 40px;
-        width: 44px;
-        height: 28px;
+        right: 35px;
+        width: 40px;
+        height: 26px;
     }
 
     .language-name {
-        font-size: 19px;
+        font-size: 18px;
     }
 
     .language-arrow {
-        right: 18px;
-        bottom: 18px;
+        right: 15px;
+        bottom: 15px;
     }
 
 }
