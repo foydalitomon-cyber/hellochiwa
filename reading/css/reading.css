@@ -316,6 +316,30 @@ body {
 
 @media (max-width: 560px) {
 
+    /* Yuqori menyu va Enter/Profil tugmasini telefon ekraniga moslash */
+    .nav-container {
+        padding: 0 12px;
+        min-height: 55px;
+    }
+    
+    .nav-menu {
+        gap: 10px; /* So'zlar orasidagi masofa qisqaradi */
+    }
+
+    .nav-menu a {
+        font-size: 13px; /* Shriftlar ixchamlashib, "Enter" va menyu sig'adi */
+    }
+
+    .logo {
+        font-size: 16px;
+        gap: 6px;
+    }
+
+    .logo-img {
+        width: 28px;
+        height: 28px;
+    }
+
     .reading-page {
         width: calc(100% - 24px);
 
@@ -379,7 +403,6 @@ body {
     }
 
 }
-
 
 /* =========================
    16. JUDA KICHIK TELEFON
