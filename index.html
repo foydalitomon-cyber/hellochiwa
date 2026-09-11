@@ -23,17 +23,18 @@
         <nav class="nav-menu">
             <a href="home.html">Home</a>
             <a href="index.html" class="active">Reading</a>
-            <!--<a href="#">Vocabulary</a>-->
+            <a href="vocabulary.html">Vocabulary</a>
             <a href="about.html">About</a>
             <a href="faq.html">FAQ</a>
             <a href="contact.html">Contact</a>
             
-            <!-- Kirish tugmasi (mehmonlar uchun) -->
-            <button id="authBtn" class="nav-auth-btn">Enter</button>
-            <!-- Tungi rejim tugmasi -->
-            <button id="darkModeToggle" title="Tungi rejim" style="background: none; border: none; cursor: pointer; font-size: 20px; margin-left: 10px;">
+            <!-- 1. Tungi rejim oychasi oldinda turadi -->
+            <button id="darkModeToggle" title="Tungi rejim" style="background: none; border: none; cursor: pointer; font-size: 20px; margin-right: 10px;">
                 🌙
             </button>
+
+            <!-- 2. Kirish tugmasi uning ortidan keladi -->
+            <button id="authBtn" class="nav-auth-btn">Enter</button>
             <!-- Tizimga kirgan foydalanuvchi profili Dropdown menyusi -->
             <div class="user-profile-dropdown" id="userProfileDropdown" style="display: none;">
                 <!-- Profil avatar/tugmasi -->
@@ -43,21 +44,33 @@
 
                 <!-- Ochiluvchi dropdown menyu -->
                 <div class="dropdown-menu" id="dropdownMenu">
-                    <div class="user-info">
-                        <span class="user-name" id="userNameText">User</span>
-                        <span class="user-email" id="userEmailText">user@mail.com</span>
+                    <!-- 1. Eng yuqorida Ism va Email -->
+                    <div class="dropdown-header" style="padding: 12px 16px; border-bottom: 1px solid #eee;">
+                        <div id="dropdownUserName" style="font-weight: bold; color: #333; font-size: 15px;">User</div>
+                        <div id="dropdownUserEmail" style="font-size: 13px; color: #666; margin-top: 2px;">email@gmail.com</div>
                     </div>
-                    
-                    <hr class="dropdown-divider">
 
-                    <a href="#" class="dropdown-item" id="logoutBtn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                            <polyline points="16 17 21 12 16 7"></polyline>
-                            <line x1="21" y1="12" x2="9" y2="12"></line>
-                        </svg>
-                        Log Out
-                    </a>
+                    <!-- 2. Qizil rangli menyu havolalari -->
+                    <div class="dropdown-links" style="padding: 8px 0;">
+                        <a href="home.html" style="display: block; padding: 8px 16px; color: #e53e3e; text-decoration: none;">Home</a>
+                        <a href="index.html" style="display: block; padding: 8px 16px; color: #e53e3e; text-decoration: none;">Reading</a>
+                        <a href="about.html" style="display: block; padding: 8px 16px; color: #e53e3e; text-decoration: none;">About</a>
+                        <a href="faq.html" style="display: block; padding: 8px 16px; color: #e53e3e; text-decoration: none;">FAQ</a>
+                        <a href="contact.html" style="display: block; padding: 8px 16px; color: #e53e3e; text-decoration: none;">Contact</a>
+                        <a href="terms.html" style="display: block; padding: 8px 16px; color: #e53e3e; text-decoration: none;">Terms of Service</a>
+                    </div>
+
+                    <!-- 3. Chiqish tugmasi -->
+                    <div style="border-top: 1px solid #eee; padding: 8px 0;">
+                        <button id="logoutBtn" style="width: 100%; text-align: left; background: none; border: none; padding: 8px 16px; color: #e53e3e; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            Chiqish
+                        </button>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -184,9 +197,9 @@
                 <a href="contact.html">Contact</a>
                 <a href="faq.html">FAQ</a>
                 <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Cookie Policy</a>
-                <a href="#">Sitemap</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="cookie-policy.html">Cookie Policy</a>
+                
             </div>
             <p class="copyright">&copy; 2026 HelloChiwa. All rights reserved.</p>
         </div>
@@ -217,10 +230,10 @@
                 <input type="email" id="loginEmail" placeholder="email@example.com" required>
             </div>
             <div class="input-group">
-                <label for="loginPassword">Parol</label>
+                <label for="loginPassword">Password</label>
                 <input type="password" id="loginPassword" placeholder="******" required>
             </div>
-            <button type="submit" class="auth-submit-btn">Kirish</button>
+            <button type="submit" class="auth-submit-btn">Login</button>
         </form>
 
         <!-- Register Formasi -->
@@ -229,13 +242,23 @@
                 <label for="regEmail">Email</label>
                 <input type="email" id="regEmail" placeholder="email@example.com" required>
             </div>
+
             <div class="input-group">
-                <label for="regPassword">Parol</label>
+                <label for="regPassword">Password</label>
                 <input type="password" id="regPassword" placeholder="Kamida 6 ta belgi" required>
             </div>
-            <button type="submit" class="auth-submit-btn">Ro'yxatdan o'tish</button>
+
+            <button type="submit" class="auth-submit-btn">Register</button>
         </form>
-        
+
+        <!-- Google / Apple login -->
+        <div class="social-login">
+            <button type="button" id="googleLoginBtn" class="social-login-btn">
+                Continue with Google
+            </button>
+
+        </div>
+
         <p id="authMessage" class="auth-message"></p>
     </div>
 </div>

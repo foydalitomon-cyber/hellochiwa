@@ -241,6 +241,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // GOOGLE LOGIN
+    const googleLoginBtn = document.getElementById('googleLoginBtn');
+
+    if (googleLoginBtn) {
+        googleLoginBtn.addEventListener('click', async () => {
+            if (!supabase) return;
+
+            if (authMessage) {
+                authMessage.style.color = '#70757c';
+                authMessage.textContent = 'Google orqali kirilmoqda...';
+            }
+
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: 'google',
+                options: {
+                    redirectTo: window.location.href
+                }
+            });
+
+            if (error && authMessage) {
+                authMessage.style.color = '#e53935';
+                authMessage.textContent = error.message;
+            }
+        });
+    }
+
     checkUser();
     loadArticles();
 

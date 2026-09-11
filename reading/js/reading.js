@@ -102,103 +102,376 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 1. RO'YXATDAN O'TISH (REGISTER)
-    if (registerForm) {
-        registerForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('regEmail').value;
-            const password = document.getElementById('regPassword').value;
+    // =====================================================
+// AUTH — REGISTER / LOGIN / GOOGLE
+// =====================================================
+
+
+// =====================================================
+// 1. RO'YXATDAN O'TISH (REGISTER) — ENGLISH MESSAGES
+// =====================================================
+
+if (registerForm) {
+    registerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (!supabase) {
+            console.error('Supabase not found!');
+            return;
+        }
+
+        const email = document.getElementById('regEmail')?.value.trim();
+        const password = document.getElementById('regPassword')?.value;
+
+        if (!email || !password) {
+            if (authMessage) {
+                authMessage.style.color = '#e53935';
+                authMessage.textContent = 'Please enter both email and password.';
+            }
+            return;
+        }
+
+        if (authMessage) {
+            authMessage.style.color = '#70757c';
+            authMessage.textContent = 'Signing up...';
+        }
+
+        const { data, error } = await supabase.auth.signUp({
+            email: email,
+            password: password
+        });
+
+        if (error) {
+            console.error('REGISTER ERROR:', error);
 
             if (authMessage) {
-                authMessage.style.color = '#70757c';
-                authMessage.textContent = 'Ro\'yxatdan o\'tilmoqda...';
-            }
-
-            const { data, error } = await supabase.auth.signUp({
-                email: email,
-                password: password
-            });
-
-            if (error) {
-                if (authMessage) {
-                    authMessage.style.color = '#e53935';
+                authMessage.style.color = '#e53935';
+                
+                // Email allaqachon mavjudligini aniqlash va inglizcha xabar berish
+                if (error.message.toLowerCase().includes('already registered') || error.status === 400) {
+                    authMessage.textContent = 'This email is already registered. Please switch to Login.';
+                    
+                    // Avtomatik tarzda Login tabiga o'tkazib yuborish
+                    if (loginTabBtn && loginForm) {
+                        setTimeout(() => {
+                            loginTabBtn.click();
+                        }, 1500);
+                    }
+                } else {
                     authMessage.textContent = error.message;
                 }
-            } else {
-                if (authMessage) {
-                    authMessage.style.color = '#4caf50';
-                    authMessage.textContent = 'Muvaffaqiyatli ro\'yxatdan o\'tdingiz!';
-                }
-                setTimeout(() => {
-                    if (authModal) authModal.classList.remove('show');
-                    checkUser();
-                }, 1500);
             }
-        });
-    }
 
-    // 2. TIZIMGA KIRISH (LOGIN)
-    if (loginForm) {
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
+            return;
+        }
 
+        console.log('REGISTER USER:', data.user);
+        console.log('REGISTER SESSION:', data.session);
+
+        // Email confirmation yoqilgan bo'lsa, session bo'lmaydi
+        if (!data.session) {
             if (authMessage) {
-                authMessage.style.color = '#70757c';
-                authMessage.textContent = 'Tekshirilmoqda...';
+                authMessage.style.color = '#4caf50';
+                authMessage.textContent = 'Registration successful! Please check your email to verify your account.';
             }
+            return;
+        }
 
-            const { data, error } = await supabase.auth.signInWithPassword({
+        // Session mavjud bo'lsa profilni ko'rsatamiz
+        updateAuthUI(data.user);
+
+        if (authMessage) {
+            authMessage.style.color = '#4caf50';
+            authMessage.textContent = 'Successfully registered!';
+        }
+
+        setTimeout(() => {
+            if (authModal) {
+                authModal.classList.remove('show');
+            }
+        }, 1000);
+    });
+}
+// =====================================================
+// 2. TIZIMGA KIRISH (LOGIN)
+// =====================================================
+
+if (loginForm) {
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (!supabase) {
+            console.error('Supabase topilmadi!');
+            return;
+        }
+
+        const email = document.getElementById('loginEmail')?.value.trim();
+        const password = document.getElementById('loginPassword')?.value;
+
+        if (!email || !password) {
+            if (authMessage) {
+                authMessage.style.color = '#e53935';
+                authMessage.textContent = 'Email va parolni kiriting.';
+            }
+            return;
+        }
+
+        if (authMessage) {
+            authMessage.style.color = '#70757c';
+            authMessage.textContent = 'Tekshirilmoqda...';
+        }
+
+        const { data, error } =
+            await supabase.auth.signInWithPassword({
                 email: email,
                 password: password
             });
 
-            if (error) {
-                if (authMessage) {
-                    authMessage.style.color = '#e53935';
-                    authMessage.textContent = 'Email yoki parol xato!';
-                }
-            } else {
-                if (authMessage) {
-                    authMessage.style.color = '#4caf50';
-                    authMessage.textContent = 'Tizimga kirildi!';
-                }
-                setTimeout(() => {
-                    if (authModal) authModal.classList.remove('show');
-                    checkUser();
-                }, 1000);
+        if (error) {
+            console.error('LOGIN ERROR:', error);
+
+            if (authMessage) {
+                authMessage.style.color = '#e53935';
+                authMessage.textContent =
+                    'Email yoki parol xato!';
             }
-        });
+
+            return;
+        }
+
+        console.log('LOGIN USER:', data.user);
+        console.log('LOGIN SESSION:', data.session);
+
+        // Profilni darhol yangilash
+        updateAuthUI(data.user);
+
+        if (authMessage) {
+            authMessage.style.color = '#4caf50';
+            authMessage.textContent = 'Tizimga kirildi!';
+        }
+
+        setTimeout(() => {
+            if (authModal) {
+                authModal.classList.remove('show');
+            }
+        }, 800);
+    });
+}
+
+
+// =====================================================
+// 3. GOOGLE LOGIN
+// =====================================================
+
+const googleLoginBtn =
+    document.getElementById('googleLoginBtn');
+
+if (googleLoginBtn) {
+
+    googleLoginBtn.addEventListener('click', async () => {
+
+        if (!supabase) {
+            console.error('Supabase topilmadi!');
+            return;
+        }
+
+        if (authMessage) {
+            authMessage.style.color = '#70757c';
+            authMessage.textContent =
+                'Google orqali kirilmoqda...';
+        }
+
+        const { error } =
+            await supabase.auth.signInWithOAuth({
+                provider: 'google',
+
+                options: {
+                    redirectTo: window.location.href
+                }
+            });
+
+        if (error) {
+
+            console.error('GOOGLE LOGIN ERROR:', error);
+
+            if (authMessage) {
+                authMessage.style.color = '#e53935';
+                authMessage.textContent =
+                    error.message;
+            }
+        }
+    });
+}
+
+
+// =====================================================
+// 4. AUTH SESSIONNI KUZATISH
+// =====================================================
+
+if (supabase) {
+
+    supabase.auth.onAuthStateChange(
+        (event, session) => {
+
+            console.log('AUTH EVENT:', event);
+
+            const user = session?.user || null;
+
+            updateAuthUI(user);
+        }
+    );
+}
+
+
+// =====================================================
+// 5. FOYDALANUVCHI SESSIYASINI TEKSHIRISH
+// =====================================================
+
+async function checkUser() {
+
+    if (!supabase) {
+        console.error('Supabase topilmadi!');
+        return;
     }
 
-    // FOYDALANUVCHI SESSIYASINI TEKSHIRISH
-    async function checkUser() {
-        if (!supabase) return;
-        const { data: { user } } = await supabase.auth.getUser();
-        updateAuthUI(user);
+    const { data, error } =
+        await supabase.auth.getSession();
+
+    if (error) {
+
+        console.error(
+            'SESSION ERROR:',
+            error
+        );
+
+        updateAuthUI(null);
+        return;
     }
 
-    function updateAuthUI(user) {
-        if (user) {
-            if (authBtn) authBtn.style.display = 'none';
-            if (userProfileDropdown) userProfileDropdown.style.display = 'inline-block';
-            if (userEmailText) userEmailText.textContent = user.email;
+    const session = data?.session || null;
 
-            const emailUsername = user.email ? user.email.split('@')[0] : 'Foydalanuvchi';
-            if (userNameText) userNameText.textContent = emailUsername;
+    console.log(
+        'CURRENT SESSION:',
+        session
+    );
 
-            const firstLetter = emailUsername.charAt(0).toUpperCase();
-            const avatarSpan = document.querySelector('.user-avatar-placeholder');
-            if (avatarSpan) avatarSpan.textContent = firstLetter;
-        } else {
-            if (authBtn) authBtn.style.display = 'inline-block';
-            if (userProfileDropdown) userProfileDropdown.style.display = 'none';
+    updateAuthUI(
+        session?.user || null
+    );
+}
+
+
+// =====================================================
+// 6. AUTH UI NI YANGILASH
+// =====================================================
+
+function updateAuthUI(user) {
+
+    if (user) {
+
+        // Sign In tugmasini yashirish
+        if (authBtn) {
+            authBtn.style.display = 'none';
+        }
+
+        // Profilni ko'rsatish
+        if (userProfileDropdown) {
+            userProfileDropdown.style.display =
+                'inline-block';
+        }
+
+
+        // ---------------------------------------------
+        // EMAIL
+        // ---------------------------------------------
+
+        const emailEl =
+            document.getElementById(
+                'dropdownUserEmail'
+            );
+
+        if (emailEl) {
+            emailEl.textContent =
+                user.email || '';
+        }
+
+
+        // ---------------------------------------------
+        // ISM
+        // ---------------------------------------------
+
+        const fullName =
+            user.user_metadata?.full_name ||
+            user.user_metadata?.name ||
+            user.user_metadata?.user_name ||
+            (
+                user.email
+                    ? user.email.split('@')[0]
+                    : 'User'
+            );
+
+        const nameEl =
+            document.getElementById(
+                'dropdownUserName'
+            );
+
+        if (nameEl) {
+            nameEl.textContent = fullName;
+        }
+
+
+        // ---------------------------------------------
+        // AVATAR (Rasm yoki Harf)
+        // ---------------------------------------------
+
+        const firstLetter =
+            fullName
+                .charAt(0)
+                .toUpperCase();
+
+        const avatarSpan =
+            document.querySelector(
+                '.user-avatar-placeholder, .user-avatar'
+            );
+
+        // Google yoki boshqa provayerdan kelgan rasm havolasini tekshirish
+        const avatarUrl = 
+            user.user_metadata?.avatar_url || 
+            user.user_metadata?.picture;
+
+        if (avatarSpan) {
+            if (avatarUrl) {
+                // Agar profil rasmi mavjud bo'lsa, rasmni chiqaramiz
+                avatarSpan.innerHTML = `<img src="${avatarUrl}" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+            } else {
+                // Rasm bo'lmasa eski tizimgacha bo'lgan holatdagi harfni chiqaramiz
+                avatarSpan.textContent = firstLetter;
+            }
+        }
+
+
+    } else {
+
+        // User yo'q bo'lsa Sign In ko'rinadi
+        if (authBtn) {
+            authBtn.style.display =
+                'inline-block';
+        }
+
+        // Profil yashiriladi
+        if (userProfileDropdown) {
+            userProfileDropdown.style.display =
+                'none';
         }
     }
+}
 
-    checkUser();
 
+// =====================================================
+// 7. SAHIFA YUKLANGANDA USERNI TEKSHIRISH
+// =====================================================
+
+checkUser();
     // --- 3. DARK MODE (OYCHA) TUGMASI LOGIKASI ---
     if (darkModeToggle) {
         darkModeToggle.addEventListener('click', () => {

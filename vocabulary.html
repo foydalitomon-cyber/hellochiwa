@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vocabulary - HelloChiwa</title>
+
+    <link rel="icon" type="image/png" href="reading/images/logo.png">
+
+    <link rel="stylesheet" href="reading/css/reading.css">
+    <link rel="stylesheet" href="reading/css/vocabulary.css">
+</head>
+
+<body>
+
+<header class="main-header">
+    <div class="nav-container">
+
+        <a href="home.html" class="logo">
+            <img
+                src="reading/images/logo.png"
+                alt="HelloChiwa Logo"
+                class="logo-img"
+            >
+            <span>HELLOCHIWA</span>
+        </a>
+
+        <nav class="nav-menu">
+
+            <a href="home.html">Home</a>
+            <a href="index.html">Reading</a>
+            <a href="vocabulary.html" class="active">Vocabulary</a>
+            <a href="about.html">About</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+
+            <button
+                id="darkModeToggle"
+                title="Tungi rejim"
+                style="background: none; border: none; cursor: pointer; font-size: 20px; margin-right: 10px;"
+            >
+                🌙
+            </button>
+
+            <button id="authBtn" class="nav-auth-btn">
+                Enter
+            </button>
+
+            <div
+                class="user-profile-dropdown"
+                id="userProfileDropdown"
+                style="display: none;"
+            >
+                <button
+                    class="profile-avatar-btn"
+                    id="profileAvatarBtn"
+                >
+                    <span class="user-avatar-placeholder">U</span>
+                </button>
+
+                <div class="dropdown-menu" id="dropdownMenu">
+
+                    <div
+                        class="dropdown-header"
+                        style="padding: 12px 16px; border-bottom: 1px solid #eee;"
+                    >
+                        <div
+                            id="dropdownUserName"
+                            style="font-weight: bold; color: #333; font-size: 15px;"
+                        >
+                            User
+                        </div>
+
+                        <div
+                            id="dropdownUserEmail"
+                            style="font-size: 13px; color: #666; margin-top: 2px;"
+                        >
+                            email@gmail.com
+                        </div>
+                    </div>
+
+                    <div
+                        class="dropdown-links"
+                        style="padding: 8px 0;"
+                    >
+                        <a href="home.html">Home</a>
+                        <a href="index.html">Reading</a>
+                        <a href="about.html">About</a>
+                        <a href="faq.html">FAQ</a>
+                        <a href="contact.html">Contact</a>
+                        <a href="terms.html">Terms of Service</a>
+                    </div>
+
+                    <div style="border-top: 1px solid #eee; padding: 8px 0;">
+                        <button
+                            id="logoutBtn"
+                            style="width: 100%; text-align: left; background: none; border: none; padding: 8px 16px; color: #e53e3e; cursor: pointer; display: flex; align-items: center; gap: 8px;"
+                        >
+                            Chiqish
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </nav>
+    </div>
+</header>
+
+
+<main class="vocab-main-container">
+
+    <h1>Vocabulary</h1>
+
+    <p class="vocab-subtitle">
+        Choose a language and browse saved words.
+    </p>
+
+    <section id="vocabularyWrapper">
+
+        <div
+            class="section-title"
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;"
+        >
+            <h2
+                style="font-size: 20px; font-weight: 700; color: var(--text-main);"
+            >
+                Choose a language
+            </h2>
+
+            <span
+                style="color: var(--text-muted); font-size: 14px;"
+            >
+                10 languages
+            </span>
+        </div>
+
+
+        <div
+            class="language-grid"
+            style="display: flex; flex-direction: column; gap: 16px;"
+        >
+
+            <!-- Japanese -->
+            <button class="language-card-btn" data-language="Japanese">
+                <div class="lang-card-left">
+                    <img
+                        src="reading/images/flags/jp.svg"
+                        alt="Japan Flag"
+                        class="lang-flag-img"
+                    >
+
+                    <span class="lang-code-text">JP</span>
+
+                    <div class="lang-info-text">
+                        <span class="lang-title">Japanese</span>
+                        <span class="lang-native-text">日本語</span>
+                    </div>
+                </div>
+
+                <span class="lang-arrow-icon">→</span>
+            </button>
+
+
+            <!-- English -->
+            <button class="language-card-btn" data-language="English">
+                <div class="lang-card-left">
+                    <img
+                        src="reading/images/flags/us.svg"
+                        alt="US Flag"
+                        class="lang-flag-img"
+                    >
+
+                    <span class="lang-code-text">US</span>
+
+                    <div class="lang-info-text">
+                        <span class="lang-title">English</span>
+                        <span class="lang-native-text">English</span>
+                    </div>
+                </div>
+
+                <span class="lang-arrow-icon">→</span>
+            </button>
+
+
+            <!-- Chinese -->
+            <button class="language-card-btn" data-language="Chinese">
+                <div class="lang-card-left">
+                    <img
+                        src="reading/images/flags/cn.svg"
+                        alt="China Flag"
+                        class="lang-flag-img"
+                    >
+
+                    <span class="lang-code-text">CN</span>
+
+                    <div class="lang-info-text">
+                        <span class="lang-title">Chinese</span>
+                        <span class="lang-native-text">中文</span>
+                    </div>
+                </div>
+
+                <span class="lang-arrow-icon">→</span>
+            </button>
+
+
+            <!-- Korean -->
+            <button class="language-card-btn" data-language="Korean">
+                <div class="lang-card-left">
+                    <img
+                        src="reading/images/flags/kr.svg"
+                        alt="Korea Flag"
+                        class="lang-flag-img"
+                    >
+
+                    <span class="lang-code-text">KR</span>
+
+                    <div class="lang-info-text">
+                        <span class="lang-title">Korean</span>
+                        <span class="lang-native-text">한국어</span>
+                    </div>
+                </div>
+
+                <span class="lang-arrow-icon">→</span>
+            </button>
+
+
+            <!-- Spanish -->
+            <button class="language-card-btn" data-language="Spanish">
+                <div class="lang-card-left">
+                    <img
+                        src="reading/images/flags/es.svg"
+                        alt="Spain Flag"
+                        class="lang-flag-img"
+                    >
+
+                    <span class="lang-code-text">ES</span>
+
+                    <div class="lang-info-text">
+                        <span class="lang-title">Spanish</span>
+                        <span class="lang-native-text">Español</span>
+                    </div>
+                </div>
+
+                <span class="lang-arrow-icon">→</span>
+            </button>
+
+
+            <!-- French -->
+            <button class="language-card-btn" data-language="French">
+                <div class="lang-card-left">
+                    <img
+                        src="reading/images/flags/fr.svg"
+                        alt="France Flag"
+                        class="lang-flag-img"
+                    >
+
+                    <span class="lang-code-text">FR</span>
+
+                    <div class="lang-info-text">
+                        <span class="lang-title">French</span>
+                        <span class="lang-native-text">Français</span>
+                    </div>
+                </div>
+
+                <span class="lang-arrow-icon">→</span>
+            </button>
+
+
+            <!-- German -->
+            <button class="language-card-btn" data-language="German">
+                <div class="lang-card-left">
+                    <img
+                        src="reading/images/flags/de.svg"
+                        alt="Germany Flag"
+                        class="lang-flag-img"
+                    >
+
+                    <span class="lang-code-text">DE</span>
+
+                    <div class="lang-info-text">
+                        <span class="lang-title">German</span>
+                        <span class="lang-native-text">Deutsch</span>
+                    </div>
+                </div>
+
+                <span class="lang-arrow-icon">→</span>
+            </button>
+
+
+            <!-- Italian -->
+            <button class="language-card-btn" data-language="Italian">
+                <div class="lang-card-left">
+                    <img
+                        src="reading/images/flags/it.svg"
+                        alt="Italy Flag"
+                        class="lang-flag-img"
+                    >
+
+                    <span class="lang-code-text">IT</span>
+
+                    <div class="lang-info-text">
+                        <span class="lang-title">Italian</span>
+                        <span class="lang-native-text">Italiano</span>
+                    </div>
+                </div>
+
+                <span class="lang-arrow-icon">→</span>
+            </button>
+
+
+            <!-- Portuguese -->
+            <button class="language-card-btn" data-language="Portuguese">
+                <div class="lang-card-left">
+                    <img
+                        src="reading/images/flags/pt.svg"
+                        alt="Portugal Flag"
+                        class="lang-flag-img"
+                    >
+
+                    <span class="lang-code-text">PT</span>
+
+                    <div class="lang-info-text">
+                        <span class="lang-title">Portuguese</span>
+                        <span class="lang-native-text">Português</span>
+                    </div>
+                </div>
+
+                <span class="lang-arrow-icon">→</span>
+            </button>
+
+
+            <!-- Russian -->
+            <button class="language-card-btn" data-language="Russian">
+                <div class="lang-card-left">
+                    <img
+                        src="reading/images/flags/ru.svg"
+                        alt="Russia Flag"
+                        class="lang-flag-img"
+                    >
+
+                    <span class="lang-code-text">RU</span>
+
+                    <div class="lang-info-text">
+                        <span class="lang-title">Russian</span>
+                        <span class="lang-native-text">Русский</span>
+                    </div>
+                </div>
+
+                <span class="lang-arrow-icon">→</span>
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer class="main-footer">
+    <div class="footer-container">
+
+        <div class="footer-links">
+            <a href="about.html">About HelloChiwa</a>
+            <a href="contact.html">Contact</a>
+            <a href="faq.html">FAQ</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="cookie-policy.html">Cookie Policy</a>
+        </div>
+
+        <p class="copyright">
+            &copy; 2026 HelloChiwa. All rights reserved.
+        </p>
+
+    </div>
+</footer>
+
+<!-- Auth Modal -->
+<div id="authModal" class="auth-modal">
+    <div class="auth-modal-content">
+        <button id="closeAuthModal" class="close-modal-btn">&times;</button>
+        
+        <div class="auth-tabs">
+            <button id="loginTabBtn" class="auth-tab-btn active">Kirish</button>
+            <button id="registerTabBtn" class="auth-tab-btn">Ro'yxatdan o'tish</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="auth-form active">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="loginEmail" required placeholder="email@example.com">
+            </div>
+            <div class="form-group">
+                <label>Parol</label>
+                <input type="password" id="loginPassword" required placeholder="********">
+            </div>
+            <button type="submit" class="submit-btn">Kirish</button>
+        </form>
+
+        <!-- Register Form -->
+        <form id="registerForm" class="auth-form">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="regEmail" required placeholder="email@example.com">
+            </div>
+            <div class="form-group">
+                <label>Parol</label>
+                <input type="password" id="regPassword" required placeholder="********">
+            </div>
+            <button type="submit" class="submit-btn">Ro'yxatdan o'tish</button>
+        </form>
+
+        <div id="authMessage" style="color: red; margin-top: 10px; font-size: 14px;"></div>
+        
+        <div class="social-auth" style="margin-top: 15px;">
+            <button id="googleLoginBtn" class="google-btn" style="width: 100%; padding: 10px; cursor: pointer;">Google orqali kirish</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Common Supabase client -->
+<script src="reading/js/supabaseClient.js"></script>
+
+<!-- Common site JS -->
+<script src="reading/js/reading.js"></script>
+
+<!-- Vocabulary JS -->
+<script src="reading/js/vocabulary.js"></script>
+
+</body>
+</html>

@@ -3,11 +3,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const articleId = urlParams.get('id');
 
+    console.log('ARTICLE ID:', articleId);
+
     const titleEl = document.getElementById('articleTitle');
     const bodyEl = document.getElementById('articleBody');
     const levelEl = document.getElementById('articleLevel');
     const langEl = document.getElementById('articleLanguage');
     
+    if (!articleId) {
+        console.error('ARTICLE ID TOPILMADI!');
+        if (titleEl) titleEl.textContent = 'Maqola ID topilmadi.';
+        if (bodyEl) {
+            bodyEl.innerHTML = `
+                <p>Maqolani ochishda xatolik yuz berdi.</p>
+                <p>URL ichida article ID mavjud emas.</p>
+            `;
+        }
+        return;
+    }
+
     // Audio va Action elementlari
     const audioEl = document.getElementById('articleAudio');
     const likeBtn = document.getElementById('likeBtn');
@@ -18,31 +32,211 @@ document.addEventListener('DOMContentLoaded', async () => {
     const commentsList = document.getElementById('commentsList');
     const commentCountEl = document.getElementById('commentCount');
 
+    // Auth elementlari
+    const authBtn = document.getElementById('authBtn');
+    const authModal = document.getElementById('authModal');
+    const closeAuthModal = document.getElementById('closeAuthModal');
+    const userProfile = document.getElementById('userProfileDropdown');
+    const userAvatar = document.getElementById('profileAvatarBtn');
+    const profileDropdown = document.getElementById('dropdownMenu');
+    const logoutBtn = document.getElementById('logoutBtn');
+
     let isLiked = false;
     let userLikeId = null;
 
-    if (!articleId) return;
+    // --- AUTH MODALNI OCHIB-YOPISH ---
+    if (authBtn && authModal) {
+        authBtn.addEventListener('click', () => {
+            authModal.classList.add('show');
+        });
+    }
 
-    // 1. MAQOLANI YUKLASH
+    if (closeAuthModal && authModal) {
+        closeAuthModal.addEventListener('click', () => {
+            authModal.classList.remove('show');
+        });
+    }
+
+    if (authModal) {
+        window.addEventListener('click', (e) => {
+            if (e.target === authModal) {
+                authModal.classList.remove('show');
+            }
+        });
+    }
+
+    // --- AUTH TABLARNI ALMASHTIRISH ---
+    const authTabBtns = document.querySelectorAll('.auth-tab-btn');
+    const authForms = document.querySelectorAll('.auth-form');
+
+    authTabBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            authTabBtns.forEach((b) => b.classList.remove('active'));
+            authForms.forEach((form) => form.classList.remove('active'));
+
+            btn.classList.add('active');
+            const tabName = btn.getAttribute('data-tab');
+
+            if (tabName === 'login') {
+                const loginForm = document.getElementById('loginForm');
+                if (loginForm) loginForm.classList.add('active');
+            }
+
+            if (tabName === 'register') {
+                const registerForm = document.getElementById('registerForm');
+                if (registerForm) registerForm.classList.add('active');
+            }
+        });
+    });
+
+    // --- 1. SIGN IN (LOGIN) LOGIKASI ---
+    const loginForm = document.getElementById('loginForm');
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail')?.value;
+            const password = document.getElementById('loginPassword')?.value;
+            
+            const { error } = await supabase.auth.signInWithPassword({ email, password });
+            if (error) {
+                alert('Kirishda xatolik: ' + error.message);
+            } else {
+                if (authModal) authModal.classList.remove('show');
+                checkUser();
+            }
+        });
+    }
+
+    // --- GOOGLE SIGN IN (OAUTH) ---
+    const googleLoginBtn = document.getElementById('googleLoginBtn');
+    if (googleLoginBtn) {
+        googleLoginBtn.addEventListener('click', async () => {
+            if (!supabase) return;
+            
+            // Keep the current article ID in the URL upon redirect
+            const currentUrl = window.location.origin + window.location.pathname + (articleId ? `?id=${articleId}` : '');
+
+            const { data, error } = await supabase.auth.signInWithOAuth({
+                provider: 'google',
+                options: {
+                    redirectTo: currentUrl
+                }
+            });
+
+            if (error) {
+                alert('Google sign-in error: ' + error.message);
+            }
+        });
+    }
+
+    // --- 2. SIGN UP (RO'YXATDAN O'TISH) LOGIKASI ---
+    const registerForm = document.getElementById('registerForm');
+    if (registerForm) {
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('registerEmail')?.value || document.getElementById('regEmail')?.value;
+            const password = document.getElementById('registerPassword')?.value || document.getElementById('regPassword')?.value;
+            
+            const { error } = await supabase.auth.signUp({ email, password });
+            if (error) {
+                alert("Ro'yxatdan o'tishda xatolik: " + error.message);
+            } else {
+                alert("Muvaffaqiyatli ro'yxatdan o'tdingiz! Emailingizni tasdiqlang yoki tizimga kiring.");
+                if (authModal) authModal.classList.remove('show');
+            }
+        });
+    }
+
+    // --- PROFILE DROPDOWN ---
+    if (userProfile) {
+        userProfile.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (profileDropdown) profileDropdown.classList.toggle('show');
+        });
+    }
+
+    document.addEventListener('click', () => {
+        if (profileDropdown) profileDropdown.classList.remove('show');
+    });
+
+    // --- LOGOUT ---
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', async () => {
+            if (!supabase) return;
+            const { error } = await supabase.auth.signOut();
+            if (error) {
+                console.error('Logout error:', error);
+                return;
+            }
+            updateUI(null);
+        });
+    }
+
+    // --- USERNI TEKSHIRISH ---
+    async function checkUser() {
+        if (!supabase) return;
+        const { data, error } = await supabase.auth.getUser();
+        if (error) {
+            updateUI(null);
+            return;
+        }
+        updateUI(data?.user || null);
+    }
+
+    // --- UI YANGILASH (EMAILNING BOSH HARFI YOKI GMAIL RASMI) ---
+    function updateUI(user) {
+        if (user) {
+            if (authBtn) authBtn.style.setProperty('display', 'none', 'important');
+            if (userProfile) userProfile.style.setProperty('display', 'flex', 'important');
+
+            // Gmaildan yoki metadata kelgan avatar
+            const avatarUrl = user.user_metadata?.avatar_url || user.user_metadata?.picture;
+            const email = user.email || 'U';
+            const firstLetter = email.charAt(0).toUpperCase();
+
+            if (userAvatar) {
+                if (avatarUrl) {
+                    // Agar rasm mavjud bo'lsa, o'shani chiqaramiz
+                    userAvatar.innerHTML = `<img src="${avatarUrl}" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+                } else {
+                    // Rasm bo'lmasa, emailning bosh harfini chiroyli dizaynda chiqaramiz
+                    userAvatar.innerHTML = `
+                        <div style="width: 100%; height: 100%; border-radius: 50%; background-color: #4a5568; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 16px;">
+                            ${firstLetter}
+                        </div>
+                    `;
+                }
+            }
+        } else {
+            if (authBtn) authBtn.style.setProperty('display', 'block', 'important');
+            if (userProfile) userProfile.style.setProperty('display', 'none', 'important');
+        }
+    }
+
+    if (supabase) {
+        supabase.auth.onAuthStateChange((event, session) => {
+            updateUI(session?.user || null);
+        });
+    }
+
+    checkUser();
+
+    // 3. MAQOLANI VA LUG'ATNI YUKLASH
     async function loadArticle() {
         if (!supabase) return;
 
-        let article = null;
-
         try {
-            const { data, error } = await supabase
+            const { data: article, error } = await supabase
                 .from('reading_articles')
                 .select('*')
                 .eq('id', articleId)
                 .single();
 
-            if (error || !data) {
+            if (error || !article) {
                 console.error("Maqola topilmadi:", error?.message);
                 if (titleEl) titleEl.textContent = "Maqola topilmadi.";
                 return;
             }
-
-            article = data;
 
             if (titleEl) titleEl.innerHTML = article.title;
             if (bodyEl) bodyEl.innerHTML = article.content.replace(/\n/g, '<br>');
@@ -50,7 +244,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (langEl) langEl.textContent = article.language_code || '';
 
             const backLink = document.getElementById('backLink');
-
             if (backLink && article.language_code) {
                 backLink.href = `articles.html?lang=${encodeURIComponent(article.language_code)}`;
             }
@@ -58,45 +251,71 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (audioEl && article.audio_url) {
                 audioEl.src = article.audio_url;
             }
+
+            const articleLanguage = article.language;
+            const articleLangCode = article.language_code;
+
+            // LUG'ATNI YUKLASH (Til va ID bo'yicha qidirish mantiqi)
+            await loadVocabulary(articleLanguage, articleLangCode, articleId);
+
         } catch (err) {
             console.error("Maqolani yuklashda xatolik:", err);
+        }
+    }
+
+    async function loadVocabulary(articleLanguage, articleLangCode, currentArticleId) {
+        if (!supabase) return;
+
+        // Barcha lug'at so'zlarini bazadan to'g'ridan-to'g'ri olib kelamiz
+        const { data: words, error } = await supabase
+            .from('reading_vocabularies')
+            .select('*');
+
+        if (error) {
+            console.error("Lug'atni yuklashda xatolik:", error.message);
             return;
         }
 
-        const articleLanguage = article.language || 'japanese';
-
-        const { data: words } = await supabase
-            .from('reading_vocabularies')
-            .select('*')
-            .eq('language', articleLanguage); // <-- .eq('article_id', articleId) o'rniga shuni qo'yasiz
+        console.log("Bazadagi barcha yuklangan lug'at so'zlari:", words);
 
         const wordMap = {};
-        if (words) {
+        if (words && words.length > 0) {
             words.forEach(w => {
                 if (w.word) {
                     const defText = w.explanation || w.definition || w.translation || w.meaning || 'Izoh biriktirilmagan';
-                    wordMap[w.word.trim().toLowerCase()] = defText;
+                    const cleanWord = w.word.replace(/[\s\n\r]+/g, ' ').trim().toLowerCase();
+                    wordMap[cleanWord] = defText;
                 }
             });
         }
 
         const handleWordClick = (e) => {
             const target = e.target.closest('.hard-word');
-            
             document.querySelectorAll('.hard-word-tooltip').forEach(el => el.remove());
 
             if (target) {
                 const rawWord = target.dataset.word || target.innerText;
-                const wordKey = rawWord.replace(/[\s\n\r]+/g, ' ').trim().toLowerCase();
+                const cleanTargetWord = rawWord.replace(/[\s\n\r]+/g, ' ').trim().toLowerCase();
 
-                console.log("Bosilgan so'z (toza):", `"${wordKey}"`); // F12 da ko'rish uchun
-                console.log("Mavjud map:", wordMap);
+                // 1. Aniq mos kelishini tekshiramiz (masalan: "기준금리")
+                let definition = wordMap[cleanTargetWord];
 
-                const definition = wordMap[wordKey] || wordMap[target.innerText.trim().toLowerCase()] || 'Izoh topilmadi';
+                // 2. Agar aniq topilmasa, so'z qo'shimchasi bilan birga kelgan bo'lishi mumkin (masalan: "기준금리를" -> "기준금리")
+                if (!definition) {
+                    for (const [dbWord, def] of Object.entries(wordMap)) {
+                        // Faqat matndagi so'z bazadagi so'zni o'z ichiga olsa (va bazadagi so'z qisqa emas, ma'noli uzunlikda bo'lsa)
+                        if (cleanTargetWord.startsWith(dbWord) || cleanTargetWord === dbWord) {
+                            definition = def;
+                            break;
+                        }
+                    }
+                }
+
+                const finalDefinition = definition || 'Izoh topilmadi';
 
                 const tooltip = document.createElement('div');
                 tooltip.className = 'hard-word-tooltip';
-                tooltip.textContent = definition;
+                tooltip.textContent = finalDefinition;
 
                 target.appendChild(tooltip);
                 e.stopPropagation();
@@ -110,8 +329,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.querySelectorAll('.hard-word-tooltip').forEach(el => el.remove());
         });
     }
-
-    // 2. SHARE FUNKSIYASI
+    // 4. SHARE FUNKSIYASI
     if (shareBtn) {
         shareBtn.addEventListener('click', async () => {
             const shareData = { title: document.title, url: window.location.href };
@@ -124,7 +342,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // 3. LIKE FUNKSIYASI
+    // 5. LIKE FUNKSIYASI
     async function fetchLikes() {
         if (!supabase) return;
 
@@ -177,7 +395,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    // 4. COMMENTS FUNKSIYASI
+    // 6. COMMENTS FUNKSIYASI
     async function fetchComments() {
         if (!supabase || !commentsList) return;
 
@@ -231,7 +449,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             submitCommentBtn.disabled = true;
 
-            // 1. Foydalanuvchining ushbu maqoladagi izohlari sonini tekshirish
             const { count, error: countError } = await supabase
                 .from('reading_comments')
                 .select('*', { count: 'exact', head: true })
@@ -243,13 +460,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return alert('An error occurred: ' + countError.message);
             }
 
-            // 2. Agar 3 ta yoki undan ko'p bo'lsa, to'xtatish
             if (count >= 3) {
                 submitCommentBtn.disabled = false;
                 return alert('You can leave a maximum of 3 comments on this article.');
             }
 
-            // 3. Yangi izohni bazaga qo'shish
             const { error } = await supabase.from('reading_comments').insert([{
                 article_id: articleId,
                 user_id: user.id,
@@ -273,7 +488,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         return div.innerHTML;
     }
 
-    /// 5. ISHGA TUSHIRISH (Xavfsiz usulda)
+    // ISHGA TUSHIRISH
     try {
         await loadArticle();
     } catch (e) {
@@ -290,13 +505,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 const darkModeToggle = document.getElementById('darkModeToggle');
 const body = document.body;
 
-// Sahifa yuklanganda saqlangan rejimni tekshirish
 if (localStorage.getItem('theme') === 'dark') {
     body.classList.add('dark-mode');
     if (darkModeToggle) darkModeToggle.textContent = '☀️';
 }
 
-// Oycha tugmasi bosilganda
 if (darkModeToggle) {
     darkModeToggle.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
