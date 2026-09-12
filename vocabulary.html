@@ -17,7 +17,7 @@
 <header class="main-header">
     <div class="nav-container">
 
-        <a href="home.html" class="logo">
+        <a href="index.html" class="logo">
             <img
                 src="reading/images/logo.png"
                 alt="HelloChiwa Logo"
@@ -28,8 +28,8 @@
 
         <nav class="nav-menu">
 
-            <a href="home.html">Home</a>
-            <a href="index.html">Reading</a>
+            <a href="index.html">Home</a>
+            <a href="reading.html">Reading</a>
             <a href="vocabulary.html" class="active">Vocabulary</a>
             <a href="about.html">About</a>
             <a href="faq.html">FAQ</a>
@@ -37,7 +37,7 @@
 
             <button
                 id="darkModeToggle"
-                title="Tungi rejim"
+                title="Dark mode"
                 style="background: none; border: none; cursor: pointer; font-size: 20px; margin-right: 10px;"
             >
                 🌙
@@ -85,8 +85,8 @@
                         class="dropdown-links"
                         style="padding: 8px 0;"
                     >
-                        <a href="home.html">Home</a>
-                        <a href="index.html">Reading</a>
+                        <a href="index.html">Home</a>
+                        <a href="reading.html">Reading</a>
                         <a href="about.html">About</a>
                         <a href="faq.html">FAQ</a>
                         <a href="contact.html">Contact</a>
@@ -98,7 +98,7 @@
                             id="logoutBtn"
                             style="width: 100%; text-align: left; background: none; border: none; padding: 8px 16px; color: #e53e3e; cursor: pointer; display: flex; align-items: center; gap: 8px;"
                         >
-                            Chiqish
+                            LogOut
                         </button>
                     </div>
 
@@ -397,7 +397,7 @@
                 <input type="email" id="loginEmail" required placeholder="email@example.com">
             </div>
             <div class="input-group">
-                <label>Parol</label>
+                <label>Password</label>
                 <input type="password" id="loginPassword" required placeholder="********">
             </div>
             <!-- CSS'da nomlanishi: .auth-submit-btn -->
@@ -411,17 +411,17 @@
                 <input type="email" id="regEmail" required placeholder="email@example.com">
             </div>
             <div class="input-group">
-                <label>Parol</label>
+                <label>Password</label>
                 <input type="password" id="regPassword" required placeholder="********">
             </div>
-            <button type="submit" class="auth-submit-btn">Ro'yxatdan o'tish</button>
+            <button type="submit" class="auth-submit-btn">Register</button>
         </form>
 
         <div id="authMessage" class="auth-message"></div>
         
         <!-- CSS'da nomlanishi: .social-login va .social-login-btn -->
         <div class="social-login">
-            <button id="googleLoginBtn" class="social-login-btn">Google orqali kirish</button>
+            <button id="googleLoginBtn" class="social-login-btn">Continue with Google</button>
         </div>
     </div>
 </div>

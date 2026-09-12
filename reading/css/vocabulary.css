@@ -344,3 +344,100 @@ html, body {
 .dropdown-links a:hover {
     background-color: #f7f9fa;
 }
+
+/* =================================================
+   VOCABULARY DARK MODE (vocabulary.css uchun)
+================================================= */
+
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #f1f5f9 !important;
+}
+
+/* Sarlavha orqasidagi ortiqcha fon (to'rtburchak) ni yo'qotish va shaffof qilish */
+body.dark-mode .vocab-list-header,
+body.dark-mode .vocab-main-container,
+body.dark-mode .vocab-main-container > section {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+body.dark-mode .vocab-list-header h1,
+body.dark-mode .vocab-main-container > h1,
+body.dark-mode .section-title h2 {
+    color: #f8fafc !important;
+}
+
+body.dark-mode .vocab-list-header p,
+body.dark-mode .vocab-main-container > .vocab-subtitle,
+body.dark-mode .section-title span {
+    color: #94a3b8 !important;
+}
+
+/* Til tanlash tugmalari */
+body.dark-mode .language-card-btn {
+    background: #1e1e1e !important;
+    border-color: #333333 !important;
+}
+
+body.dark-mode .language-card-btn:hover {
+    background: #252525 !important;
+    border-color: #475569 !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode .lang-code-text,
+body.dark-mode .lang-title {
+    color: #f8fafc !important;
+}
+
+body.dark-mode .lang-native-text,
+body.dark-mode .lang-arrow-icon {
+    color: #94a3b8 !important;
+}
+
+/* So'z kartochkalari (vocabulary items) */
+body.dark-mode .vocabulary-item,
+body.dark-mode .vocab-item-card {
+    background: #1e1e1e !important;
+    border: 1px solid #333333 !important;
+    border-left: 4px solid #38bdf8 !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+}
+
+body.dark-mode .vocabulary-item:hover,
+body.dark-mode .vocab-item-card:hover {
+    border-color: #38bdf8 !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6) !important;
+    background: #252525 !important;
+}
+
+body.dark-mode .vocabulary-number {
+    color: #94a3b8 !important;
+}
+
+body.dark-mode .vocabulary-word {
+    color: #f8fafc !important;
+}
+
+body.dark-mode .vocabulary-explanation {
+    color: #cbd5e1 !important;
+}
+
+/* Dropdown menyu */
+body.dark-mode .dropdown-menu {
+    background: #1e1e1e !important;
+    border-color: #333333 !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+}
+
+body.dark-mode .dropdown-links a {
+    color: #f1f5f9 !important;
+}
+
+body.dark-mode .dropdown-links a:hover {
+    background-color: #2c2c2c !important;
+}
+
