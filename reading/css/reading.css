@@ -1745,24 +1745,89 @@ body.dark-mode .user-info-dropdown {
 }
 
 /* =================================================
-   MOBILE PROFILE DROPDOWN FIX
+   MOBILE HEADER:
+   LOGO -> PROFILE
+   DESKTOP O'ZGARMAYDI
 ================================================= */
 
 @media (max-width: 560px) {
 
-    /* Profil tugmasi har ikkala rejimda ham ko‘rinsin */
-    .profile-avatar-btn {
-        width: 42px;
-        height: 42px;
-        min-width: 42px;
-        min-height: 42px;
+    /* Header container */
+    .nav-container {
+        width: 100%;
+        min-height: 54px;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        overflow: visible !important;
+    }
+
+    /* =============================================
+       LOGO TELEFONDA YO'QOLADI
+    ============================================= */
+
+    .nav-container > .logo {
+        display: none !important;
+    }
+
+    /* =============================================
+       NAV MENU QOLGAN BO'SH JOYNI EGALLAYDI
+    ============================================= */
+
+    .nav-container > .nav-menu {
+        display: flex;
+        align-items: center;
+
+        width: 100%;
+        min-width: 0;
+
+        gap: 10px;
+
+        overflow-x: auto;
+        overflow-y: visible;
+
+        white-space: nowrap;
+
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-container > .nav-menu::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* =============================================
+       PROFIL LOGO O'RNIGA — ENG CHAPDA
+    ============================================= */
+
+    .nav-menu .user-profile-dropdown {
+        order: -1;
+
+        flex: 0 0 auto;
+
+        display: inline-block !important;
+
+        position: relative;
+        z-index: 10000;
+    }
+
+    /* =============================================
+       PROFIL AVATARI
+    ============================================= */
+
+    .nav-menu .profile-avatar-btn {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+
+        padding: 0;
+        margin: 0;
 
         display: flex;
         align-items: center;
         justify-content: center;
-
-        padding: 0;
-        margin: 0;
 
         border: none;
         border-radius: 50%;
@@ -1771,15 +1836,12 @@ body.dark-mode .user-info-dropdown {
         color: #ffffff !important;
 
         cursor: pointer;
-        position: relative;
-        z-index: 1001;
 
-        pointer-events: auto;
-        -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
     }
 
-    .user-avatar-placeholder {
+    .nav-menu .user-avatar-placeholder {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1792,8 +1854,40 @@ body.dark-mode .user-info-dropdown {
         font-weight: 600;
     }
 
-    /* Dropdown scroll qilinadigan nav ichida kesilmasligi uchun */
-    .dropdown-menu {
+    /* =============================================
+       MENYU LINKLARI
+    ============================================= */
+
+    .nav-menu > a {
+        flex: 0 0 auto;
+        font-size: 12px;
+    }
+
+    /* =============================================
+       DARK MODE
+    ============================================= */
+
+    .nav-menu > #darkModeToggle {
+        flex: 0 0 auto;
+        margin-right: 0 !important;
+        font-size: 18px !important;
+    }
+
+    /* =============================================
+       ENTER
+    ============================================= */
+
+    .nav-menu > #authBtn {
+        flex: 0 0 auto;
+        padding: 7px 12px;
+        font-size: 12px;
+    }
+
+    /* =============================================
+       PROFILE DROPDOWN
+    ============================================= */
+
+    .nav-menu .dropdown-menu {
         position: fixed !important;
 
         top: 62px !important;
@@ -1803,21 +1897,15 @@ body.dark-mode .user-info-dropdown {
         width: 220px !important;
         max-width: calc(100vw - 20px);
 
-        display: none;
         z-index: 99999 !important;
 
-        background: #ffffff;
-        border: 1px solid #e5e0d5;
-        border-radius: 12px;
-
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.20);
-
-        pointer-events: auto;
+        display: none;
     }
 
-    .dropdown-menu.show {
+    .nav-menu .dropdown-menu.show {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
+        pointer-events: auto !important;
     }
 }
