@@ -321,7 +321,7 @@ body {
         padding: 0 10px;
         min-height: 50px;
         gap: 8px;
-        overflow: hidden;
+        overflow: visible;
     }
 
     /* Logo biroz ixchamlashadi */
