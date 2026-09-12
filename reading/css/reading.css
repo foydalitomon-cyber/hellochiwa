@@ -1744,3 +1744,53 @@ body.dark-mode .user-info-dropdown {
     border-bottom: 1px solid #333333 !important;
 }
 
+/* =================================================
+   30 MOBILE PROFILE BUTTON FIX
+================================================= */
+
+.user-profile-dropdown {
+    position: relative;
+    z-index: 1000;
+}
+
+.profile-avatar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+    pointer-events: auto;
+
+    position: relative;
+    z-index: 1001;
+
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.profile-avatar-btn:focus {
+    outline: none;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 48px;
+
+    z-index: 1100;
+
+    pointer-events: auto;
+}
+
+.dropdown-menu.show {
+    display: block !important;
+}
