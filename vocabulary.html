@@ -53,6 +53,7 @@
                 style="display: none;"
             >
                 <button
+                    type="button"
                     class="profile-avatar-btn"
                     id="profileAvatarBtn"
                 >
@@ -380,7 +381,8 @@
 <!-- Auth Modal -->
 <div id="authModal" class="auth-modal">
     <div class="auth-modal-content">
-        <button id="closeAuthModal" class="close-modal-btn">&times;</button>
+        <!-- CSS'da nomlanishi: .close-auth-modal -->
+        <button id="closeAuthModal" class="close-auth-modal">&times;</button>
         
         <div class="auth-tabs">
             <button id="loginTabBtn" class="auth-tab-btn active">Kirish</button>
@@ -389,39 +391,40 @@
 
         <!-- Login Form -->
         <form id="loginForm" class="auth-form active">
-            <div class="form-group">
+            <!-- CSS'da nomlanishi: .input-group -->
+            <div class="input-group">
                 <label>Email</label>
                 <input type="email" id="loginEmail" required placeholder="email@example.com">
             </div>
-            <div class="form-group">
+            <div class="input-group">
                 <label>Parol</label>
                 <input type="password" id="loginPassword" required placeholder="********">
             </div>
-            <button type="submit" class="submit-btn">Kirish</button>
+            <!-- CSS'da nomlanishi: .auth-submit-btn -->
+            <button type="submit" class="auth-submit-btn">Kirish</button>
         </form>
 
         <!-- Register Form -->
         <form id="registerForm" class="auth-form">
-            <div class="form-group">
+            <div class="input-group">
                 <label>Email</label>
                 <input type="email" id="regEmail" required placeholder="email@example.com">
             </div>
-            <div class="form-group">
+            <div class="input-group">
                 <label>Parol</label>
                 <input type="password" id="regPassword" required placeholder="********">
             </div>
-            <button type="submit" class="submit-btn">Ro'yxatdan o'tish</button>
+            <button type="submit" class="auth-submit-btn">Ro'yxatdan o'tish</button>
         </form>
 
-        <div id="authMessage" style="color: red; margin-top: 10px; font-size: 14px;"></div>
+        <div id="authMessage" class="auth-message"></div>
         
-        <div class="social-auth" style="margin-top: 15px;">
-            <button id="googleLoginBtn" class="google-btn" style="width: 100%; padding: 10px; cursor: pointer;">Google orqali kirish</button>
+        <!-- CSS'da nomlanishi: .social-login va .social-login-btn -->
+        <div class="social-login">
+            <button id="googleLoginBtn" class="social-login-btn">Google orqali kirish</button>
         </div>
     </div>
 </div>
-
-
 <!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 

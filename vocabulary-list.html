@@ -24,103 +24,100 @@
 
 <body class="vocab-list-page">
 
-    <!-- =========================
-         HEADER
-    ========================== -->
-    <header class="main-header">
-        <div class="nav-container">
+<header class="main-header">
+    <div class="nav-container">
 
-            <a href="home.html" class="logo">
-                <img
-                    src="reading/images/logo.png"
-                    alt="HelloChiwa Logo"
-                    class="logo-img"
-                >
-                <span>HELLOCHIWA</span>
-            </a>
+        <a href="home.html" class="logo">
+            <img
+                src="reading/images/logo.png"
+                alt="HelloChiwa Logo"
+                class="logo-img"
+            >
+            <span>HELLOCHIWA</span>
+        </a>
 
-            <nav class="nav-menu">
+        <nav class="nav-menu">
 
-                <a href="home.html">Home</a>
-                <a href="index.html">Reading</a>
-                <a href="vocabulary.html" class="active">Vocabulary</a>
-                <a href="about.html">About</a>
-                <a href="faq.html">FAQ</a>
-                <a href="contact.html">Contact</a>
+            <a href="home.html">Home</a>
+            <a href="index.html">Reading</a>
+            <a href="vocabulary.html" class="active">Vocabulary</a>
+            <a href="about.html">About</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
 
+            <button
+                id="darkModeToggle"
+                title="Tungi rejim"
+                style="background: none; border: none; cursor: pointer; font-size: 20px; margin-right: 10px;"
+            >
+                🌙
+            </button>
+
+            <button id="authBtn" class="nav-auth-btn">
+                Enter
+            </button>
+
+            <div
+                class="user-profile-dropdown"
+                id="userProfileDropdown"
+                style="display: none;"
+            >
                 <button
-                    id="darkModeToggle"
-                    title="Tungi rejim"
-                    style="background: none; border: none; cursor: pointer; font-size: 20px; margin-right: 10px;"
+                    class="profile-avatar-btn"
+                    id="profileAvatarBtn"
                 >
-                    🌙
+                    <span class="user-avatar-placeholder">U</span>
                 </button>
 
-                <button id="authBtn" class="nav-auth-btn">
-                    Enter
-                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
 
-                <div
-                    class="user-profile-dropdown"
-                    id="userProfileDropdown"
-                    style="display: none;"
-                >
-                    <button
-                        class="profile-avatar-btn"
-                        id="profileAvatarBtn"
+                    <div
+                        class="dropdown-header"
+                        style="padding: 12px 16px; border-bottom: 1px solid #eee;"
                     >
-                        <span class="user-avatar-placeholder">U</span>
-                    </button>
-
-                    <div class="dropdown-menu" id="dropdownMenu">
-
                         <div
-                            class="dropdown-header"
-                            style="padding: 12px 16px; border-bottom: 1px solid #eee;"
+                            id="dropdownUserName"
+                            style="font-weight: bold; color: #333; font-size: 15px;"
                         >
-                            <div
-                                id="dropdownUserName"
-                                style="font-weight: bold; color: #333; font-size: 15px;"
-                            >
-                                User
-                            </div>
-
-                            <div
-                                id="dropdownUserEmail"
-                                style="font-size: 13px; color: #666; margin-top: 2px;"
-                            >
-                                email@gmail.com
-                            </div>
+                            User
                         </div>
 
                         <div
-                            class="dropdown-links"
-                            style="padding: 8px 0;"
+                            id="dropdownUserEmail"
+                            style="font-size: 13px; color: #666; margin-top: 2px;"
                         >
-                            <a href="home.html">Home</a>
-                            <a href="index.html">Reading</a>
-                            <a href="vocabulary.html">Vocabulary</a>
-                            <a href="about.html">About</a>
-                            <a href="faq.html">FAQ</a>
-                            <a href="contact.html">Contact</a>
-                            <a href="terms.html">Terms of Service</a>
+                            email@gmail.com
                         </div>
-
-                        <div style="border-top: 1px solid #eee; padding: 8px 0;">
-                            <button
-                                id="logoutBtn"
-                                style="width: 100%; text-align: left; background: none; border: none; padding: 8px 16px; color: #e53e3e; cursor: pointer; display: flex; align-items: center; gap: 8px;"
-                            >
-                                Chiqish
-                            </button>
-                        </div>
-
                     </div>
-                </div>
 
-            </nav>
-        </div>
-    </header>
+                    <div
+                        class="dropdown-links"
+                        style="padding: 8px 0;"
+                    >
+                        <a href="home.html">Home</a>
+                        <a href="index.html">Reading</a>
+                        <a href="about.html">About</a>
+                        <a href="faq.html">FAQ</a>
+                        <a href="contact.html">Contact</a>
+                        <a href="terms.html">Terms of Service</a>
+                    </div>
+
+                    <div style="border-top: 1px solid #eee; padding: 8px 0;">
+                        <button
+                            id="logoutBtn"
+                            style="width: 100%; text-align: left; background: none; border: none; padding: 8px 16px; color: #e53e3e; cursor: pointer; display: flex; align-items: center; gap: 8px;"
+                        >
+                            Chiqish
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </nav>
+    </div>
+</header>
+
 
 
     <!-- =========================
@@ -162,104 +159,169 @@
 
 
     <!-- =========================
-         AUTH MODAL
-    ========================== -->
-    <div
-        id="authModal"
-        class="auth-modal"
-        style="display: none;"
-    >
+     AUTH MODAL
+========================= -->
+<div id="authModal" class="auth-modal">
 
-        <div class="auth-modal-content">
+    <div class="auth-modal-content">
+
+        <!-- Close -->
+        <button
+            id="closeAuthModal"
+            class="close-auth-modal"
+            type="button"
+        >
+            &times;
+        </button>
+
+
+        <!-- Login / Register Tabs -->
+        <div class="auth-tabs">
 
             <button
-                id="closeAuthModal"
-                class="close-auth-modal"
+                id="loginTabBtn"
+                class="auth-tab-btn active"
                 type="button"
             >
-                ×
+                Login
             </button>
 
-            <div class="auth-tabs">
+            <button
+                id="registerTabBtn"
+                class="auth-tab-btn"
+                type="button"
+            >
+                Register
+            </button>
 
-                <button
-                    id="loginTabBtn"
-                    class="auth-tab active"
-                    type="button"
-                >
-                    Login
-                </button>
+        </div>
 
-                <button
-                    id="registerTabBtn"
-                    class="auth-tab"
-                    type="button"
-                >
-                    Register
-                </button>
 
-            </div>
+        <!-- =========================
+             LOGIN FORM
+        ========================== -->
+        <form
+            id="loginForm"
+            class="auth-form active"
+        >
 
-            <form id="loginForm">
+            <div class="input-group">
+
+                <label for="loginEmail">
+                    Email
+                </label>
 
                 <input
                     type="email"
                     id="loginEmail"
-                    placeholder="Email"
                     required
+                    placeholder="email@example.com"
                 >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="loginPassword">
+                    Password
+                </label>
 
                 <input
                     type="password"
                     id="loginPassword"
-                    placeholder="Password"
                     required
+                    placeholder="********"
                 >
 
-                <button type="submit">
-                    Login
-                </button>
+            </div>
 
-            </form>
 
-            <form
-                id="registerForm"
-                style="display: none;"
+            <button
+                type="submit"
+                class="auth-submit-btn"
             >
+                Login
+            </button>
+
+        </form>
+
+
+        <!-- =========================
+             REGISTER FORM
+        ========================== -->
+        <form
+            id="registerForm"
+            class="auth-form"
+        >
+
+            <div class="input-group">
+
+                <label for="regEmail">
+                    Email
+                </label>
 
                 <input
                     type="email"
                     id="regEmail"
-                    placeholder="Email"
                     required
+                    placeholder="email@example.com"
                 >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="regPassword">
+                    Password
+                </label>
 
                 <input
                     type="password"
                     id="regPassword"
-                    placeholder="Password"
                     required
+                    placeholder="********"
                 >
 
-                <button type="submit">
-                    Register
-                </button>
+            </div>
 
-            </form>
+
+            <button
+                type="submit"
+                class="auth-submit-btn"
+            >
+                Register
+            </button>
+
+        </form>
+
+
+        <!-- Auth Message -->
+        <div
+            id="authMessage"
+            class="auth-message"
+        ></div>
+
+
+        <!-- =========================
+             GOOGLE LOGIN
+        ========================== -->
+        <div class="social-login">
 
             <button
                 id="googleLoginBtn"
+                class="social-login-btn"
                 type="button"
             >
                 Continue with Google
             </button>
 
-            <div id="authMessage"></div>
-
         </div>
 
     </div>
 
+</div>
 
     <!-- =========================
          FOOTER
