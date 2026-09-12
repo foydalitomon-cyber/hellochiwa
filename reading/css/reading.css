@@ -1708,3 +1708,39 @@ body.dark-mode .reader-body {
     color: #cbd5e1 !important;
 }
 
+/* =================================================
+   DROPDOWN MENU DARK MODE FIX
+================================================= */
+
+/* 1. Qora rejimda menyuning o'zi oq bo'lib qolmasligi yoki aksincha, 
+   oq fonli menyu bo'lsa yozuvlari aniq ko'rinishi uchun: */
+body.dark-mode .dropdown-menu,
+body.dark-mode .user-dropdown,
+body.dark-mode .dropdown-content {
+    background-color: #1e1e1e !important; /* Tungi rejimga mos to'q fon */
+    border: 1px solid #333333 !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* 2. Menyus ichidagi yozuvlar va havolalar */
+body.dark-mode .dropdown-menu a,
+body.dark-mode .user-dropdown a,
+body.dark-mode .dropdown-content a {
+    color: #e2e8f0 !important; /* Tiniq oqish rang */
+}
+
+/* 3. Sichqoncha borgandagi (hover) holati */
+body.dark-mode .dropdown-menu a:hover,
+body.dark-mode .user-dropdown a:hover,
+body.dark-mode .dropdown-content a:hover {
+    background-color: #2c2c2c !important;
+    color: #ffffff !important;
+}
+
+/* 4. Foydalanuvchi ismi va emaili chiqadigan qism (agar bo'lsa) */
+body.dark-mode .dropdown-header,
+body.dark-mode .user-info-dropdown {
+    color: #f8fafc !important;
+    border-bottom: 1px solid #333333 !important;
+}
+

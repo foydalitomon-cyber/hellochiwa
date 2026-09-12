@@ -9,41 +9,73 @@
 </head>
 <body>
 
-    <!-- HEADER / NAVIGATSIYA -->
-    <header class="main-header">
-        <div class="nav-container">
-            <!-- 1. Chap tomonda Logo -->
-            <a href="reading.html" class="logo">
-                <img src="reading/images/logo.png" alt="HelloChiwa Logo" class="logo-img">
-                <span>HelloChiwa</span>
-            </a>
+          <!-- YUQORI MENYU -->
+<header class="main-header">
+    <div class="nav-container">
+        <!-- Sayt logotipi (Rasm + Matn) -->
+        <a href="index.html" class="logo">
+            <img src="reading/images/logo.png" alt="HelloChiwa Logo" class="logo-img">
+            <span>HELLOCHIWA</span>
+        </a>
+        
+        <nav class="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="reading.html" class="active">Reading</a>
+            <a href="vocabulary.html">Vocabulary</a>
+            <a href="about.html">About</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
             
-            <!-- O'ng tomonda tugmalar, tungi rejim va profil -->
-            <div class="header-right">
-                <button id="darkModeToggle" class="dark-mode-btn" style="background: none; border: none; cursor: pointer; font-size: 1.2rem; margin-left: 10px;">🌙</button>
-                <!-- Kirish tugmasi -->
-                <button id="authBtn" class="nav-auth-btn">Sign In</button>
-                
-                <!-- Tizimga kirgan foydalanuvchi profili va Dropdown menyu -->
-                <div id="userProfileDropdown" class="user-profile-dropdown" style="display: none;">
-                    <div id="profileAvatarBtn" class="profile-avatar" style="width: 38px; height: 38px; border-radius: 50%; background: #292824; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer;">
-                        <span class="user-avatar-placeholder">J</span>
+            <!-- 1. Tungi rejim oychasi oldinda turadi -->
+            <button id="darkModeToggle" title="Tungi rejim" style="background: none; border: none; cursor: pointer; font-size: 20px; margin-right: 10px;">
+                🌙
+            </button>
+
+            <!-- 2. Kirish tugmasi uning ortidan keladi -->
+            <button id="authBtn" class="nav-auth-btn">Enter</button>
+            <!-- Tizimga kirgan foydalanuvchi profili Dropdown menyusi -->
+            <div class="user-profile-dropdown" id="userProfileDropdown" style="display: none;">
+                <!-- Profil avatar/tugmasi -->
+                <button class="profile-avatar-btn" id="profileAvatarBtn">
+                    <span class="user-avatar-placeholder">U</span>
+                </button>
+
+                <!-- Ochiluvchi dropdown menyu -->
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <!-- 1. Eng yuqorida Ism va Email -->
+                    <div class="dropdown-header" style="padding: 12px 16px; border-bottom: 1px solid #eee;">
+                        <div id="dropdownUserName" style="font-weight: bold; color: #333; font-size: 15px;">User</div>
+                        <div id="dropdownUserEmail" style="font-size: 13px; color: #666; margin-top: 2px;">email@gmail.com</div>
                     </div>
 
-                    <!-- Bosilganda ochiladigan menyu (Barcha sahifalar va Chiqish shu yerga ko'chirildi) -->
-                    <div id="dropdownMenu" class="dropdown-menu">
-                        <a href="index.html" class="dropdown-item">Home</a>
-                        <a href="reading.html" class="dropdown-item">Reading</a>
-                        <a href="about.html" class="dropdown-item">About</a>
-                        <a href="faq.html" class="dropdown-item">FAQ</a>
-                        <a href="contact.html" class="dropdown-item">Contact</a>
-                        <hr style="border: none; border-top: 1px solid #eee; margin: 4px 0;">
-                        <button id="logoutBtn" class="dropdown-item" style="color: #e74c3c;">Chiqish</button>
+                    <!-- 2. Qizil rangli menyu havolalari -->
+                    <div class="dropdown-links" style="padding: 8px 0;">
+                        <a href="index.html" style="display: block; padding: 8px 16px; color: #e53e3e; text-decoration: none;">Home</a>
+                        <a href="reading.html" style="display: block; padding: 8px 16px; color: #e53e3e; text-decoration: none;">Reading</a>
+                        <a href="about.html" style="display: block; padding: 8px 16px; color: #e53e3e; text-decoration: none;">About</a>
+                        <a href="faq.html" style="display: block; padding: 8px 16px; color: #e53e3e; text-decoration: none;">FAQ</a>
+                        <a href="contact.html" style="display: block; padding: 8px 16px; color: #e53e3e; text-decoration: none;">Contact</a>
+                        <a href="terms.html" style="display: block; padding: 8px 16px; color: #e53e3e; text-decoration: none;">Terms of Service</a>
+                    </div>
+
+                    <!-- 3. Chiqish tugmasi -->
+                    <div style="border-top: 1px solid #eee; padding: 8px 0;">
+                        <button id="logoutBtn" style="width: 100%; text-align: left; background: none; border: none; padding: 8px 16px; color: #e53e3e; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            LogOut
+                        </button>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </nav>
+    </div>
+</header>
+
+
     <!-- MAQOLALAR SECTION -->
     <main class="main-content">
         <section class="articles-section">
