@@ -52,19 +52,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (profileAvatarBtn && dropdownMenu) {
 
     profileAvatarBtn.addEventListener('click', function (e) {
-
         e.preventDefault();
         e.stopPropagation();
 
-        const isOpen =
-            dropdownMenu.classList.contains('show');
+        console.log('PROFILE BUTTON CLICKED');
 
-        if (isOpen) {
-            dropdownMenu.classList.remove('show');
-        } else {
-            dropdownMenu.classList.add('show');
-        }
+        dropdownMenu.classList.toggle('show');
 
+        console.log(
+            'DROPDOWN SHOW:',
+            dropdownMenu.classList.contains('show')
+        );
     });
 
     document.addEventListener('click', function (e) {
