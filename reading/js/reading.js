@@ -49,21 +49,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Avatar bosilganda dropdownni ochish/yopish
     if (profileAvatarBtn && dropdownMenu) {
-        profileAvatarBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            dropdownMenu.classList.toggle('show');
-        });
 
-        // Ekran bo'sh joyi bosilganda menyuni yopish
-        document.addEventListener('click', (e) => {
-            if (userProfileDropdown && !userProfileDropdown.contains(e.target)) {
-                dropdownMenu.classList.remove('show');
-            }
-        });
-    }
+    profileAvatarBtn.addEventListener('click', function (e) {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const isOpen =
+            dropdownMenu.classList.contains('show');
+
+        if (isOpen) {
+            dropdownMenu.classList.remove('show');
+        } else {
+            dropdownMenu.classList.add('show');
+        }
+
+    });
+
+    document.addEventListener('click', function (e) {
+
+        if (
+            userProfileDropdown &&
+            !userProfileDropdown.contains(e.target)
+        ) {
+            dropdownMenu.classList.remove('show');
+        }
+
+    });
+}
 
     // Dropdown ichidagi Chiqish (Logout) tugmasi
     if (logoutBtn) {
