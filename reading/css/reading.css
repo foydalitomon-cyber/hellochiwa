@@ -1745,134 +1745,79 @@ body.dark-mode .user-info-dropdown {
 }
 
 /* =================================================
-   MOBILE HEADER / PROFILE FIX
+   MOBILE PROFILE DROPDOWN FIX
 ================================================= */
 
 @media (max-width: 560px) {
 
-    .main-header {
-        position: sticky;
-        top: 0;
-        z-index: 2000;
-    }
-
-    .nav-container {
-        width: 100%;
-        min-height: 60px;
-        padding: 0 10px;
-        gap: 8px;
-        overflow: visible;
-    }
-
-    .logo {
-        flex-shrink: 0;
-    }
-
-    .nav-menu {
-        display: flex;
-        align-items: center;
-
-        flex: 1;
-        min-width: 0;
-
-        overflow-x: auto;
-        overflow-y: visible;
-
-        white-space: nowrap;
-
-        gap: 14px;
-
-        padding: 0 2px 4px;
-
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-    }
-
-    .nav-menu::-webkit-scrollbar {
-        display: none;
-    }
-
-    .nav-menu a {
-        flex-shrink: 0;
-    }
-
-    /* ENTER */
-    .nav-auth-btn {
-        flex-shrink: 0;
-        position: relative;
-        z-index: 2002;
-
-        touch-action: manipulation;
-    }
-
-    /* PROFILE CONTAINER */
-    .user-profile-dropdown {
-        position: relative;
-
-        flex-shrink: 0;
-
-        z-index: 3000;
-
-        display: inline-block;
-    }
-
-    /* PROFILE BUTTON */
+    /* Profil tugmasi har ikkala rejimda ham ko‘rinsin */
     .profile-avatar-btn {
-        display: flex;
-
-        align-items: center;
-        justify-content: center;
-
         width: 42px;
         height: 42px;
+        min-width: 42px;
+        min-height: 42px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         padding: 0;
         margin: 0;
 
         border: none;
-        background: transparent;
+        border-radius: 50%;
+
+        background: #35332d !important;
+        color: #ffffff !important;
 
         cursor: pointer;
-
         position: relative;
-        z-index: 3001;
+        z-index: 1001;
 
         pointer-events: auto;
-
-        touch-action: manipulation;
-
         -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
     }
 
-    .profile-avatar-btn:focus {
-        outline: none;
+    .user-avatar-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 100%;
+        height: 100%;
+
+        color: #ffffff !important;
+        font-size: 15px;
+        font-weight: 600;
     }
 
-    /* DROPDOWN */
+    /* Dropdown scroll qilinadigan nav ichida kesilmasligi uchun */
     .dropdown-menu {
+        position: fixed !important;
+
+        top: 62px !important;
+        right: 10px !important;
+        left: auto !important;
+
+        width: 220px !important;
+        max-width: calc(100vw - 20px);
+
         display: none;
-
-        position: absolute;
-
-        top: calc(100% + 8px);
-        right: 0;
-
-        min-width: 220px;
+        z-index: 99999 !important;
 
         background: #ffffff;
+        border: 1px solid #e5e0d5;
+        border-radius: 12px;
 
-        border-radius: 10px;
-
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-
-        padding: 8px;
-
-        z-index: 4000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.20);
 
         pointer-events: auto;
     }
 
     .dropdown-menu.show {
         display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 }
