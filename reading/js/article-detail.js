@@ -119,7 +119,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             const { data, error } = await supabase.auth.signInWithOAuth({
                 provider: 'google',
                 options: {
-                    redirectTo: currentUrl
+                    redirectTo: currentUrl,
+                    queryParams: {
+                        prompt: 'select_account' // Har qanday qurilmada emaillarni tanlash oynasini majburiy chiqaradi
+                    }
                 }
             });
 
@@ -128,7 +131,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
-
     // --- 2. SIGN UP (RO'YXATDAN O'TISH) LOGIKASI ---
     const registerForm = document.getElementById('registerForm');
     if (registerForm) {

@@ -244,19 +244,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (googleLoginBtn) {
         googleLoginBtn.addEventListener('click', async () => {
             if (!supabase) {
-                console.error('Supabase topilmadi!');
+                console.error('Supabase not found!');
                 return;
             }
 
             if (authMessage) {
                 authMessage.style.color = '#70757c';
-                authMessage.textContent = 'Google orqali kirilmoqda...';
+                authMessage.textContent = 'Logging in with Google...';
             }
 
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: 'google',
                 options: {
-                    redirectTo: window.location.href
+                    redirectTo: window.location.href,
+                    queryParams: {
+                        prompt: 'select_account' // Forces the account selection screen to appear on any device
+                    }
                 }
             });
 
@@ -269,7 +272,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
     // 4. AUTH SESSIONNI KUZATISH
     if (supabase) {
         supabase.auth.onAuthStateChange((event, session) => {

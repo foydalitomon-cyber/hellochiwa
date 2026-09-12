@@ -263,46 +263,39 @@ if (loginForm) {
 // 3. GOOGLE LOGIN
 // =====================================================
 
-const googleLoginBtn =
-    document.getElementById('googleLoginBtn');
+const googleLoginBtn = document.getElementById('googleLoginBtn');
 
 if (googleLoginBtn) {
-
     googleLoginBtn.addEventListener('click', async () => {
-
         if (!supabase) {
-            console.error('Supabase topilmadi!');
+            console.error('Supabase not found!');
             return;
         }
 
         if (authMessage) {
             authMessage.style.color = '#70757c';
-            authMessage.textContent =
-                'Google orqali kirilmoqda...';
+            authMessage.textContent = 'Logging in with Google...';
         }
 
-        const { error } =
-            await supabase.auth.signInWithOAuth({
-                provider: 'google',
-
-                options: {
-                    redirectTo: window.location.href
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: 'google',
+            options: {
+                redirectTo: window.location.href,
+                queryParams: {
+                    prompt: 'select_account' // Har qanday qurilmada emaillarni tanlash oynasini chiqaradi
                 }
-            });
+            }
+        });
 
         if (error) {
-
             console.error('GOOGLE LOGIN ERROR:', error);
-
             if (authMessage) {
                 authMessage.style.color = '#e53935';
-                authMessage.textContent =
-                    error.message;
+                authMessage.textContent = error.message;
             }
         }
     });
 }
-
 
 // =====================================================
 // 4. AUTH SESSIONNI KUZATISH
