@@ -49,38 +49,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (profileAvatarBtn && dropdownMenu) {
-
-    // Telefonda va kompyuterda bosishni boshqarish
-    profileAvatarBtn.addEventListener('click', function (e) {
+    // JavaScript qismi uchun eng oxirgi va mukammal variant:
+if (userProfileDropdown && dropdownMenu) {
+    
+    // Ham kompyuter, ham telefon uchun yagona xavfsiz hodisa
+    userProfileDropdown.addEventListener('click', function (e) {
         e.stopPropagation();
-        console.log('CLICK FIRED');
         dropdownMenu.classList.toggle('show');
     });
 
-    profileAvatarBtn.addEventListener('touchend', function (e) {
-        e.preventDefault(); // Telefonda ortiqcha click hodisasi takrorlanib menyuni yopib qo'yishining oldini oladi
-        e.stopPropagation();
-        console.log('TOUCHEND FIRED');
-        dropdownMenu.classList.toggle('show');
-    });
-
-    // Tashqariga bosilganda menyuni yopish
+    // Tashqariga bosilganda yopish
     document.addEventListener('click', function (e) {
-        if (
-            userProfileDropdown &&
-            !userProfileDropdown.contains(e.target)
-        ) {
-            dropdownMenu.classList.remove('show');
-        }
-    });
-
-    // Mobil qurilmalarda tashqariga touch qilinganda ham yopilishi uchun
-    document.addEventListener('touchend', function (e) {
-        if (
-            userProfileDropdown &&
-            !userProfileDropdown.contains(e.target)
-        ) {
+        if (!userProfileDropdown.contains(e.target)) {
             dropdownMenu.classList.remove('show');
         }
     });

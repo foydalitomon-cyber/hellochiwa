@@ -1139,6 +1139,17 @@ body {
 
 @media (max-width: 768px) {
 
+    /* TELEFONDA HEADER ELEMENTLARI USTMA-UST TUSHISHINING OLDINI OLISH */
+    .header-right {
+        z-index: 20;
+        flex-shrink: 0;
+    }
+    
+    .user-profile-dropdown {
+        z-index: 20;
+        flex-shrink: 0;
+    }
+
     .nav-container {
         width: calc(100% - 28px);
     }
@@ -1153,27 +1164,22 @@ body {
 
     .articles-section {
         width: calc(100% - 28px);
-
         margin-top: 35px;
     }
 
     .reader-container {
         width: calc(100% - 36px);
-
         padding: 45px 0 70px;
     }
 
     .reader-title {
         font-size: 2rem;
-
         line-height: 1.3;
-
         margin-bottom: 28px;
     }
 
     .reader-body {
         font-size: 17px;
-
         line-height: 1.85;
     }
 
@@ -1209,7 +1215,6 @@ body {
 
     .reader-body {
         font-size: 16px;
-
         line-height: 1.85;
     }
 }
@@ -1232,7 +1237,6 @@ body {
         box-sizing: border-box !important;
     }
 }
-
 /* =================================================
    25. WORD MODAL / POPUP
 ================================================= */
@@ -1280,6 +1284,8 @@ body {
 .user-profile-dropdown {
     position: relative;
     display: inline-block;
+    z-index: 10; /* Navigatsiya havolalaridan ustunda turishi uchun */
+    flex-shrink: 0; /* Telefon ekranida tugma siqilib, yo'qolib qolmasligi uchun */
 }
 
 .profile-avatar-btn {
