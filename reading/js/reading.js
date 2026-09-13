@@ -51,22 +51,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (profileAvatarBtn && dropdownMenu) {
 
-    // Telefonda ham, kompyuterda ham birdek ishlashi uchun
-    ['click', 'touchend'].forEach(eventType => {
-        profileAvatarBtn.addEventListener(eventType, function (e) {
-            e.stopPropagation(); // Faqat tarqalishini to'xtatamiz, preventDefault shart emas
-
-            console.log('PROFILE BUTTON CLICKED');
-
-            dropdownMenu.classList.toggle('show');
-
-            console.log(
-                'DROPDOWN SHOW:',
-                dropdownMenu.classList.contains('show')
-            );
-        });
+    // Telefonda va kompyuterda bosishni boshqarish
+    profileAvatarBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        console.log('CLICK FIRED');
+        dropdownMenu.classList.toggle('show');
     });
 
+    profileAvatarBtn.addEventListener('touchend', function (e) {
+        e.preventDefault(); // Telefonda ortiqcha click hodisasi takrorlanib menyuni yopib qo'yishining oldini oladi
+        e.stopPropagation();
+        console.log('TOUCHEND FIRED');
+        dropdownMenu.classList.toggle('show');
+    });
+
+    // Tashqariga bosilganda menyuni yopish
     document.addEventListener('click', function (e) {
         if (
             userProfileDropdown &&
@@ -75,8 +74,17 @@ document.addEventListener('DOMContentLoaded', () => {
             dropdownMenu.classList.remove('show');
         }
     });
-}
 
+    // Mobil qurilmalarda tashqariga touch qilinganda ham yopilishi uchun
+    document.addEventListener('touchend', function (e) {
+        if (
+            userProfileDropdown &&
+            !userProfileDropdown.contains(e.target)
+        ) {
+            dropdownMenu.classList.remove('show');
+        }
+    });
+}
     // Dropdown ichidagi Chiqish (Logout) tugmasi
     if (logoutBtn) {
         logoutBtn.addEventListener('click', async (e) => {
