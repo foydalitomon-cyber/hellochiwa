@@ -51,29 +51,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (profileAvatarBtn && dropdownMenu) {
 
-    profileAvatarBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    // Telefonda ham, kompyuterda ham birdek ishlashi uchun
+    ['click', 'touchend'].forEach(eventType => {
+        profileAvatarBtn.addEventListener(eventType, function (e) {
+            e.stopPropagation(); // Faqat tarqalishini to'xtatamiz, preventDefault shart emas
 
-        console.log('PROFILE BUTTON CLICKED');
+            console.log('PROFILE BUTTON CLICKED');
 
-        dropdownMenu.classList.toggle('show');
+            dropdownMenu.classList.toggle('show');
 
-        console.log(
-            'DROPDOWN SHOW:',
-            dropdownMenu.classList.contains('show')
-        );
+            console.log(
+                'DROPDOWN SHOW:',
+                dropdownMenu.classList.contains('show')
+            );
+        });
     });
 
     document.addEventListener('click', function (e) {
-
         if (
             userProfileDropdown &&
             !userProfileDropdown.contains(e.target)
         ) {
             dropdownMenu.classList.remove('show');
         }
-
     });
 }
 
