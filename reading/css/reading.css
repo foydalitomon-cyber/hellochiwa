@@ -1782,6 +1782,8 @@ body.dark-mode .user-info-dropdown {
 
         flex: 0 0 auto;
 
+        display: inline-block !important;
+
         position: relative;
         z-index: 10000;
     }
