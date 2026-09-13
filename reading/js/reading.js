@@ -49,22 +49,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // JavaScript qismi uchun eng oxirgi va mukammal variant:
-if (userProfileDropdown && dropdownMenu) {
+    // Mobil va kompyuterda 100% ishlaydigan universal profil menyusi
+document.addEventListener('click', function (e) {
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const userProfileDropdown = document.getElementById('userProfileDropdown');
     
-    // Ham kompyuter, ham telefon uchun yagona xavfsiz hodisa
-    userProfileDropdown.addEventListener('click', function (e) {
+    // Agar sahifada profil elementlari bo'lmasa, to'xtaymiz
+    if (!dropdownMenu || !userProfileDropdown) return;
+
+    // 1. Agar foydalanuvchi profil tugmasi yoki uning ichidagilarga (avatar/ism) bossa
+    const profileBtn = e.target.closest('.profile-avatar-btn, #userProfileDropdown');
+    
+    if (profileBtn) {
+        e.preventDefault();
         e.stopPropagation();
         dropdownMenu.classList.toggle('show');
-    });
+        console.log('Menyu holati:', dropdownMenu.classList.contains('show'));
+        return;
+    }
 
-    // Tashqariga bosilganda yopish
-    document.addEventListener('click', function (e) {
-        if (!userProfileDropdown.contains(e.target)) {
-            dropdownMenu.classList.remove('show');
-        }
-    });
-}
+    // 2. Agar menyu ochiq bo'lsa va foydalanuvchi uning TASHQARISIGA bossa, yopamiz
+    if (!userProfileDropdown.contains(e.target)) {
+        dropdownMenu.classList.remove('show');
+    }
+});
     // Dropdown ichidagi Chiqish (Logout) tugmasi
     if (logoutBtn) {
         logoutBtn.addEventListener('click', async (e) => {
