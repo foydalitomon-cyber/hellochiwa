@@ -380,8 +380,13 @@ async function checkUser() {
 
 function updateAuthUI(user) {
 
-    if (user) {
+    const navContainer = document.querySelector('.nav-container');
 
+    if (navContainer) {
+        navContainer.classList.toggle('logged-in', !!user);
+    }
+
+    if (user) {
         // Sign In tugmasini yashirish
         if (authBtn) {
             authBtn.style.display = 'none';

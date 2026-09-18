@@ -1537,97 +1537,159 @@ body.dark-mode .user-info-dropdown {
     border-bottom: 1px solid #333333 !important;
 }
 
-/* =================================================
-   MOBILE HEADER - CLEAN VERSION
-   Desktop dizayniga maksimal yaqin
-================================================= */
+/* =========================================================
+   MOBILE HEADER — LOGO / ENTER / PROFILE
+========================================================= */
 
 @media (max-width: 560px) {
 
-    .main-header {
-        width: 100%;
-    }
-
     .nav-container {
         width: 100%;
-        min-height: 70px;
-
-        padding: 0 14px;
+        min-height: 56px;
+        padding: 0 10px;
 
         display: flex;
         align-items: center;
 
-        gap: 12px;
+        gap: 8px;
+        box-sizing: border-box;
 
-        overflow: visible;
+        overflow: visible !important;
     }
 
-    /* LOGO */
+    /* =========================================
+       LOGO — LOGIN QILINMAGANDA
+    ========================================= */
+
     .nav-container > .logo {
-        display: flex;
+        display: flex !important;
+        align-items: center;
 
-        flex-shrink: 0;
+        flex: 0 0 auto;
 
-        font-size: 16px;
-        gap: 6px;
+        width: 30px;
+        height: 30px;
+
+        margin: 0;
+        padding: 0;
     }
 
     .nav-container > .logo .logo-img {
         width: 30px;
         height: 30px;
+
+        display: block;
     }
 
-    /* NAV */
+    /* HELLOCHIWA YOZUVINI TELEFONDA YASHIRAMIZ */
+
+    .nav-container > .logo span {
+        display: none !important;
+    }
+
+
+    /* =========================================
+       NAV
+    ========================================= */
+
     .nav-container > .nav-menu {
-        display: flex;
+        display: flex !important;
         align-items: center;
 
-        gap: 14px;
-
-        flex: 1;
+        flex: 1 1 auto;
         min-width: 0;
 
-        overflow: visible;
+        gap: 9px;
+
+        overflow: visible !important;
 
         white-space: nowrap;
     }
 
+
+    /* =========================================
+       LINKLAR
+    ========================================= */
+
     .nav-menu > a {
-        flex-shrink: 0;
-
-        font-size: 13px;
-    }
-
-    /* DARK MODE */
-    .nav-menu > #darkModeToggle {
-        flex-shrink: 0;
-
-        margin-right: 0 !important;
-
-        font-size: 18px !important;
-
-        padding: 0;
-    }
-
-    /* ENTER */
-    .nav-menu > #authBtn {
-        flex-shrink: 0;
-
-        padding: 8px 13px;
+        flex: 0 0 auto;
 
         font-size: 12px;
+
+        white-space: nowrap;
     }
 
-    /* PROFILE */
+
+    /* TELEFONDA HEADERGA SIG'ISHI UCHUN */
+
+    .nav-menu > a[href="about.html"],
+    .nav-menu > a[href="faq.html"],
+    .nav-menu > a[href="contact.html"] {
+        display: none !important;
+    }
+
+
+    /* =========================================
+       ENTER
+    ========================================= */
+
+    .nav-menu > #authBtn {
+        display: inline-flex !important;
+
+        flex: 0 0 auto;
+
+        align-items: center;
+        justify-content: center;
+
+        padding: 6px 10px;
+
+        font-size: 12px;
+
+        white-space: nowrap;
+
+        margin: 0 !important;
+    }
+
+
+    /* =========================================
+       PROFILE
+    ========================================= */
+
     .nav-menu > .user-profile-dropdown {
+        display: none;
+
+        flex: 0 0 auto;
+
         position: relative;
 
-        display: inline-block;
-
-        flex-shrink: 0;
-
-        z-index: 1000;
+        z-index: 10000;
     }
+
+
+    /* =========================================
+       LOGIN QILINGANDA:
+       LOGO + ENTER YO'Q
+       PROFILE LOGO O'RNIGA
+    ========================================= */
+
+    .nav-container.logged-in > .logo {
+        display: none !important;
+    }
+
+    .nav-container.logged-in .nav-menu > .user-profile-dropdown {
+        display: block !important;
+
+        order: -1;
+    }
+
+    .nav-container.logged-in .nav-menu > #authBtn {
+        display: none !important;
+    }
+
+
+    /* =========================================
+       PROFILE AVATAR
+    ========================================= */
 
     .nav-menu > .user-profile-dropdown .profile-avatar-btn {
         width: 38px;
@@ -1647,7 +1709,6 @@ body.dark-mode .user-info-dropdown {
         border-radius: 50%;
 
         background: #35332d;
-
         color: #ffffff;
 
         cursor: pointer;
@@ -1657,132 +1718,28 @@ body.dark-mode .user-info-dropdown {
         -webkit-tap-highlight-color: transparent;
     }
 
-    /* PROFILE DROPDOWN */
-    .nav-menu > .user-profile-dropdown .dropdown-menu {
-        position: absolute;
 
-        top: calc(100% + 10px);
-        right: 0;
-        left: auto;
+    /* =========================================
+       DARK MODE
+    ========================================= */
 
-        width: 220px;
-        max-width: calc(100vw - 20px);
-
-        display: none;
-
-        z-index: 99999;
-    }
-
-    .nav-menu > .user-profile-dropdown .dropdown-menu.show {
-        display: block !important;
-
-        visibility: visible !important;
-
-        opacity: 1 !important;
-
-        pointer-events: auto !important;
-    }
-}
-
-/* =========================================================
-   FINAL MOBILE HEADER + LANGUAGE CARD FIX
-   ========================================================= */
-
-@media (max-width: 560px) {
-
-    /* HEADER */
-    .nav-container {
-        width: 100%;
-        min-height: 56px;
-        padding: 0 12px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        box-sizing: border-box;
-        overflow: visible !important;
-    }
-
-    /* Logo */
-    .nav-container > .logo {
-        display: flex !important;
+    .nav-menu > #darkModeToggle {
         flex: 0 0 auto;
-        align-items: center;
-        gap: 4px;
-        text-decoration: none;
-    }
 
-    .nav-container > .logo .logo-img {
-        width: 28px;
-        height: 28px;
-    }
-
-    .nav-container > .logo span {
-        font-size: 13px;
-        font-weight: 700;
-    }
-
-    /* NAV */
-    .nav-menu {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-
-        flex: 1 1 auto;
-        min-width: 0;
-
-        overflow-x: auto;
-        overflow-y: visible;
-
-        white-space: nowrap;
-
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .nav-menu::-webkit-scrollbar {
-        display: none;
-    }
-
-    .nav-menu > a {
-        flex: 0 0 auto;
-        font-size: 12px;
-    }
-
-    /* DARK MODE */
-    #darkModeToggle {
-        flex: 0 0 auto;
         margin: 0 !important;
-        padding: 4px !important;
+        padding: 3px !important;
+
         font-size: 18px !important;
     }
 
-    /* ENTER */
-    #authBtn {
-        flex: 0 0 auto;
-        white-space: nowrap;
-        padding: 7px 11px;
-        font-size: 12px;
-    }
 
-    /* PROFILE */
-    .user-profile-dropdown {
-        flex: 0 0 auto;
-        position: relative;
-        z-index: 10000;
-    }
+    /* =========================================
+       DROPDOWN
+    ========================================= */
 
-    .profile-avatar-btn {
-        width: 38px;
-        height: 38px;
-        min-width: 38px;
-        min-height: 38px;
-        padding: 0;
-        border-radius: 50%;
-    }
-
-    /* DROPDOWN */
-    .dropdown-menu {
+    .nav-menu > .user-profile-dropdown .dropdown-menu {
         position: fixed !important;
+
         top: 62px !important;
         right: 10px !important;
         left: auto !important;
@@ -1791,114 +1748,52 @@ body.dark-mode .user-info-dropdown {
         max-width: calc(100vw - 20px);
 
         z-index: 99999 !important;
+
+        display: none;
     }
 
+    .nav-menu > .user-profile-dropdown .dropdown-menu.show {
+        display: block !important;
 
-    /* =====================================================
-       LANGUAGE CARDS
-       ===================================================== */
+        visibility: visible !important;
+        opacity: 1 !important;
 
-    .language-grid {
-        grid-template-columns: 1fr;
-        gap: 14px;
-    }
-
-    .language-card {
-        position: relative;
-        min-height: 125px;
-        padding: 20px 22px;
-        box-sizing: border-box;
-        overflow: hidden;
-    }
-
-    .language-code {
-        display: block;
-        margin-bottom: 8px;
-    }
-
-    .language-name {
-        display: block;
-        max-width: 65%;
-        font-size: 20px;
-        line-height: 1.2;
-        white-space: normal;
-    }
-
-    .language-native {
-        display: block;
-        margin-top: 6px;
-        font-size: 15px;
-    }
-
-    .language-flag {
-        position: absolute;
-        right: 22px;
-        top: 50%;
-        transform: translateY(-50%);
-
-        width: 58px;
-        height: auto;
-
-        object-fit: contain;
-    }
-
-    .language-arrow {
-        position: absolute;
-        right: 18px;
-        bottom: 16px;
+        pointer-events: auto !important;
     }
 }
 
 
 /* =========================================================
-   VERY SMALL PHONES
-   ========================================================= */
+   JUDA KICHIK TELEFONLAR
+========================================================= */
 
 @media (max-width: 420px) {
 
     .nav-container {
         padding: 0 8px;
-        gap: 5px;
+        gap: 6px;
     }
 
-    .nav-container > .logo span {
-        display: none;
-    }
-
+    .nav-container > .logo,
     .nav-container > .logo .logo-img {
         width: 30px;
         height: 30px;
     }
 
     .nav-menu {
-        gap: 8px;
+        gap: 7px !important;
     }
 
     .nav-menu > a {
         font-size: 11px;
     }
 
-    #darkModeToggle {
-        font-size: 17px !important;
-    }
-
-    #authBtn {
-        padding: 6px 9px;
+    .nav-menu > #authBtn {
+        padding: 6px 8px;
         font-size: 11px;
     }
 
-    .language-card {
-        min-height: 120px;
-        padding: 18px;
-    }
-
-    .language-name {
-        font-size: 19px;
-        max-width: 62%;
-    }
-
-    .language-flag {
-        right: 18px;
-        width: 52px;
+    .nav-menu > #darkModeToggle {
+        font-size: 17px !important;
     }
 }
