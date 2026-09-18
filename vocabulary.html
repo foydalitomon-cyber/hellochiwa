@@ -49,8 +49,8 @@
                 <div class="dropdown-menu" id="dropdownMenu">
                     <!-- 1. Eng yuqorida Ism va Email -->
                     <div class="dropdown-header" style="padding: 12px 16px; border-bottom: 1px solid #eee;">
-                        <div id="dropdownUserName" style="font-weight: bold; color: #333; font-size: 15px;">User</div>
-                        <div id="dropdownUserEmail" style="font-size: 13px; color: #666; margin-top: 2px;">email@gmail.com</div>
+                        <div id="dropdownUserName" style="font-weight: bold; color: #333; font-size: 15px;"></div>
+                        <div id="dropdownUserEmail" style="font-size: 13px; color: #666; margin-top: 2px;"></div>
                     </div>
 
                     <!-- 2. Qizil rangli menyu havolalari -->
@@ -348,51 +348,54 @@
     </div>
 </footer>
 
-<!-- Auth Modal -->
+<!-- AUTH MODAL (LOGIN / REGISTER) -->
 <div id="authModal" class="auth-modal">
     <div class="auth-modal-content">
-        <!-- CSS'da nomlanishi: .close-auth-modal -->
-        <button id="closeAuthModal" class="close-auth-modal">&times;</button>
+        <span class="close-auth-modal" id="closeAuthModal">&times;</span>
         
+        <!-- Tab tugmalari -->
         <div class="auth-tabs">
-            <button id="loginTabBtn" class="auth-tab-btn active">Kirish</button>
-            <button id="registerTabBtn" class="auth-tab-btn">Ro'yxatdan o'tish</button>
+            <button id="loginTabBtn" class="auth-tab-btn active">Login</button>
+            <button id="registerTabBtn" class="auth-tab-btn">Register</button>
         </div>
 
-        <!-- Login Form -->
+        <!-- Login Formasi -->
         <form id="loginForm" class="auth-form active">
-            <!-- CSS'da nomlanishi: .input-group -->
             <div class="input-group">
-                <label>Email</label>
-                <input type="email" id="loginEmail" required placeholder="email@example.com">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" placeholder="email@example.com" required>
             </div>
             <div class="input-group">
-                <label>Password</label>
-                <input type="password" id="loginPassword" required placeholder="********">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="******" required>
             </div>
-            <!-- CSS'da nomlanishi: .auth-submit-btn -->
-            <button type="submit" class="auth-submit-btn">Kirish</button>
+            <button type="submit" class="auth-submit-btn">Login</button>
         </form>
 
-        <!-- Register Form -->
+        <!-- Register Formasi -->
         <form id="registerForm" class="auth-form">
             <div class="input-group">
-                <label>Email</label>
-                <input type="email" id="regEmail" required placeholder="email@example.com">
+                <label for="regEmail">Email</label>
+                <input type="email" id="regEmail" placeholder="email@example.com" required>
             </div>
+
             <div class="input-group">
-                <label>Password</label>
-                <input type="password" id="regPassword" required placeholder="********">
+                <label for="regPassword">Password</label>
+                <!-- 8 tadan kam bo'lmagan, katta-kichik harf va raqam talab qiluvchi placeholder -->
+                <input type="password" id="regPassword" placeholder="Min 8 chars (A-Z, a-z, 0-9)" minlength="8" required>
             </div>
+
             <button type="submit" class="auth-submit-btn">Register</button>
         </form>
 
-        <div id="authMessage" class="auth-message"></div>
-        
-        <!-- CSS'da nomlanishi: .social-login va .social-login-btn -->
+        <!-- Google login -->
         <div class="social-login">
-            <button id="googleLoginBtn" class="social-login-btn">Continue with Google</button>
+            <button type="button" id="googleLoginBtn" class="social-login-btn">
+                Continue with Google
+            </button>
         </div>
+
+        <p id="authMessage" class="auth-message"></p>
     </div>
 </div>
 <!-- Supabase -->

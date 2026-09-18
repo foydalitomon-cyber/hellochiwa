@@ -46,8 +46,8 @@
                 <div class="dropdown-menu" id="dropdownMenu">
                     <!-- 1. Eng yuqorida Ism va Email -->
                     <div class="dropdown-header" style="padding: 12px 16px; border-bottom: 1px solid #eee;">
-                        <div id="dropdownUserName" style="font-weight: bold; color: #333; font-size: 15px;">User</div>
-                        <div id="dropdownUserEmail" style="font-size: 13px; color: #666; margin-top: 2px;">email@gmail.com</div>
+                        <div id="dropdownUserName" style="font-weight: bold; color: #333; font-size: 15px;"></div>
+                        <div id="dropdownUserEmail" style="font-size: 13px; color: #666; margin-top: 2px;"></div>
                     </div>
 
                     <!-- 2. Qizil rangli menyu havolalari -->
@@ -68,7 +68,7 @@
                                 <polyline points="16 17 21 12 16 7"></polyline>
                                 <line x1="21" y1="12" x2="9" y2="12"></line>
                             </svg>
-                            Chiqish
+                            LogOut
                         </button>
                     </div>
                 </div>
@@ -219,8 +219,8 @@
         
         <!-- Tab tugmalari -->
         <div class="auth-tabs">
-            <button id="loginTabBtn" class="auth-tab-btn active">Kirish</button>
-            <button id="registerTabBtn" class="auth-tab-btn">Ro'yxatdan o'tish</button>
+            <button id="loginTabBtn" class="auth-tab-btn active">Login</button>
+            <button id="registerTabBtn" class="auth-tab-btn">Register</button>
         </div>
 
         <!-- Login Formasi -->
@@ -245,18 +245,18 @@
 
             <div class="input-group">
                 <label for="regPassword">Password</label>
-                <input type="password" id="regPassword" placeholder="Kamida 6 ta belgi" required>
+                <!-- 8 tadan kam bo'lmagan, katta-kichik harf va raqam talab qiluvchi placeholder -->
+                <input type="password" id="regPassword" placeholder="Min 8 chars (A-Z, a-z, 0-9)" minlength="8" required>
             </div>
 
             <button type="submit" class="auth-submit-btn">Register</button>
         </form>
 
-        <!-- Google / Apple login -->
+        <!-- Google login -->
         <div class="social-login">
             <button type="button" id="googleLoginBtn" class="social-login-btn">
                 Continue with Google
             </button>
-
         </div>
 
         <p id="authMessage" class="auth-message"></p>

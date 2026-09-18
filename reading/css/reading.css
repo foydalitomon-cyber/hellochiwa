@@ -310,101 +310,6 @@ body {
 
 
 /* =========================
-   15. TELEFON
-   560px dan kichik ekran
-========================= */
-
-@media (max-width: 560px) {
-
-    /* Header konteyneri */
-    .nav-container {
-        padding: 0 10px;
-        min-height: 50px;
-        gap: 8px;
-        overflow: visible;
-    }
-
-    /* Logo biroz ixchamlashadi */
-    .logo {
-        font-size: 14px;
-        gap: 3px;
-    }
-
-    .logo-img {
-        width: 26px;
-        height: 26px;
-    }
-
-    /* Menyuni gorizontal suriladigan qilish (ustma-ust chiqib xiralashishining oldini oladi) */
-    .nav-menu {
-        display: flex;
-        overflow-x: auto;
-        white-space: nowrap;
-        gap: 14px;
-        padding-bottom: 4px;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; /* Firefox uchun skrollni yashirish */
-    }
-
-    /* Chrome va Safari uchun pastdagi skroll chizig'ini yashirish */
-    .nav-menu::-webkit-scrollbar {
-        display: none;
-    }
-
-    .nav-menu a {
-        font-size: 13px;
-        flex-shrink: 0;
-    }
-
-    /* O'ng tarafdagi Enter / profil tugmasi */
-
-    .reading-page {
-        width: calc(100% - 20px);
-        padding: 30px 0 60px;
-    }
-
-    /* Reading sarlavhasini moslashtirish */
-    .reading-header h1 {
-        letter-spacing: -1px;
-    }
-
-    .reading-header p {
-        font-size: 14px;
-    }
-
-    .section-title h2 {
-        font-size: 18px;
-    }
-
-    /* Telefonda cardlar bittadan chiqadi */
-    .language-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .language-card {
-        min-height: 120px;
-        padding: 18px;
-        border-radius: 14px;
-    }
-
-    .language-flag {
-        right: 35px;
-        width: 40px;
-        height: 26px;
-    }
-
-    .language-name {
-        font-size: 18px;
-    }
-
-    .language-arrow {
-        right: 15px;
-        bottom: 15px;
-    }
-
-}
-/* =========================
    16. JUDA KICHIK TELEFON
 ========================= */
 
@@ -1133,110 +1038,7 @@ body {
 }
 
 
-/* =================================================
-   24. MOBILE
-================================================= */
 
-@media (max-width: 768px) {
-
-    /* TELEFONDA HEADER ELEMENTLARI USTMA-UST TUSHISHINING OLDINI OLISH */
-    .header-right {
-        z-index: 20;
-        flex-shrink: 0;
-    }
-    
-    .user-profile-dropdown {
-        z-index: 20;
-        flex-shrink: 0;
-    }
-
-    .nav-container {
-        width: calc(100% - 28px);
-    }
-
-    .nav-menu {
-        gap: 12px;
-    }
-
-    .nav-menu a {
-        font-size: 13px;
-    }
-
-    .articles-section {
-        width: calc(100% - 28px);
-        margin-top: 35px;
-    }
-
-    .reader-container {
-        width: calc(100% - 36px);
-        padding: 45px 0 70px;
-    }
-
-    .reader-title {
-        font-size: 2rem;
-        line-height: 1.3;
-        margin-bottom: 28px;
-    }
-
-    .reader-body {
-        font-size: 17px;
-        line-height: 1.85;
-    }
-
-    .reader-body p {
-        margin-bottom: 22px;
-    }
-
-    .footer-links {
-        gap: 16px;
-    }
-}
-
-
-/* Kichik telefon */
-
-@media (max-width: 420px) {
-
-    .nav-container {
-        width: calc(100% - 20px);
-    }
-
-    .nav-menu {
-        gap: 8px;
-    }
-
-    .nav-menu a {
-        font-size: 12px;
-    }
-
-    .reader-container {
-        width: calc(100% - 28px);
-    }
-
-    .reader-body {
-        font-size: 16px;
-        line-height: 1.85;
-    }
-}
-
-/* FAQAT TELEFONLAR UCHUN SO'Z OYNASINI TO'G'RILASH */
-@media (max-width: 768px) {
-    .word-modal {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .hard-word-tooltip, 
-    .word-modal-content {
-        max-width: 85vw !important;
-        width: 85vw !important;
-        margin: 0 auto !important;
-        left: auto !important;
-        transform: none !important;
-        box-sizing: border-box !important;
-    }
-}
 /* =================================================
    25. WORD MODAL / POPUP
 ================================================= */
@@ -1580,6 +1382,15 @@ body.dark-mode span:not(.icon):not(.hard-word) {
     color: #e2e8f0 !important;
 }
 
+/* Auth modal xabarlari dark mode'da ham aniq ko'rinishi uchun */
+body.dark-mode #authMessage {
+    color: #4ade80 !important; /* Och yashil (muvaffaqiyat uchun) */
+}
+
+body.dark-mode #authMessage.error {
+    color: #f87171 !important; /* Och qizil (xatolik uchun) */
+}
+
 /* --- QIYIN SO'ZLAR (HARD-WORDS) DARK MODE UCHUN --- */
 body.dark-mode .hard-word {
     color: #38bdf8 !important; /* Och moviy neon rangda yaqqol ajralib turadi */
@@ -1727,82 +1538,103 @@ body.dark-mode .user-info-dropdown {
 }
 
 /* =================================================
-   MOBILE HEADER:
-   LOGO -> PROFILE
-   DESKTOP O'ZGARMAYDI
+   MOBILE HEADER - CLEAN VERSION
+   Desktop dizayniga maksimal yaqin
 ================================================= */
 
 @media (max-width: 560px) {
 
-    /* Header container */
+    .main-header {
+        width: 100%;
+    }
+
     .nav-container {
         width: 100%;
-        min-height: 54px;
-        padding: 0 10px;
+        min-height: 70px;
+
+        padding: 0 14px;
+
         display: flex;
         align-items: center;
-        gap: 8px;
-        overflow: visible !important;
+
+        gap: 12px;
+
+        overflow: visible;
     }
 
-    /* =============================================
-       LOGO TELEFONDA YO'QOLADI
-    ============================================= */
-
+    /* LOGO */
     .nav-container > .logo {
-        display: none !important;
+        display: flex;
+
+        flex-shrink: 0;
+
+        font-size: 16px;
+        gap: 6px;
     }
 
-    /* =============================================
-       NAV MENU QOLGAN BO'SH JOYNI EGALLAYDI
-    ============================================= */
+    .nav-container > .logo .logo-img {
+        width: 30px;
+        height: 30px;
+    }
 
+    /* NAV */
     .nav-container > .nav-menu {
         display: flex;
         align-items: center;
 
-        width: 100%;
+        gap: 14px;
+
+        flex: 1;
         min-width: 0;
 
-        gap: 10px;
-
-        overflow-x: auto;
-        overflow-y: visible;
+        overflow: visible;
 
         white-space: nowrap;
-
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
     }
 
-    .nav-container > .nav-menu::-webkit-scrollbar {
-        display: none;
+    .nav-menu > a {
+        flex-shrink: 0;
+
+        font-size: 13px;
     }
 
-    /* =============================================
-       PROFIL LOGO O'RNIGA — ENG CHAPDA
-    ============================================= */
+    /* DARK MODE */
+    .nav-menu > #darkModeToggle {
+        flex-shrink: 0;
 
-    .nav-menu .user-profile-dropdown {
-        order: -1;
+        margin-right: 0 !important;
 
-        flex: 0 0 auto;
+        font-size: 18px !important;
 
-        display: inline-block !important;
+        padding: 0;
+    }
 
+    /* ENTER */
+    .nav-menu > #authBtn {
+        flex-shrink: 0;
+
+        padding: 8px 13px;
+
+        font-size: 12px;
+    }
+
+    /* PROFILE */
+    .nav-menu > .user-profile-dropdown {
         position: relative;
-        z-index: 10000;
+
+        display: inline-block;
+
+        flex-shrink: 0;
+
+        z-index: 1000;
     }
 
-    /* =============================================
-       PROFIL AVATARI
-    ============================================= */
+    .nav-menu > .user-profile-dropdown .profile-avatar-btn {
+        width: 38px;
+        height: 38px;
 
-    .nav-menu .profile-avatar-btn {
-        width: 40px;
-        height: 40px;
-        min-width: 40px;
-        min-height: 40px;
+        min-width: 38px;
+        min-height: 38px;
 
         padding: 0;
         margin: 0;
@@ -1814,80 +1646,40 @@ body.dark-mode .user-info-dropdown {
         border: none;
         border-radius: 50%;
 
-        background: #35332d !important;
-        color: #ffffff !important;
+        background: #35332d;
+
+        color: #ffffff;
 
         cursor: pointer;
 
         touch-action: manipulation;
+
         -webkit-tap-highlight-color: transparent;
     }
 
-    .nav-menu .user-avatar-placeholder {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    /* PROFILE DROPDOWN */
+    .nav-menu > .user-profile-dropdown .dropdown-menu {
+        position: absolute;
 
-        width: 100%;
-        height: 100%;
+        top: calc(100% + 10px);
+        right: 0;
+        left: auto;
 
-        color: #ffffff !important;
-        font-size: 15px;
-        font-weight: 600;
-    }
-
-    /* =============================================
-       MENYU LINKLARI
-    ============================================= */
-
-    .nav-menu > a {
-        flex: 0 0 auto;
-        font-size: 12px;
-    }
-
-    /* =============================================
-       DARK MODE
-    ============================================= */
-
-    .nav-menu > #darkModeToggle {
-        flex: 0 0 auto;
-        margin-right: 0 !important;
-        font-size: 18px !important;
-    }
-
-    /* =============================================
-       ENTER
-    ============================================= */
-
-    .nav-menu > #authBtn {
-        flex: 0 0 auto;
-        padding: 7px 12px;
-        font-size: 12px;
-    }
-
-    /* =============================================
-       PROFILE DROPDOWN
-    ============================================= */
-
-    .nav-menu .dropdown-menu {
-        position: fixed !important;
-
-        top: 62px !important;
-        right: 10px !important;
-        left: auto !important;
-
-        width: 220px !important;
+        width: 220px;
         max-width: calc(100vw - 20px);
 
-        z-index: 99999 !important;
-
         display: none;
+
+        z-index: 99999;
     }
 
-    .nav-menu .dropdown-menu.show {
+    .nav-menu > .user-profile-dropdown .dropdown-menu.show {
         display: block !important;
+
         visibility: visible !important;
+
         opacity: 1 !important;
+
         pointer-events: auto !important;
     }
 }

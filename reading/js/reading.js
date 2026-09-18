@@ -129,15 +129,27 @@ if (registerForm) {
         }
 
         const email = document.getElementById('regEmail')?.value.trim();
-        const password = document.getElementById('regPassword')?.value;
+    const password = document.getElementById('regPassword')?.value;
 
-        if (!email || !password) {
-            if (authMessage) {
-                authMessage.style.color = '#e53935';
-                authMessage.textContent = 'Please enter both email and password.';
-            }
-            return;
+    if (!email || !password) {
+        if (authMessage) {
+            authMessage.style.color = '#e53935';
+            authMessage.textContent = 'Please enter both email and password.';
         }
+        return;
+    }
+
+    // --- KUCHLI PAROL TEKSHIRUVI ---
+    // Kamida 8 ta belgi, kamida bitta katta harf, bitta kichik harf va bitta raqam talab qiladi
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+        if (authMessage) {
+            authMessage.style.color = '#e53935';
+            authMessage.textContent = 'Password must be at least 8 characters and include uppercase, lowercase letters, and a number.';
+        }
+        return;
+    }
 
         if (authMessage) {
             authMessage.style.color = '#70757c';

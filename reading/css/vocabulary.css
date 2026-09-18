@@ -134,7 +134,7 @@ html, body {
 }
 
 /* Orqaga qaytish tugmasi */
-.vocab-back-btn {
+.back-btn {
     display: inline-block;
     color: var(--primary-color, #3182ce);
     font-weight: 600;
@@ -143,7 +143,7 @@ html, body {
     transition: opacity 0.2s ease;
 }
 
-.vocab-back-btn:hover {
+.back-btn:hover {
     opacity: 0.8;
     text-decoration: underline;
 }

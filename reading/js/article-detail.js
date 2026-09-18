@@ -250,8 +250,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                 backLink.href = `articles.html?lang=${encodeURIComponent(article.language_code)}`;
             }
 
-            if (audioEl && article.audio_url) {
-                audioEl.src = article.audio_url;
+            if (audioEl) {
+                // audio_url mavjud va bo'sh emasligini tekshiramiz
+                if (article.audio_url && article.audio_url.trim() !== '') {
+                    audioEl.src = article.audio_url;
+                    audioEl.style.display = 'block'; // Audio bo'lsa ko'rsatamiz
+                } else {
+                    audioEl.src = '';
+                    audioEl.style.display = 'none';  // Audio bo'lmasa yashiramiz
+                }
             }
 
             const articleLanguage = article.language;
