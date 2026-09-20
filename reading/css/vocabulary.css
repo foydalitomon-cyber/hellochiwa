@@ -422,18 +422,41 @@ body.dark-mode .vocabulary-explanation {
     color: #cbd5e1 !important;
 }
 
-/* Dropdown menyu */
-body.dark-mode .dropdown-menu {
-    background: #1e1e1e !important;
-    border-color: #333333 !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+/* =================================================
+   DROPDOWN MENU DARK MODE FIX (READING BILAN BIR XIL)
+================================================= */
+
+/* Dropdown menyuning o'zi */
+body.dark-mode .dropdown-menu,
+body.dark-mode .user-dropdown,
+body.dark-mode .dropdown-content {
+    background-color: #1e1e1e !important;
+    border: 1px solid #333333 !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8) !important;
 }
 
+/* Linklar (Home, Reading, va h.k.) */
+body.dark-mode .dropdown-menu a,
 body.dark-mode .dropdown-links a {
-    color: #f1f5f9 !important;
+    color: #e2e8f0 !important;
 }
 
+body.dark-mode .dropdown-menu a:hover,
 body.dark-mode .dropdown-links a:hover {
     background-color: #2c2c2c !important;
+    color: #ffffff !important;
 }
 
+/* Profil ismi va emailini (gradient/xirali yo'qotib) TINIQ OQ QILISH */
+body.dark-mode .dropdown-menu *,
+body.dark-mode .user-dropdown *,
+body.dark-mode .dropdown-content * {
+    color: #ffffff !important; /* Barcha matnlarni majburan tiniq oq qiladi */
+    opacity: 1 !important;     /* Xiralik va gradient effektini yo'qotadi */
+}
+
+/* LogOut (Chiqish) tugmasi qizil bo'lib ajralib turishi uchun */
+body.dark-mode .dropdown-menu a[href*="logout"],
+body.dark-mode .dropdown-menu .logout-btn {
+    color: #ef4444 !important;
+}

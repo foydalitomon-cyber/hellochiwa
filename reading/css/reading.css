@@ -1530,11 +1530,20 @@ body.dark-mode .dropdown-content a:hover {
     color: #ffffff !important;
 }
 
-/* 4. Foydalanuvchi ismi va emaili chiqadigan qism (agar bo'lsa) */
-body.dark-mode .dropdown-header,
-body.dark-mode .user-info-dropdown {
-    color: #f8fafc !important;
-    border-bottom: 1px solid #333333 !important;
+/* 4. Foydalanuvchi ismi va emaili (TO'G'RILANDI) */
+/* Mobil brauzerlar (Safari/Chrome) uchun maxsus dark mode fix */
+body.dark-mode .dropdown-menu *,
+body.dark-mode .user-dropdown *,
+body.dark-mode .dropdown-content * {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important; /* iPhone Safari matnni qoraytirib yuborishini to'xtatadi */
+    opacity: 1 !important;
+}
+
+/* LogOut (Chiqish) tugmasi qizil bo'lib ajralib turishi uchun */
+body.dark-mode .dropdown-menu a[href*="logout"],
+body.dark-mode .dropdown-menu .logout-btn {
+    color: #ef4444 !important;
 }
 
 /* =========================================================
