@@ -1538,10 +1538,11 @@ body.dark-mode .user-info-dropdown {
 }
 
 /* =========================================================
-   MOBILE HEADER — LOGO / NAV / PROFILE
+   MOBILE + TABLET HEADER
+   LOGO | SCROLLABLE NAV | THEME | ENTER / PROFILE
 ========================================================= */
 
-@media (max-width: 560px) {
+@media (max-width: 768px) {
 
     /* =====================================================
        HEADER CONTAINER
@@ -1569,6 +1570,7 @@ body.dark-mode .user-info-dropdown {
 
     .nav-container > .logo {
         display: flex !important;
+
         align-items: center;
         justify-content: center;
 
@@ -1579,6 +1581,8 @@ body.dark-mode .user-info-dropdown {
 
         margin: 0;
         padding: 0;
+
+        z-index: 20;
     }
 
     .nav-container > .logo .logo-img {
@@ -1597,6 +1601,9 @@ body.dark-mode .user-info-dropdown {
 
     /* =====================================================
        NAV MENU
+
+       Menu o'zi horizontal scroll container.
+       Lekin o'ngdagi theme/profile/enter sticky.
     ===================================================== */
 
     .nav-container > .nav-menu {
@@ -1608,9 +1615,25 @@ body.dark-mode .user-info-dropdown {
 
         gap: 9px;
 
-        overflow: visible !important;
+        /*
+           Muhim:
+           Menyu ko'paysa faqat shu qism suriladi.
+        */
+        overflow-x: auto !important;
+        overflow-y: visible !important;
 
         white-space: nowrap;
+
+        /*
+           Scrollbarni yashiramiz
+        */
+        scrollbar-width: none;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-container > .nav-menu::-webkit-scrollbar {
+        display: none;
     }
 
 
@@ -1624,6 +1647,12 @@ body.dark-mode .user-info-dropdown {
         font-size: 12px;
 
         white-space: nowrap;
+
+        /*
+           Linklar scroll qilinadigan qismda qoladi.
+        */
+        position: relative;
+        z-index: 1;
     }
 
 
@@ -1639,7 +1668,9 @@ body.dark-mode .user-info-dropdown {
 
 
     /* =====================================================
-       ENTER BUTTON — LOGGED OUT
+       ENTER — LOGGED OUT
+
+       O'ng tomonga yopishib turadi.
     ===================================================== */
 
     .nav-menu > #authBtn {
@@ -1657,11 +1688,27 @@ body.dark-mode .user-info-dropdown {
         font-size: 12px;
 
         white-space: nowrap;
+
+        /*
+           O'ng tomonda doim ko'rinadi.
+        */
+        position: sticky;
+        right: 0;
+
+        z-index: 20;
+
+        /*
+           Orqasida boshqa menu ko'rinib ketmasligi uchun
+           background beramiz.
+        */
+        background: inherit;
     }
 
 
     /* =====================================================
        PROFILE CONTAINER
+
+       Logged out holatda yashirin.
     ===================================================== */
 
     .nav-menu > .user-profile-dropdown {
@@ -1669,22 +1716,22 @@ body.dark-mode .user-info-dropdown {
 
         flex: 0 0 auto;
 
-        position: relative;
+        position: sticky;
+
+        right: 0;
 
         margin: 0;
 
-        z-index: 10000;
+        z-index: 30;
     }
 
 
     /* =====================================================
        LOGGED IN
-       
-       Logo       → chapda qoladi
-       Navigation → o'rtada
-       Moon       → o'ng tomonda
-       Profile    → eng o'ng tomonda
-       Enter      → yashiriladi
+
+       Logo qoladi.
+       Enter yo'q.
+       Profile o'ng tomonda.
     ===================================================== */
 
     .nav-container.logged-in > .logo {
@@ -1704,9 +1751,11 @@ body.dark-mode .user-info-dropdown {
 
         margin-left: 0 !important;
 
-        position: relative;
+        position: sticky;
 
-        z-index: 10000;
+        right: 0;
+
+        z-index: 30;
     }
 
 
@@ -1725,6 +1774,7 @@ body.dark-mode .user-info-dropdown {
         margin: 0;
 
         display: flex;
+
         align-items: center;
         justify-content: center;
 
@@ -1744,6 +1794,8 @@ body.dark-mode .user-info-dropdown {
 
     /* =====================================================
        DARK MODE BUTTON
+
+       O'ng tomonda profile/Enter oldida turadi.
     ===================================================== */
 
     .nav-menu > #darkModeToggle {
@@ -1755,15 +1807,24 @@ body.dark-mode .user-info-dropdown {
         padding: 3px !important;
 
         font-size: 18px !important;
+
+        position: sticky;
+
+        /*
+           Profile/Enter oldida qoladi.
+        */
+        right: 42px;
+
+        z-index: 25;
+
+        flex-shrink: 0;
     }
 
 
     /* =====================================================
        PROFILE DROPDOWN
-       
-       Fixed position ishlatiladi.
-       Shu sababli header yoki nav overflow'i
-       popupni kesib tashlamaydi.
+
+       Header/nav overflowidan mustaqil.
     ===================================================== */
 
     .nav-menu > .user-profile-dropdown .dropdown-menu {
@@ -1775,6 +1836,7 @@ body.dark-mode .user-info-dropdown {
         left: auto !important;
 
         width: 220px !important;
+
         max-width: calc(100vw - 20px);
 
         margin: 0 !important;
@@ -1793,6 +1855,7 @@ body.dark-mode .user-info-dropdown {
         display: block !important;
 
         visibility: visible !important;
+
         opacity: 1 !important;
 
         pointer-events: auto !important;
@@ -1801,7 +1864,7 @@ body.dark-mode .user-info-dropdown {
 
 
 /* =========================================================
-   JUDA KICHIK TELEFONLAR
+   SMALL PHONES
 ========================================================= */
 
 @media (max-width: 420px) {
@@ -1813,7 +1876,9 @@ body.dark-mode .user-info-dropdown {
     }
 
 
-    /* LOGO */
+    /* =====================================================
+       LOGO
+    ===================================================== */
 
     .nav-container > .logo,
     .nav-container > .logo .logo-img {
@@ -1822,21 +1887,27 @@ body.dark-mode .user-info-dropdown {
     }
 
 
-    /* NAV */
+    /* =====================================================
+       NAV
+    ===================================================== */
 
     .nav-container > .nav-menu {
         gap: 7px !important;
     }
 
 
-    /* LINKS */
+    /* =====================================================
+       LINKS
+    ===================================================== */
 
     .nav-menu > a {
         font-size: 11px;
     }
 
 
-    /* ENTER */
+    /* =====================================================
+       ENTER
+    ===================================================== */
 
     .nav-menu > #authBtn {
         padding: 6px 8px;
@@ -1845,14 +1916,20 @@ body.dark-mode .user-info-dropdown {
     }
 
 
-    /* DARK MODE */
+    /* =====================================================
+       DARK MODE
+    ===================================================== */
 
     .nav-menu > #darkModeToggle {
         font-size: 17px !important;
+
+        right: 38px;
     }
 
 
-    /* PROFILE */
+    /* =====================================================
+       PROFILE
+    ===================================================== */
 
     .nav-menu > .user-profile-dropdown .profile-avatar-btn {
         width: 36px;
@@ -1863,7 +1940,9 @@ body.dark-mode .user-info-dropdown {
     }
 
 
-    /* DROPDOWN */
+    /* =====================================================
+       DROPDOWN
+    ===================================================== */
 
     .nav-menu > .user-profile-dropdown .dropdown-menu {
         top: 60px !important;
@@ -1871,6 +1950,53 @@ body.dark-mode .user-info-dropdown {
         right: 8px !important;
 
         width: 220px !important;
+
         max-width: calc(100vw - 16px);
+    }
+}
+
+
+/* =========================================================
+   READING LANGUAGE CARDS
+   MOBILE / SMALL TABLET
+   Bitta-bitta pastga tushadi
+========================================================= */
+
+@media (max-width: 768px) {
+
+    /*
+       Reading sahifasidagi til kartalari.
+       2 ustun o'rniga 1 ustun.
+    */
+
+    .language-grid,
+    .languages-grid,
+    .reading-language-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+
+    /*
+       Agar eski CSS flex ishlatayotgan bo'lsa
+    */
+
+    .language-grid,
+    .languages-grid,
+    .reading-language-grid {
+        display: grid !important;
+
+        width: 100%;
+    }
+
+
+    /*
+       Har bir language card to'liq kenglikda.
+    */
+
+    .language-card,
+    .language-card-btn {
+        width: 100% !important;
+
+        box-sizing: border-box;
     }
 }
