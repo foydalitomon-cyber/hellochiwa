@@ -1994,3 +1994,12 @@ body.dark-mode .user-info-dropdown {
         bottom: 15px !important;
     }
 }
+
+/* =====================================================
+   TELEFONLAR UCHUN: Reading kardlarini 1 ta ustun qilish
+===================================================== */
+@media (max-width: 800px) {
+    .language-grid {
+        grid-template-columns: 1fr !important; /* 2 talikdan voz kechib, majburan 1 ta ustun qilamiz */
+    }
+}
