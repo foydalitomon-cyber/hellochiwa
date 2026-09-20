@@ -49,26 +49,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Mobil va kompyuterda 100% ishlaydigan universal profil menyusi
+    // =====================================================
+// PROFILE DROPDOWN
+// =====================================================
+
 document.addEventListener('click', function (e) {
     const dropdownMenu = document.getElementById('dropdownMenu');
     const userProfileDropdown = document.getElementById('userProfileDropdown');
-    
-    // Agar sahifada profil elementlari bo'lmasa, to'xtaymiz
-    if (!dropdownMenu || !userProfileDropdown) return;
+    const profileAvatarBtn = document.getElementById('profileAvatarBtn');
 
-    // 1. Agar foydalanuvchi profil tugmasi yoki uning ichidagilarga (avatar/ism) bossa
-    const profileBtn = e.target.closest('.profile-avatar-btn, #userProfileDropdown');
-    
-    if (profileBtn) {
-        e.preventDefault();
-        e.stopPropagation();
-        dropdownMenu.classList.toggle('show');
-        console.log('Menyu holati:', dropdownMenu.classList.contains('show'));
+    // Profil dropdown sahifada bo'lmasa, hech narsa qilmaymiz
+    if (!dropdownMenu || !userProfileDropdown || !profileAvatarBtn) {
         return;
     }
 
-    // 2. Agar menyu ochiq bo'lsa va foydalanuvchi uning TASHQARISIGA bossa, yopamiz
+    // 1. FAQAT avatar tugmasi bosilganda dropdownni ochish/yopish
+    if (profileAvatarBtn.contains(e.target)) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        dropdownMenu.classList.toggle('show');
+
+        console.log(
+            'Menyu holati:',
+            dropdownMenu.classList.contains('show')
+        );
+
+        return;
+    }
+
+    // 2. Dropdown ichidagi link/buttonlarga tegmaymiz
+    if (dropdownMenu.contains(e.target)) {
+        return;
+    }
+
+    // 3. Dropdown tashqarisiga bosilsa yopamiz
     if (!userProfileDropdown.contains(e.target)) {
         dropdownMenu.classList.remove('show');
     }
