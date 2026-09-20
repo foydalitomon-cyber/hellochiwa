@@ -1538,32 +1538,39 @@ body.dark-mode .user-info-dropdown {
 }
 
 /* =========================================================
-   MOBILE HEADER — LOGO / ENTER / PROFILE
+   MOBILE HEADER — LOGO / NAV / PROFILE
 ========================================================= */
 
 @media (max-width: 560px) {
 
+    /* =====================================================
+       HEADER CONTAINER
+    ===================================================== */
+
     .nav-container {
         width: 100%;
         min-height: 56px;
+
         padding: 0 10px;
+        box-sizing: border-box;
 
         display: flex;
         align-items: center;
 
         gap: 8px;
-        box-sizing: border-box;
 
         overflow: visible !important;
     }
 
-    /* =========================================
-       LOGO — LOGIN QILINMAGANDA
-    ========================================= */
+
+    /* =====================================================
+       LOGO
+    ===================================================== */
 
     .nav-container > .logo {
         display: flex !important;
         align-items: center;
+        justify-content: center;
 
         flex: 0 0 auto;
 
@@ -1575,22 +1582,22 @@ body.dark-mode .user-info-dropdown {
     }
 
     .nav-container > .logo .logo-img {
+        display: block;
+
         width: 30px;
         height: 30px;
 
-        display: block;
+        object-fit: contain;
     }
-
-    /* HELLOCHIWA YOZUVINI TELEFONDA YASHIRAMIZ */
 
     .nav-container > .logo span {
         display: none !important;
     }
 
 
-    /* =========================================
-       NAV
-    ========================================= */
+    /* =====================================================
+       NAV MENU
+    ===================================================== */
 
     .nav-container > .nav-menu {
         display: flex !important;
@@ -1607,9 +1614,9 @@ body.dark-mode .user-info-dropdown {
     }
 
 
-    /* =========================================
-       LINKLAR
-    ========================================= */
+    /* =====================================================
+       NAV LINKS
+    ===================================================== */
 
     .nav-menu > a {
         flex: 0 0 auto;
@@ -1620,7 +1627,9 @@ body.dark-mode .user-info-dropdown {
     }
 
 
-    /* TELEFONDA HEADERGA SIG'ISHI UCHUN */
+    /* =====================================================
+       MOBILEDA YASHIRILADIGAN SAHIFALAR
+    ===================================================== */
 
     .nav-menu > a[href="about.html"],
     .nav-menu > a[href="faq.html"],
@@ -1629,9 +1638,9 @@ body.dark-mode .user-info-dropdown {
     }
 
 
-    /* =========================================
-       ENTER
-    ========================================= */
+    /* =====================================================
+       ENTER BUTTON — LOGGED OUT
+    ===================================================== */
 
     .nav-menu > #authBtn {
         display: inline-flex !important;
@@ -1643,17 +1652,17 @@ body.dark-mode .user-info-dropdown {
 
         padding: 6px 10px;
 
+        margin: 0 !important;
+
         font-size: 12px;
 
         white-space: nowrap;
-
-        margin: 0 !important;
     }
 
 
-    /* =========================================
-       PROFILE
-    ========================================= */
+    /* =====================================================
+       PROFILE CONTAINER
+    ===================================================== */
 
     .nav-menu > .user-profile-dropdown {
         display: none;
@@ -1662,34 +1671,48 @@ body.dark-mode .user-info-dropdown {
 
         position: relative;
 
+        margin: 0;
+
         z-index: 10000;
     }
 
 
-    /* =========================================
-       LOGIN QILINGANDA:
-       LOGO + ENTER YO'Q
-       PROFILE LOGO O'RNIGA
-    ========================================= */
+    /* =====================================================
+       LOGGED IN
+       
+       Logo       → chapda qoladi
+       Navigation → o'rtada
+       Moon       → o'ng tomonda
+       Profile    → eng o'ng tomonda
+       Enter      → yashiriladi
+    ===================================================== */
 
     .nav-container.logged-in > .logo {
-        display: none !important;
-    }
-
-    .nav-container.logged-in .nav-menu > .user-profile-dropdown {
-        display: block !important;
-
-        order: -1;
+        display: flex !important;
     }
 
     .nav-container.logged-in .nav-menu > #authBtn {
         display: none !important;
     }
 
+    .nav-container.logged-in .nav-menu > .user-profile-dropdown {
+        display: block !important;
 
-    /* =========================================
+        flex: 0 0 auto;
+
+        order: 10;
+
+        margin-left: 0 !important;
+
+        position: relative;
+
+        z-index: 10000;
+    }
+
+
+    /* =====================================================
        PROFILE AVATAR
-    ========================================= */
+    ===================================================== */
 
     .nav-menu > .user-profile-dropdown .profile-avatar-btn {
         width: 38px;
@@ -1719,11 +1742,13 @@ body.dark-mode .user-info-dropdown {
     }
 
 
-    /* =========================================
-       DARK MODE
-    ========================================= */
+    /* =====================================================
+       DARK MODE BUTTON
+    ===================================================== */
 
     .nav-menu > #darkModeToggle {
+        display: inline-flex !important;
+
         flex: 0 0 auto;
 
         margin: 0 !important;
@@ -1733,24 +1758,36 @@ body.dark-mode .user-info-dropdown {
     }
 
 
-    /* =========================================
-       DROPDOWN
-    ========================================= */
+    /* =====================================================
+       PROFILE DROPDOWN
+       
+       Fixed position ishlatiladi.
+       Shu sababli header yoki nav overflow'i
+       popupni kesib tashlamaydi.
+    ===================================================== */
 
     .nav-menu > .user-profile-dropdown .dropdown-menu {
         position: fixed !important;
 
         top: 62px !important;
+
         right: 10px !important;
         left: auto !important;
 
         width: 220px !important;
         max-width: calc(100vw - 20px);
 
+        margin: 0 !important;
+
         z-index: 99999 !important;
 
         display: none;
     }
+
+
+    /* =====================================================
+       DROPDOWN OPEN
+    ===================================================== */
 
     .nav-menu > .user-profile-dropdown .dropdown-menu.show {
         display: block !important;
@@ -1771,8 +1808,12 @@ body.dark-mode .user-info-dropdown {
 
     .nav-container {
         padding: 0 8px;
+
         gap: 6px;
     }
+
+
+    /* LOGO */
 
     .nav-container > .logo,
     .nav-container > .logo .logo-img {
@@ -1780,20 +1821,56 @@ body.dark-mode .user-info-dropdown {
         height: 30px;
     }
 
-    .nav-menu {
+
+    /* NAV */
+
+    .nav-container > .nav-menu {
         gap: 7px !important;
     }
+
+
+    /* LINKS */
 
     .nav-menu > a {
         font-size: 11px;
     }
 
+
+    /* ENTER */
+
     .nav-menu > #authBtn {
         padding: 6px 8px;
+
         font-size: 11px;
     }
 
+
+    /* DARK MODE */
+
     .nav-menu > #darkModeToggle {
         font-size: 17px !important;
+    }
+
+
+    /* PROFILE */
+
+    .nav-menu > .user-profile-dropdown .profile-avatar-btn {
+        width: 36px;
+        height: 36px;
+
+        min-width: 36px;
+        min-height: 36px;
+    }
+
+
+    /* DROPDOWN */
+
+    .nav-menu > .user-profile-dropdown .dropdown-menu {
+        top: 60px !important;
+
+        right: 8px !important;
+
+        width: 220px !important;
+        max-width: calc(100vw - 16px);
     }
 }
