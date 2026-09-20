@@ -1540,6 +1540,7 @@ body.dark-mode .user-info-dropdown {
 /* =========================================================
    MOBILE HEADER
    LOGO | SCROLLABLE NAV | FIXED RIGHT CONTROLS
+   HTML O'ZGARTIRILMAYDI
 ========================================================= */
 
 @media (max-width: 560px) {
@@ -1550,6 +1551,8 @@ body.dark-mode .user-info-dropdown {
 
     .main-header {
         width: 100%;
+        position: relative;
+        z-index: 1000;
     }
 
     .nav-container {
@@ -1578,7 +1581,7 @@ body.dark-mode .user-info-dropdown {
         align-items: center;
         justify-content: center;
 
-        flex: 0 0 auto;
+        flex: 0 0 30px;
 
         width: 30px;
         height: 30px;
@@ -1587,6 +1590,9 @@ body.dark-mode .user-info-dropdown {
         padding: 0;
 
         text-decoration: none;
+
+        position: relative;
+        z-index: 100;
     }
 
     .nav-container > .logo .logo-img {
@@ -1605,57 +1611,40 @@ body.dark-mode .user-info-dropdown {
 
     /* =====================================================
        NAV MENU
-
+       
        MUHIM:
-       Faqat NAV LINKLAR kerak bo'lsa suriladi.
-
-       🌙 / Enter / Profile esa absolute bo'lib,
-       o'ng tomonda doim qimirlamaydi.
+       nav-menu o'zi faqat markaziy hududni egallaydi.
     ===================================================== */
 
     .nav-container > .nav-menu {
         position: relative;
 
+        flex: 1 1 auto;
+
+        min-width: 0;
+        width: auto;
+
+        height: 56px;
+
         display: flex !important;
         align-items: center;
 
-        flex: 1 1 auto;
-        min-width: 0;
-        width: 0;
+        gap: 0;
 
-        gap: 9px;
+        overflow: visible !important;
 
         white-space: nowrap;
-
-        overflow-x: auto;
-        overflow-y: visible;
-
-        /*
-           O'ngdagi fixed controls uchun joy.
-           Linklar shu joyga kirib bormaydi.
-        */
-        padding-right: 92px;
-
-        box-sizing: border-box;
-
-        scrollbar-width: none;
-
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .nav-container > .nav-menu::-webkit-scrollbar {
-        display: none;
     }
 
 
     /* =====================================================
-       NAV LINKLAR
+       NAV LINKS
+       
+       HTML'dagi birinchi oddiy <a> elementlar.
 
-       Hozir sig'sa:
-       Home Reading Vocabulary
+       Home / Reading / Vocabulary / About / FAQ / Contact
 
-       Sig'masa:
-       faqat shu qism gorizontal suriladi.
+       Faqat shu linklar scroll qilinadi.
     ===================================================== */
 
     .nav-menu > a {
@@ -1670,7 +1659,7 @@ body.dark-mode .user-info-dropdown {
 
 
     /* =====================================================
-       MOBILEDA YASHIRILADIGAN SAHIFALAR
+       MOBILEDA YASHIRILADIGAN LINKLAR
     ===================================================== */
 
     .nav-menu > a[href="about.html"],
@@ -1681,59 +1670,85 @@ body.dark-mode .user-info-dropdown {
 
 
     /* =====================================================
-       RIGHT CONTROLS AREA
+       MUHIM QISM:
+       LINKLARNI SCROLL QILISH
        
-       HTML'da alohida wrapper yo'q.
-       Shuning uchun ularni nav-menu ichida absolute
-       qilib o'ng tomonga qotiramiz.
+       Nav menu ichida wrapper yo'q.
+       Shuning uchun linklar oddiy flex item bo'lib qoladi.
+       
+       Ular hozirgi 3 ta link bilan qimirlamaydi.
+       Yangi linklar ko'payganda esa headerdan chiqib ketmasligi
+       uchun overflow-x nav-menu'da ishlatiladi.
     ===================================================== */
+
+    .nav-menu {
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+
+        scrollbar-width: none;
+
+        -webkit-overflow-scrolling: touch;
+
+        padding-right: 94px;
+
+        box-sizing: border-box;
+    }
+
+    .nav-menu::-webkit-scrollbar {
+        display: none;
+    }
 
 
     /* =====================================================
        DARK MODE
+       
+       O'NG TOMONDA QOTIB TURADI
     ===================================================== */
 
     .nav-menu > #darkModeToggle {
-        position: absolute;
+        position: fixed;
 
-        top: 50%;
-        right: 48px;
+        top: 28px;
+        right: 58px;
 
         transform: translateY(-50%);
+
+        width: 30px;
+        height: 30px;
 
         display: inline-flex !important;
 
         align-items: center;
         justify-content: center;
-
-        width: 30px;
-        height: 30px;
-
-        flex: 0 0 auto;
 
         margin: 0 !important;
         padding: 0 !important;
 
         font-size: 18px !important;
-
         line-height: 1;
 
         background: none !important;
         border: none !important;
 
-        z-index: 20;
+        z-index: 10002;
+
+        cursor: pointer;
+
+        flex: 0 0 auto;
     }
 
 
     /* =====================================================
-       ENTER — LOGGED OUT
+       ENTER BUTTON
+       
+       LOGGED OUT HOLATDA O'NG TOMONDA QOTADI
     ===================================================== */
 
     .nav-menu > #authBtn {
-        position: absolute;
+        position: fixed;
 
-        top: 50%;
-        right: 0;
+        top: 28px;
+        right: 10px;
 
         transform: translateY(-50%);
 
@@ -1741,8 +1756,6 @@ body.dark-mode .user-info-dropdown {
 
         align-items: center;
         justify-content: center;
-
-        width: auto;
 
         min-width: 48px;
 
@@ -1756,24 +1769,24 @@ body.dark-mode .user-info-dropdown {
 
         white-space: nowrap;
 
-        flex: 0 0 auto;
+        z-index: 10002;
 
-        z-index: 20;
+        flex: 0 0 auto;
     }
 
 
     /* =====================================================
        PROFILE
        
-       LOGIN QILINGANDA:
-       🌙 + PROFILE o'ng tomonda qoladi.
+       LOGIN QILINGANDA ENTER YO'QOLADI,
+       PROFILE O'NG TOMONDA XUDDI ENTER O'RNIDA TURADI.
     ===================================================== */
 
     .nav-menu > .user-profile-dropdown {
-        position: absolute !important;
+        position: fixed !important;
 
-        top: 50%;
-        right: 0;
+        top: 28px;
+        right: 10px;
 
         transform: translateY(-50%);
 
@@ -1784,18 +1797,14 @@ body.dark-mode .user-info-dropdown {
 
         margin: 0 !important;
 
-        flex: 0 0 auto;
+        z-index: 10003;
 
-        z-index: 30;
+        flex: 0 0 38px;
     }
 
 
     /* =====================================================
        LOGGED IN
-       
-       Logo qoladi.
-       Enter yo'qoladi.
-       Profile o'ng tomonga chiqadi.
     ===================================================== */
 
     .nav-container.logged-in > .logo {
@@ -1834,7 +1843,6 @@ body.dark-mode .user-info-dropdown {
         border-radius: 50%;
 
         background: #35332d;
-
         color: #ffffff;
 
         cursor: pointer;
@@ -1842,26 +1850,28 @@ body.dark-mode .user-info-dropdown {
         touch-action: manipulation;
 
         -webkit-tap-highlight-color: transparent;
+
+        position: relative;
+
+        z-index: 10004;
     }
 
 
     /* =====================================================
        PROFILE DROPDOWN
        
-       Fixed:
-       Header/nav popupni kesmaydi.
+       Headerga bog'lanmaydi.
+       Ekranning o'ng tomonidan ochiladi.
     ===================================================== */
 
     .nav-menu > .user-profile-dropdown .dropdown-menu {
         position: fixed !important;
 
         top: 62px !important;
-
         right: 10px !important;
         left: auto !important;
 
         width: 220px !important;
-
         max-width: calc(100vw - 20px);
 
         margin: 0 !important;
@@ -1871,16 +1881,10 @@ body.dark-mode .user-info-dropdown {
         display: none;
     }
 
-
-    /* =====================================================
-       DROPDOWN OPEN
-    ===================================================== */
-
     .nav-menu > .user-profile-dropdown .dropdown-menu.show {
         display: block !important;
 
         visibility: visible !important;
-
         opacity: 1 !important;
 
         pointer-events: auto !important;
@@ -1889,7 +1893,7 @@ body.dark-mode .user-info-dropdown {
 
 
 /* =========================================================
-   SMALL PHONES
+   JUDA KICHIK TELEFONLAR
 ========================================================= */
 
 @media (max-width: 420px) {
@@ -1906,9 +1910,9 @@ body.dark-mode .user-info-dropdown {
     }
 
     .nav-container > .nav-menu {
-        gap: 7px;
+        padding-right: 82px;
 
-        padding-right: 86px;
+        gap: 7px !important;
     }
 
     .nav-menu > a {
@@ -1916,7 +1920,7 @@ body.dark-mode .user-info-dropdown {
     }
 
     .nav-menu > #darkModeToggle {
-        right: 44px;
+        right: 52px;
 
         width: 28px;
         height: 28px;
@@ -1925,6 +1929,8 @@ body.dark-mode .user-info-dropdown {
     }
 
     .nav-menu > #authBtn {
+        right: 8px;
+
         min-width: 46px;
 
         padding: 6px 7px;
@@ -1933,6 +1939,8 @@ body.dark-mode .user-info-dropdown {
     }
 
     .nav-menu > .user-profile-dropdown {
+        right: 8px;
+
         width: 36px;
         height: 36px;
     }
@@ -1947,18 +1955,17 @@ body.dark-mode .user-info-dropdown {
 
     .nav-menu > .user-profile-dropdown .dropdown-menu {
         top: 60px !important;
-
         right: 8px !important;
 
         width: 220px !important;
-
         max-width: calc(100vw - 16px);
     }
 }
 
+
 /* =========================================================
    READING LANGUAGE CARDS — MOBILE
-   Har bir til alohida qatorda
+   VOCABULARYDAGI KABI BIRMA-BIR
 ========================================================= */
 
 @media (max-width: 560px) {
@@ -1977,7 +1984,6 @@ body.dark-mode .user-info-dropdown {
         width: 100% !important;
 
         min-width: 0 !important;
-
         min-height: 120px !important;
 
         padding: 18px !important;
