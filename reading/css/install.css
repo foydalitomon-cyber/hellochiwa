@@ -1,0 +1,688 @@
+/* =========================================================
+   HELLOCHIWA INSTALL POPUP
+   ========================================================= */
+
+/* Orqa fon */
+#helloChiwaInstallPopup {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(20, 18, 14, 0.72);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+}
+
+/* Popup ko'ringanda */
+#helloChiwaInstallPopup.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =========================================================
+   ASOSIY POPUP
+   ========================================================= */
+
+.hello-install-box {
+    position: relative;
+
+    width: min(520px, 100%);
+    box-sizing: border-box;
+
+    padding: 88px 42px 38px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(255, 220, 145, 0.32),
+            transparent 35%
+        ),
+        #faf9f5;
+
+    border: 1px solid rgba(255, 255, 255, 0.85);
+
+    border-radius: 28px;
+
+    text-align: center;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.38),
+        0 0 40px rgba(218, 166, 74, 0.18);
+
+    transform: scale(0.75) translateY(35px);
+
+    transition:
+        transform 0.55s cubic-bezier(.17,.89,.32,1.35);
+
+    overflow: visible;
+
+    isolation: isolate;
+}
+
+
+/* Popup ochilganda */
+#helloChiwaInstallPopup.show .hello-install-box {
+    transform: scale(1) translateY(0);
+}
+
+
+/* =========================================================
+   YOPISH TUGMASI
+   ========================================================= */
+
+.hello-install-close {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid #ddd5c7;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.7);
+
+    color: #625b4f;
+
+    font-size: 25px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease;
+}
+
+.hello-install-close:hover {
+    transform: rotate(90deg) scale(1.08);
+
+    background: #35332d;
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.hello-install-icon {
+    position: absolute;
+
+    top: -76px;
+    left: 50%;
+
+    width: 150px;
+    height: 150px;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffffff 0%,
+            #fffdf8 58%,
+            #f0dfb9 100%
+        );
+
+    border: 5px solid rgba(255, 255, 255, 0.95);
+
+    box-shadow:
+        0 0 0 2px rgba(196, 148, 65, 0.35),
+        0 0 20px rgba(255, 194, 77, 0.65),
+        0 0 55px rgba(255, 188, 62, 0.45),
+        0 12px 35px rgba(0, 0, 0, 0.20);
+
+    z-index: 10;
+
+    animation:
+        helloLogoFloat 3s ease-in-out infinite,
+        helloLogoGlow 2s ease-in-out infinite alternate;
+}
+
+
+/* Logo rasmi */
+.hello-install-icon img {
+    width: 108px;
+    height: 108px;
+
+    object-fit: contain;
+
+    border-radius: 50%;
+
+    display: block;
+
+    filter:
+        drop-shadow(0 4px 10px rgba(130, 91, 30, 0.22));
+}
+
+
+/* =========================================================
+   LOGO ATROFIDAGI AYLANUVCHI HALQALAR
+   ========================================================= */
+
+.hello-install-icon::before,
+.hello-install-icon::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+/* Oltin halqa */
+.hello-install-icon::before {
+    width: 205px;
+    height: 72px;
+
+    border: 2px solid rgba(221, 166, 65, 0.72);
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-18deg);
+
+    box-shadow:
+        0 0 12px rgba(238, 184, 75, 0.65),
+        inset 0 0 8px rgba(255, 213, 118, 0.25);
+
+    animation:
+        helloOrbitOne 4.5s linear infinite;
+}
+
+
+/* Oqartirilgan ikkinchi halqa */
+.hello-install-icon::after {
+    width: 220px;
+    height: 82px;
+
+    border: 2px solid rgba(255, 255, 255, 0.82);
+
+    transform:
+        translate(-50%, -50%)
+        rotate(35deg);
+
+    box-shadow:
+        0 0 14px rgba(255, 255, 255, 0.75);
+
+    animation:
+        helloOrbitTwo 5.5s linear infinite;
+}
+
+
+/* =========================================================
+   YALTIRAYDIGAN ZARRALAR
+   ========================================================= */
+
+.hello-install-box::before,
+.hello-install-box::after {
+    content: "✦  ✧  ◆  ✦  ✧";
+
+    position: absolute;
+
+    top: -72px;
+    left: 50%;
+
+    width: 440px;
+
+    transform: translateX(-50%);
+
+    color: #dca947;
+
+    font-size: 17px;
+    letter-spacing: 42px;
+
+    pointer-events: none;
+
+    z-index: 5;
+
+    text-shadow:
+        0 0 6px rgba(255, 205, 103, 0.9),
+        0 0 15px rgba(255, 191, 61, 0.75);
+
+    animation:
+        helloSparkle 2.2s ease-in-out infinite;
+}
+
+.hello-install-box::after {
+    top: auto;
+    bottom: -35px;
+
+    color: #b88a3e;
+
+    font-size: 13px;
+
+    animation-delay: 1s;
+}
+
+
+/* =========================================================
+   SARLAVHA
+   ========================================================= */
+
+.hello-install-box h3 {
+    position: relative;
+    z-index: 3;
+
+    margin: 0 0 14px;
+
+    color: #2e2b26;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(27px, 5vw, 38px);
+
+    font-weight: 700;
+
+    letter-spacing: -0.6px;
+
+    text-shadow:
+        0 1px 0 #ffffff;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.hello-install-box p {
+    position: relative;
+    z-index: 3;
+
+    max-width: 390px;
+
+    margin: 0 auto 30px;
+
+    color: #686154;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   BUTTONLAR
+   ========================================================= */
+
+.hello-install-actions {
+    position: relative;
+    z-index: 4;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    width: 100%;
+}
+
+
+/* INSTALL */
+.hello-install-button {
+    width: 100%;
+
+    min-height: 56px;
+
+    border: none;
+    border-radius: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f3c66d,
+            #c7933e
+        );
+
+    color: #ffffff;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    letter-spacing: 0.2px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px rgba(191, 137, 48, 0.35),
+        0 0 0 rgba(244, 190, 83, 0);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.hello-install-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 30px rgba(191, 137, 48, 0.45),
+        0 0 25px rgba(246, 194, 91, 0.45);
+}
+
+.hello-install-button:active {
+    transform: translateY(0) scale(0.98);
+}
+
+
+/* NOT NOW */
+.hello-install-later {
+    width: 100%;
+
+    min-height: 52px;
+
+    border: 1px solid #cfc4b2;
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.5);
+
+    color: #70685c;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.hello-install-later:hover {
+    background: #ffffff;
+
+    border-color: #b69c6e;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   ANIMATSIYALAR
+   ========================================================= */
+
+@keyframes helloLogoFloat {
+
+    0%,
+    100% {
+        transform:
+            translateX(-50%)
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateX(-50%)
+            translateY(-9px);
+    }
+}
+
+
+@keyframes helloLogoGlow {
+
+    from {
+        box-shadow:
+            0 0 0 2px rgba(196, 148, 65, 0.35),
+            0 0 18px rgba(255, 194, 77, 0.5),
+            0 0 38px rgba(255, 188, 62, 0.32),
+            0 12px 35px rgba(0, 0, 0, 0.20);
+    }
+
+    to {
+        box-shadow:
+            0 0 0 2px rgba(225, 173, 73, 0.5),
+            0 0 28px rgba(255, 203, 96, 0.85),
+            0 0 65px rgba(255, 190, 55, 0.58),
+            0 15px 40px rgba(0, 0, 0, 0.24);
+    }
+}
+
+
+@keyframes helloOrbitOne {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(-18deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(342deg);
+    }
+}
+
+
+@keyframes helloOrbitTwo {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            rotate(35deg);
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            rotate(-325deg);
+    }
+}
+
+
+@keyframes helloSparkle {
+
+    0%,
+    100% {
+        opacity: 0.35;
+        transform:
+            translateX(-50%)
+            scale(0.85);
+    }
+
+    50% {
+        opacity: 1;
+        transform:
+            translateX(-50%)
+            scale(1.12);
+    }
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+body.dark-mode #helloChiwaInstallPopup {
+    background: rgba(0, 0, 0, 0.78);
+}
+
+body.dark-mode .hello-install-box {
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(221, 169, 74, 0.18),
+            transparent 38%
+        ),
+        #20201e;
+
+    border-color: rgba(255, 255, 255, 0.12);
+
+    box-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.7),
+        0 0 45px rgba(222, 169, 67, 0.16);
+}
+
+body.dark-mode .hello-install-box h3 {
+    color: #f8f5ed;
+}
+
+body.dark-mode .hello-install-box p {
+    color: #c7c0b4;
+}
+
+body.dark-mode .hello-install-close {
+    background: #2c2c29;
+
+    border-color: #494740;
+
+    color: #eee9df;
+}
+
+body.dark-mode .hello-install-later {
+    background: transparent;
+
+    border-color: #625a4c;
+
+    color: #d7d0c3;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+    #helloChiwaInstallPopup {
+        padding: 16px;
+    }
+
+    .hello-install-box {
+        width: 100%;
+
+        padding:
+            78px
+            24px
+            28px;
+
+        border-radius: 24px;
+    }
+
+    .hello-install-icon {
+        width: 125px;
+        height: 125px;
+
+        top: -62px;
+    }
+
+    .hello-install-icon img {
+        width: 88px;
+        height: 88px;
+    }
+
+    .hello-install-icon::before {
+        width: 170px;
+        height: 62px;
+    }
+
+    .hello-install-icon::after {
+        width: 185px;
+        height: 70px;
+    }
+
+    .hello-install-box h3 {
+        font-size: 28px;
+    }
+
+    .hello-install-box p {
+        font-size: 15px;
+
+        margin-bottom: 24px;
+    }
+
+    .hello-install-close {
+        top: 14px;
+        right: 14px;
+    }
+
+    .hello-install-box::before,
+    .hello-install-box::after {
+        width: 300px;
+
+        font-size: 12px;
+
+        letter-spacing: 25px;
+    }
+}
+
+
+/* Juda kichik ekranlar */
+@media (max-width: 380px) {
+
+    .hello-install-box {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .hello-install-box h3 {
+        font-size: 25px;
+    }
+
+    .hello-install-icon {
+        width: 112px;
+        height: 112px;
+
+        top: -56px;
+    }
+
+    .hello-install-icon img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+
+/* =========================================================
+   MOTIONNI KAMAYTIRISHNI SO'RAGAN FOYDALANUVCHI UCHUN
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .hello-install-icon,
+    .hello-install-icon::before,
+    .hello-install-icon::after,
+    .hello-install-box::before,
+    .hello-install-box::after {
+        animation: none !important;
+    }
+
+    .hello-install-box {
+        transition: none;
+    }
+}
