@@ -320,13 +320,25 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                 }
 
-                const finalDefinition = definition || 'Izoh topilmadi';
+                const finalDefinition = definition || 'Explanation not found';
 
                 const tooltip = document.createElement('div');
                 tooltip.className = 'hard-word-tooltip';
                 tooltip.textContent = finalDefinition;
 
                 target.appendChild(tooltip);
+
+                const rect = tooltip.getBoundingClientRect();
+                const padding = 10;
+
+                if (rect.left < padding) {
+                    tooltip.style.left = `${50 + (padding - rect.left)}%`;
+                }
+
+                if (rect.right > window.innerWidth - padding) {
+                    tooltip.style.left = `calc(50% - ${rect.right - window.innerWidth + padding}px)`;
+                }
+
                 e.stopPropagation();
             }
         };
