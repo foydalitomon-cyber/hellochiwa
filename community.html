@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>HelloChiwa Community</title>
+
+    <link
+        rel="stylesheet"
+        href="reading/css/community.css"
+    >
+</head>
+
+
+<body>
+
+<div
+    id="communityApp"
+    class="community-app"
+>
+
+
+    <!-- =====================================================
+         COMMUNITY HEADER
+    ====================================================== -->
+
+    <header class="community-header">
+
+        <button
+            id="communityBackBtn"
+            class="community-back-btn"
+            type="button"
+        >
+            ← Back
+        </button>
+
+
+        <h1 class="community-title">
+            Community
+        </h1>
+
+
+        <button
+            id="communityMenuBtn"
+            class="community-menu-btn"
+            type="button"
+            aria-label="Open profile"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         COMMUNITY NAVIGATION
+    ====================================================== -->
+
+    <nav class="community-main-nav">
+
+        <button
+            class="community-nav-btn active"
+            type="button"
+            data-section="chats"
+        >
+            Chats
+        </button>
+
+
+        <button
+            class="community-nav-btn"
+            type="button"
+            data-section="people"
+        >
+            People
+        </button>
+
+
+        <button
+            class="community-nav-btn"
+            type="button"
+            data-section="vc-room"
+        >
+            VC Room
+        </button>
+
+
+        <button
+            class="community-nav-btn"
+            type="button"
+            data-section="live-stream"
+        >
+            Live Stream
+        </button>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="community-main">
+
+
+        <!-- =================================================
+             CHATS
+        ================================================== -->
+
+        <section
+            class="community-section active"
+            data-community-section="chats"
+        >
+
+            <div class="community-section-header">
+
+                <h2>
+                    Chats
+                </h2>
+
+                <p>
+                    Talk with HelloChiwa users.
+                </p>
+
+            </div>
+
+
+            <div id="communityChatsContent" class="community-chats">
+
+                <!-- SEARCH -->
+                <div class="community-chat-search-wrapper">
+
+                    <div class="community-chat-search">
+
+                        <span class="community-chat-search-icon">⌕</span>
+
+                        <input
+                            id="communityChatSearchInput"
+                            type="text"
+                            placeholder="Search people..."
+                            autocomplete="off"
+                        >
+
+                        <button
+                            id="communityChatSearchClear"
+                            class="community-chat-search-clear"
+                            type="button"
+                            aria-label="Clear search"
+                            hidden
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SEARCH RESULTS -->
+                <div
+                    id="communityChatSearchResults"
+                    class="community-chat-search-results"
+                ></div>
+
+
+                <!-- CONVERSATIONS -->
+                <div
+                    id="communityConversationList"
+                    class="community-conversation-list"
+                ></div>
+
+
+                <!-- EMPTY -->
+                <div
+                    id="communityChatEmpty"
+                    class="community-chat-empty"
+                >
+                    <div class="community-empty-icon">💬</div>
+
+                    <h3>Your conversations</h3>
+
+                    <p>
+                        Search for a HelloChiwa user to start a conversation.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             PEOPLE
+        ================================================== -->
+
+        <section
+            class="community-section"
+            data-community-section="people"
+            hidden
+        >
+
+            <div class="community-section-header">
+
+                <h2>
+                    People
+                </h2>
+
+                <p>
+                    Find language learners and follow them.
+                </p>
+
+            </div>
+
+
+            <div
+                id="communityPeopleContent"
+                class="community-placeholder"
+            >
+
+                <div class="community-empty-icon">
+                    👥
+                </div>
+
+                <h3>
+                    People
+                </h3>
+
+                <p>
+                    People discovery will appear here.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             VC ROOM
+        ================================================== -->
+
+        <section
+            class="community-section"
+            data-community-section="vc-room"
+            hidden
+        >
+
+            <div class="community-section-header">
+
+                <h2>
+                    VC Room
+                </h2>
+
+                <p>
+                    Join language conversation rooms.
+                </p>
+
+            </div>
+
+
+            <div
+                id="communityVcContent"
+                class="community-placeholder"
+            >
+
+                <div class="community-empty-icon">
+                    🎙️
+                </div>
+
+                <h3>
+                    VC Room
+                </h3>
+
+                <p>
+                    Voice rooms will appear here.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LIVE STREAM
+        ================================================== -->
+
+        <section
+            class="community-section"
+            data-community-section="live-stream"
+            hidden
+        >
+
+            <div class="community-section-header">
+
+                <h2>
+                    Live Stream
+                </h2>
+
+                <p>
+                    Watch language-learning live streams.
+                </p>
+
+            </div>
+
+
+            <div
+                id="communityLiveContent"
+                class="community-placeholder"
+            >
+
+                <div class="community-empty-icon">
+                    🔴
+                </div>
+
+                <h3>
+                    Live Stream
+                </h3>
+
+                <p>
+                    Live streams will appear here.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         DRAWER OVERLAY
+    ====================================================== -->
+
+    <div
+        id="communityDrawerOverlay"
+        class="community-drawer-overlay"
+        hidden
+    ></div>
+
+
+
+    <!-- =====================================================
+         PROFILE DRAWER
+    ====================================================== -->
+
+    <aside
+        id="communityProfileDrawer"
+        class="community-profile-drawer"
+        aria-hidden="true"
+    >
+
+        <div class="community-drawer-header">
+
+            <h2>
+                Profile
+            </h2>
+
+
+            <button
+                id="communityCloseDrawerBtn"
+                class="community-close-drawer-btn"
+                type="button"
+                aria-label="Close profile"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <div class="community-profile-content">
+
+
+            <!-- =================================================
+                 PROFILE SUMMARY
+            ================================================== -->
+
+            <div class="community-profile-top">
+
+
+                <div
+                    id="communityProfileAvatar"
+                    class="community-profile-avatar"
+                >
+                    U
+                </div>
+
+
+                <div class="community-profile-identity">
+
+                    <h2
+                        id="communityProfileName"
+                    >
+                        User
+                    </h2>
+
+
+                    <p
+                        id="communityProfileUsername"
+                    >
+                        @hellochiwa_1
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <p
+                id="communityProfileBio"
+                class="community-profile-bio"
+            >
+                No bio yet.
+            </p>
+
+
+
+            <!-- =================================================
+                 PROFILE STATS
+            ================================================== -->
+
+            <div class="community-profile-stats">
+
+
+                <div class="community-profile-stat">
+
+                    <strong
+                        id="communityFollowersCount"
+                    >
+                        0
+                    </strong>
+
+                    <span>
+                        Followers
+                    </span>
+
+                </div>
+
+
+                <div class="community-profile-stat">
+
+                    <strong
+                        id="communityFollowingCount"
+                    >
+                        0
+                    </strong>
+
+                    <span>
+                        Following
+                    </span>
+
+                </div>
+
+
+                <div class="community-profile-stat">
+
+                    <strong
+                        id="communityMomentsCount"
+                    >
+                        0
+                    </strong>
+
+                    <span>
+                        Moments
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 EDIT PROFILE
+            ================================================== -->
+
+            <button
+                id="communityEditProfileBtn"
+                class="community-edit-profile-btn"
+                type="button"
+            >
+                Edit Profile
+            </button>
+
+
+
+            <!-- =================================================
+                 MOMENTS
+            ================================================== -->
+
+            <section
+                class="community-profile-moments"
+            >
+
+                <div
+                    class="community-moments-header"
+                >
+
+                    <h3>
+                        Moments
+                    </h3>
+
+
+                    <button
+                        id="communityCreateMomentBtn"
+                        class="community-create-moment-btn"
+                        type="button"
+                    >
+                        + Create
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="communityMomentsList"
+                    class="community-moments-list"
+                ></div>
+
+            </section>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         COMMUNITY PROFILE SETUP MODAL
+    ====================================================== -->
+
+    <div
+        id="communityProfileSetupModal"
+        class="community-modal"
+        hidden
+    >
+
+        <div
+            class="community-modal-card community-profile-setup-card"
+        >
+
+
+            <!-- =================================================
+                 MODAL HEADER
+            ================================================== -->
+
+            <div
+                class="community-modal-header"
+            >
+
+                <div>
+
+                    <h2>
+                        Create your Community profile
+                    </h2>
+
+                    <p>
+                        Set up your profile before entering Community.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <form
+                id="communityProfileSetupForm"
+                class="community-profile-form"
+            >
+
+
+                <!-- =================================================
+                     PROFILE PHOTO
+                ================================================== -->
+
+                <div class="community-avatar-wrapper">
+
+                    <div
+                        id="communitySetupAvatar"
+                        class="community-setup-avatar"
+                    >
+                        U
+                    </div>
+
+                    <button
+                        type="button"
+                        id="communityChangeAvatarBtn"
+                        class="community-change-avatar-btn"
+                        aria-label="Change profile photo"
+                    >
+                        ✎
+                    </button>
+
+                    <input
+                        type="file"
+                        id="communityAvatarInput"
+                        accept="image/*"
+                    >
+
+                </div>
+
+
+                <!-- =================================================
+                     FULL NAME
+                ================================================== -->
+
+                <label
+                    class="community-form-field"
+                >
+
+                    <span>
+                        Full name
+                    </span>
+
+
+                    <input
+                        id="communitySetupFullName"
+                        type="text"
+                        maxlength="80"
+                        autocomplete="name"
+                        required
+                    >
+
+                </label>
+
+
+
+                <!-- =================================================
+                     USERNAME
+                ================================================== -->
+
+                <label
+                    class="community-form-field"
+                >
+
+                    <span>
+                        Username
+                    </span>
+
+
+                    <div
+                        class="community-username-input-wrapper"
+                    >
+
+                        <input
+                            id="communitySetupUsername"
+                            type="text"
+                            maxlength="30"
+                            autocomplete="username"
+                            required
+                        >
+
+                    </div>
+
+
+                    <small>
+                        Your username is created automatically.
+                        You can change it anytime.
+                    </small>
+
+                </label>
+
+
+
+                <!-- =================================================
+                     BIO
+                ================================================== -->
+
+                <label
+                    class="community-form-field"
+                >
+
+                    <span>
+                        Bio
+                    </span>
+
+
+                    <textarea
+                        id="communitySetupBio"
+                        maxlength="300"
+                        rows="4"
+                        placeholder="Tell people a little about yourself..."
+                    ></textarea>
+
+                </label>
+
+
+
+                <!-- =================================================
+                     COUNTRY
+                ================================================== -->
+
+                <label
+                    class="community-form-field"
+                >
+
+                    <span>
+                        Country
+                    </span>
+
+
+                    <select
+                        id="communitySetupCountry"
+                        required
+                    >
+
+                        <option value="">
+                            🌍 Select your country
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+
+                <!-- =================================================
+                     CITY
+                ================================================== -->
+
+                <label
+                    class="community-form-field"
+                >
+
+                    <span>
+                        City
+                        <em>
+                            Optional
+                        </em>
+                    </span>
+
+
+                    <input
+                        id="communitySetupCity"
+                        type="text"
+                        maxlength="80"
+                        placeholder="Tokyo, Osaka, Seoul..."
+                    >
+
+                </label>
+
+
+
+                <!-- =================================================
+                     NATIVE LANGUAGES
+                ================================================== -->
+
+                <div
+                    class="community-language-group"
+                >
+
+                    <div
+                        class="community-language-group-title"
+                    >
+
+                        <strong>
+                            Native language
+                        </strong>
+
+                        <span>
+                            Choose up to 2
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="community-language-row"
+                    >
+
+                        <select
+                            id="communitySetupNativeLanguage1"
+                            required
+                        >
+
+                            <option value="">
+                                🌍 Select native language
+                            </option>
+
+                        </select>
+
+
+                        <select
+                            id="communitySetupNativeLanguage2"
+                        >
+
+                            <option value="">
+                                + Add another
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     LEARNING LANGUAGES
+                ================================================== -->
+
+                <div
+                    class="community-language-group"
+                >
+
+                    <div
+                        class="community-language-group-title"
+                    >
+
+                        <strong>
+                            Learning language
+                        </strong>
+
+                        <span>
+                            Choose up to 2
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="community-language-row"
+                    >
+
+                        <select
+                            id="communitySetupLearningLanguage1"
+                            required
+                        >
+
+                            <option value="">
+                                🌍 Select learning language
+                            </option>
+
+                        </select>
+
+
+                        <select
+                            id="communitySetupLearningLanguage2"
+                        >
+
+                            <option value="">
+                                + Add another
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     INTERESTS
+                ================================================== -->
+
+                <label
+                    class="community-form-field"
+                >
+
+                    <span>
+                        Interests
+                        <em>
+                            Optional
+                        </em>
+                    </span>
+
+
+                    <input
+                        id="communitySetupInterests"
+                        type="text"
+                        maxlength="300"
+                        placeholder="Business, travel, technology..."
+                    >
+
+                </label>
+
+
+
+                <!-- =================================================
+                     GENDER
+                ================================================== -->
+
+                <div
+                    class="community-form-field"
+                >
+
+                    <span>
+                        Gender
+                        <em>
+                            Optional
+                        </em>
+                    </span>
+
+
+                    <select
+                        id="communitySetupGender"
+                    >
+
+                        <option value="">
+                            Prefer not to say
+                        </option>
+
+                        <option value="male">
+                            ♂ Male
+                        </option>
+
+                        <option value="female">
+                            ♀ Female
+                        </option>
+
+                        <option value="non_binary">
+                            Non-binary
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     AGE
+                ================================================== -->
+
+                <div
+                    class="community-age-field"
+                >
+
+                    <div
+                        class="community-age-header"
+                    >
+
+                        <div>
+
+                            <strong>
+                                Age
+                            </strong>
+
+                            <span>
+                                Optional
+                            </span>
+
+                        </div>
+
+
+                        <output
+                            id="communityAgeValue"
+                            class="community-age-value"
+                        >
+                            18
+                        </output>
+
+                    </div>
+
+
+                    <input
+                        id="communitySetupAge"
+                        type="range"
+                        min="18"
+                        max="120"
+                        value="18"
+                        step="1"
+                    >
+
+
+                    <div
+                        class="community-age-range"
+                    >
+
+                        <span>
+                            18
+                        </span>
+
+                        <span>
+                            120
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     MESSAGE
+                ================================================== -->
+
+                <p
+                    id="communityProfileSetupMessage"
+                    class="community-form-message"
+                    role="status"
+                ></p>
+
+
+
+                <!-- =================================================
+                     SAVE
+                ================================================== -->
+
+                <button
+                    type="submit"
+                    id="communitySaveProfileBtn"
+                    class="community-primary-btn"
+                >
+                    Continue to Community
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         CREATE MOMENT MODAL
+    ====================================================== -->
+
+    <div
+        id="communityMomentModal"
+        class="community-modal"
+        hidden
+    >
+
+        <div
+            class="community-modal-card community-moment-modal-card"
+        >
+
+            <div
+                class="community-modal-header"
+            >
+
+                <h2>
+                    Create Moment
+                </h2>
+
+
+                <button
+                    id="communityCloseMomentModal"
+                    class="community-modal-close"
+                    type="button"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+
+            <!-- TEXT -->
+
+            <textarea
+                id="communityMomentText"
+                class="community-moment-input"
+                maxlength="3000"
+                rows="6"
+                placeholder="Share something with the community..."
+            ></textarea>
+
+
+
+            <!-- MEDIA -->
+
+            <label
+                class="community-media-picker"
+            >
+
+                <span>
+                    📷 Add photos or videos
+                </span>
+
+
+                <input
+                    id="communityMomentMedia"
+                    type="file"
+                    accept="image/*,video/*"
+                    multiple
+                >
+
+            </label>
+
+
+
+            <p
+                id="communityMediaInfo"
+                class="community-media-info"
+            >
+                Up to 10 photos OR 4 videos per Moment.
+            </p>
+
+
+
+            <div
+                id="communityMediaPreview"
+                class="community-media-preview"
+            ></div>
+
+
+
+            <p
+                id="communityMomentMessage"
+                class="community-form-message"
+            ></p>
+
+
+
+            <button
+                id="communityPublishMomentBtn"
+                class="community-primary-btn"
+                type="button"
+            >
+                Publish Moment
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SUPABASE
+====================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<!-- =====================================================
+     HELLOCHIWA SUPABASE CLIENT
+====================================================== -->
+
+<script src="reading/js/supabaseClient.js"></script>
+
+
+<!-- =====================================================
+     COMMUNITY JS
+====================================================== -->
+
+<script src="reading/js/community.js"></script>
+
+
+</body>
+
+</html>

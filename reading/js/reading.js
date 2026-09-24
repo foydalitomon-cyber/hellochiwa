@@ -393,113 +393,190 @@ async function checkUser() {
 // 6. AUTH UI NI YANGILASH
 // =====================================================
 
-function updateAuthUI(user) {
+async function updateAuthUI(user) {
 
-    const navContainer = document.querySelector('.nav-container');
+    const navContainer =
+        document.querySelector('.nav-container');
 
     if (navContainer) {
-        navContainer.classList.toggle('logged-in', !!user);
+        navContainer.classList.toggle(
+            'logged-in',
+            !!user
+        );
     }
 
-    if (user) {
-        // Sign In tugmasini yashirish
+    // =================================================
+    // USER YO'Q
+    // =================================================
+
+    if (!user) {
+
         if (authBtn) {
-            authBtn.style.display = 'none';
+            authBtn.style.display = 'inline-block';
         }
 
-        // Profilni ko'rsatish
         if (userProfileDropdown) {
-            userProfileDropdown.style.display =
-                'inline-block';
+            userProfileDropdown.style.display = 'none';
         }
 
+        if (dropdownMenu) {
+            dropdownMenu.classList.remove('show');
+        }
 
-        // ---------------------------------------------
-        // EMAIL
-        // ---------------------------------------------
+        return;
+    }
 
-        const emailEl =
-            document.getElementById(
-                'dropdownUserEmail'
+
+    // =================================================
+    // AUTH USER BOR
+    // =================================================
+
+    if (authBtn) {
+        authBtn.style.display = 'none';
+    }
+
+    if (userProfileDropdown) {
+        userProfileDropdown.style.display = 'inline-block';
+    }
+
+
+    // =================================================
+    // HELLOCHIWA USERS DAN PROFILNI OLISH
+    // =================================================
+
+    let profile = null;
+
+    if (supabase) {
+
+        const { data, error } = await supabase
+            .from('hellochiwa_users')
+            .select(`
+                id,
+                email,
+                username,
+                full_name,
+                avatar_url,
+                bio,
+                age,
+                country,
+                city,
+                native_language,
+                known_language,
+                known_language_level,
+                learning_languages,
+                interests,
+                community_joined
+            `)
+            .eq('id', user.id)
+            .maybeSingle();
+
+        if (error) {
+
+            console.error(
+                'HELLOCHIWA USER PROFILE ERROR:',
+                error
             );
 
-        if (emailEl) {
-            emailEl.textContent =
-                user.email || '';
-        }
+        } else {
 
+            profile = data;
 
-        // ---------------------------------------------
-        // ISM
-        // ---------------------------------------------
-
-        const fullName =
-            user.user_metadata?.full_name ||
-            user.user_metadata?.name ||
-            user.user_metadata?.user_name ||
-            (
-                user.email
-                    ? user.email.split('@')[0]
-                    : 'User'
+            console.log(
+                'HELLOCHIWA USER PROFILE:',
+                profile
             );
-
-        const nameEl =
-            document.getElementById(
-                'dropdownUserName'
-            );
-
-        if (nameEl) {
-            nameEl.textContent = fullName;
         }
+    }
 
 
-        // ---------------------------------------------
-        // AVATAR (Rasm yoki Harf)
-        // ---------------------------------------------
+    // =================================================
+    // EMAIL
+    // =================================================
 
-        const firstLetter =
-            fullName
-                .charAt(0)
-                .toUpperCase();
+    const emailEl =
+        document.getElementById(
+            'dropdownUserEmail'
+        );
 
-        const avatarSpan =
-            document.querySelector(
-                '.user-avatar-placeholder, .user-avatar'
-            );
+    if (emailEl) {
 
-        // Google yoki boshqa provayerdan kelgan rasm havolasini tekshirish
-        const avatarUrl = 
-            user.user_metadata?.avatar_url || 
-            user.user_metadata?.picture;
-
-        if (avatarSpan) {
-            if (avatarUrl) {
-                // Agar profil rasmi mavjud bo'lsa, rasmni chiqaramiz
-                avatarSpan.innerHTML = `<img src="${avatarUrl}" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
-            } else {
-                // Rasm bo'lmasa eski tizimgacha bo'lgan holatdagi harfni chiqaramiz
-                avatarSpan.textContent = firstLetter;
-            }
-        }
+        emailEl.textContent =
+            profile?.email ||
+            user.email ||
+            '';
+    }
 
 
-    } else {
+    // =================================================
+    // ISM
+    // =================================================
 
-        // User yo'q bo'lsa Sign In ko'rinadi
-        if (authBtn) {
-            authBtn.style.display =
-                'inline-block';
-        }
+    const fullName =
+        profile?.full_name ||
+        profile?.username ||
+        user.user_metadata?.full_name ||
+        user.user_metadata?.name ||
+        user.user_metadata?.user_name ||
+        (
+            user.email
+                ? user.email.split('@')[0]
+                : 'User'
+        );
 
-        // Profil yashiriladi
-        if (userProfileDropdown) {
-            userProfileDropdown.style.display =
-                'none';
+    const nameEl =
+        document.getElementById(
+            'dropdownUserName'
+        );
+
+    if (nameEl) {
+        nameEl.textContent = fullName;
+    }
+
+
+    // =================================================
+    // AVATAR
+    // =================================================
+
+    const firstLetter =
+        fullName
+            .charAt(0)
+            .toUpperCase();
+
+    const avatarSpan =
+        document.querySelector(
+            '.user-avatar-placeholder, .user-avatar'
+        );
+
+    const avatarUrl =
+        profile?.avatar_url ||
+        user.user_metadata?.avatar_url ||
+        user.user_metadata?.picture ||
+        '';
+
+    if (avatarSpan) {
+
+        if (avatarUrl) {
+
+            avatarSpan.innerHTML = `
+                <img
+                    src="${avatarUrl}"
+                    alt="Avatar"
+                    style="
+                        width:100%;
+                        height:100%;
+                        border-radius:50%;
+                        object-fit:cover;
+                    "
+                >
+            `;
+
+        } else {
+
+            avatarSpan.textContent =
+                firstLetter;
         }
     }
 }
-
-
 // =====================================================
 // 7. SAHIFA YUKLANGANDA USERNI TEKSHIRISH
 // =====================================================
