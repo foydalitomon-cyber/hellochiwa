@@ -3101,16 +3101,48 @@ if (profileAvatar) {
         });
     }
 
-    // 4. Leave Room
+    // Realtime orqali boshqa xonalar o'zgarsa ro'yxatni yangilab turish uchun
+    function listenToGlobalRooms() {
+        supabase
+            .channel('public_voice_rooms')
+            .on('postgres_changes', {
+                event: '*',
+                schema: 'public',
+                table: 'hellochiwa_voice_rooms'
+            }, () => {
+                loadVoiceRooms();
+            })
+            .subscribe();
+    }
+
+    // 4. Leave Room (Yangilangan versiyasi)
     if (leaveRoomBtn) {
         leaveRoomBtn.addEventListener('click', async () => {
-            if (!currentRoomId) return;
+            if (!currentRoomId || !currentUser) return;
 
-            await supabase
-                .from('hellochiwa_room_participants')
-                .delete()
-                .eq('room_id', currentRoomId)
-                .eq('user_id', currentUser.id);
+            // 1. Joriy user xona egasi (host) ekanligini tekshiramiz
+            const { data: room } = await supabase
+                .from('hellochiwa_voice_rooms')
+                .select('host_id')
+                .eq('id', currentRoomId)
+                .single();
+
+            const isHost = room && room.host_id === currentUser.id;
+
+            if (isHost) {
+                // Agar xonani ochgan odam (Host) chiqib ketayotgan bo'lsa, xona yopiladi (is_active = false)
+                await supabase
+                    .from('hellochiwa_voice_rooms')
+                    .update({ is_active: false })
+                    .eq('id', currentRoomId);
+            } else {
+                // Oddiy qatnashchi bo'lsa, faqat o'zi participantlar jadvalidan o'chiriladi
+                await supabase
+                    .from('hellochiwa_room_participants')
+                    .delete()
+                    .eq('room_id', currentRoomId)
+                    .eq('user_id', currentUser.id);
+            }
 
             if (realtimeRoomSubscription) {
                 supabase.removeChannel(realtimeRoomSubscription);
@@ -3122,7 +3154,8 @@ if (profileAvatar) {
         });
     }
 
-    // Load initial rooms
+    // Load initial rooms & listen to global updates
     loadVoiceRooms();
+    listenToGlobalRooms();
 
-}); // <--- DOMContentLoaded ning yagona va haqiqiy oxirgi yopilish qavsi shu yerda bo'lishi shart!
+}); // <--- DOMContentLoaded ning oxirgi yopilish qavsi
