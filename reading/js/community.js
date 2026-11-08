@@ -957,7 +957,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         drawer.setAttribute(
             'aria-hidden',
-            'true'
+            'aria-hidden'
         );
 
 
@@ -990,7 +990,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         menuBtn.addEventListener(
             'click',
-            () => {
+            async () => { // <--- async qo'shildi
+
+                // 🛑 TEKshiruv: Menyu bosilganda oldin profil to'liqligi tekshiriladi
+                const hasAccess = await checkCommunityProfileAccess();
+                if (!hasAccess) {
+                    return; // Agar profil to'ldirilmagan bo'lsa, drawer ochilmaydi, setup modal chiqadi
+                }
 
                 if (
                     drawer?.classList.contains('open')
@@ -1028,7 +1034,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         );
 
     }
-
 
     // =====================================================
     // ESC
@@ -2720,80 +2725,121 @@ if (profileAvatar) {
     }
 
 
+ // =====================================================
+    // CHECK COMMUNITY PROFILE ACCESS (MAJBURIY TEKSHIRUV)
+    // =====================================================
+
+    async function checkCommunityProfileAccess() {
+
+        if (!currentUser) {
+            currentUser = await getCurrentUser();
+        }
+
+        if (!currentUser) {
+            return false;
+        }
+
+        const {
+            data: profile,
+            error
+        } = await supabase
+            .from('hellochiwa_users')
+            .select('*')
+            .eq('id', currentUser.id)
+            .maybeSingle();
+
+        if (error) {
+            console.error('Profile access check error:', error);
+            return false;
+        }
+
+        currentProfile = profile;
+
+        // =================================================
+        // PROFILE INCOMPLETE (Agar ma'lumotlar yetishmasa)
+        // =================================================
+
+        if (
+            !isCommunityProfileComplete(
+                profile
+            )
+        ) {
+
+            await openProfileSetup(
+                profile
+            );
+
+            return false; // Ichkariga kiritmaydi, setup modalni ochadi
+
+        }
+
+
+        // =================================================
+        // PROFILE COMPLETE (Hammasi joyida bo'lsa)
+        // =================================================
+
+        if (setupModal) {
+
+            setupModal.hidden = true;
+
+        }
+
+
+        console.log(
+            '=== HELLOCHIWA COMMUNITY ACCESS GRANTED ==='
+        );
+
+        return true;
+
+    }
+
+
     // =====================================================
     // INITIALIZE
     // =====================================================
 
-    showInitialSection();
-
-
-    currentUser =
-        await getCurrentUser();
-
+    currentUser = await getCurrentUser();
 
     if (!currentUser) {
-
-        console.log(
-            'Community: no signed-in user.'
-        );
-
+        console.log('Community: no signed-in user.');
+        alert('Please sign in to use HelloChiwa Community.');
+        window.location.href = '../index.html'; // Tizimda bo'lmasa bosh sahifaga yo'naltiradi
         return;
-
     }
 
 
     // =====================================================
-    // CHECK PROFILE
+    // MOBILE / SAFARI / BFCache
     // =====================================================
 
-    const {
-        data: profile,
-        error
-    } =
-        await supabase
-            .from('hellochiwa_users')
-            .select('*')
-            .eq(
-                'id',
-                currentUser.id
-            )
-            .maybeSingle();
+    window.addEventListener(
+        'pageshow',
+        async event => {
 
+            if (!event.persisted) {
+                return;
+            }
 
-    if (error) {
+            console.log(
+                'Community restored from browser cache.'
+            );
 
-        console.error(
-            'Initial community profile check:',
-            error
-        );
+            await checkCommunityProfileAccess();
 
-        return;
-
-    }
-
-
-    currentProfile =
-        profile;
-
-
-    // =====================================================
-    // FIRST COMMUNITY ENTRY
-    // =====================================================
-
-    if (
-        !isCommunityProfileComplete(profile)
-    ) {
-
-        await openProfileSetup(
-            profile
-        );
-
-    }
-
-
-    console.log(
-        '=== HELLOCHIWA COMMUNITY READY ==='
+        }
     );
+
+
+    // =====================================================
+    // INITIAL PROFILE ACCESS CHECK & START
+    // =====================================================
+
+    const hasAccess = await checkCommunityProfileAccess();
+
+    if (hasAccess) {
+        showInitialSection();
+        console.log('=== HELLOCHIWA COMMUNITY READY ===');
+    }
 
 
     // =====================================================
@@ -2831,4 +2877,252 @@ if (profileAvatar) {
 
     }
 
-});
+
+
+   // =====================================================
+    // VOICEROOMS LOGIC
+    // =====================================================
+
+    let currentRoomId = null;
+    let realtimeRoomSubscription = null;
+
+    const createRoomBtn = document.getElementById('communityCreateRoomBtn');
+    const createRoomModal = document.getElementById('communityCreateRoomModal');
+    const createRoomForm = document.getElementById('communityCreateRoomForm');
+    const closeCreateRoomBtn = document.getElementById('closeCreateRoomBtn');
+    const voiceRoomsList = document.getElementById('communityVoiceRoomsList');
+    const activeRoomPanel = document.getElementById('communityActiveRoomPanel');
+    const leaveRoomBtn = document.getElementById('leaveRoomBtn');
+    const toggleMicBtn = document.getElementById('toggleMicBtn');
+
+    // 1. Fetch & Render Active Rooms
+    async function loadVoiceRooms() {
+        if (!voiceRoomsList) return;
+
+        const { data: rooms, error } = await supabase
+            .from('hellochiwa_voice_rooms')
+            .select('*, hellochiwa_users(full_name)')
+            .eq('is_active', true)
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            console.error('Error loading rooms:', error);
+            return;
+        }
+
+        voiceRoomsList.innerHTML = '';
+
+        if (!rooms || rooms.length === 0) {
+            voiceRoomsList.innerHTML = '<p class="community-empty">No active voice rooms right now. Create one!</p>';
+            return;
+        }
+
+        rooms.forEach(room => {
+            const card = document.createElement('div');
+            card.className = 'community-vr-card';
+            card.innerHTML = `
+                <div class="vr-card-title">${room.title}</div>
+                <div class="vr-card-meta">
+                    <span>🌐 ${room.language.toUpperCase()}</span>
+                    <span>Host: ${room.hellochiwa_users?.full_name || 'User'}</span>
+                </div>
+            `;
+            card.addEventListener('click', () => joinVoiceRoom(room.id, room.title));
+            voiceRoomsList.appendChild(card);
+        });
+    }
+
+    // 2. Create Room
+    if (createRoomBtn) {
+        createRoomBtn.addEventListener('click', () => {
+            createRoomModal.hidden = false;
+            createRoomModal.style.display = 'flex'; // Agar CSS display ishlatsa ochish uchun
+        });
+    }
+
+    if (closeCreateRoomBtn) {
+        closeCreateRoomBtn.addEventListener('click', () => {
+            createRoomModal.hidden = true;
+            createRoomModal.style.display = 'none';
+        });
+    }
+
+    if (createRoomForm) {
+        createRoomForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const title = document.getElementById('roomTitle').value.trim();
+            const language = document.getElementById('roomLanguage').value;
+
+            if (!title) return;
+
+            const { data: room, error } = await supabase
+                .from('hellochiwa_voice_rooms')
+                .insert({
+                    title,
+                    language,
+                    host_id: currentUser.id,
+                    is_active: true
+                })
+                .select()
+                .single();
+
+            if (error) {
+                alert('Could not create room: ' + error.message);
+                return;
+            }
+
+            // MODALNI MAJBURIY YOPISH QISMI
+            if (createRoomModal) {
+                createRoomModal.hidden = true;
+                createRoomModal.style.display = 'none';
+            }
+
+            createRoomForm.reset();
+            await loadVoiceRooms();
+            joinVoiceRoom(room.id, room.title);
+        });
+    }
+    // 3. Join Voice Room & Realtime Listener
+    async function joinVoiceRoom(roomId, title) {
+        currentRoomId = roomId;
+        document.getElementById('liveRoomTitle').textContent = title;
+        activeRoomPanel.hidden = false;
+
+        // Register user in table as participant
+        await supabase.from('hellochiwa_room_participants').upsert({
+            room_id: roomId,
+            user_id: currentUser.id,
+            role: 'speaker',
+            is_muted: true
+        });
+
+        // Subscribe to participant updates in real-time
+        listenToRoomParticipants(roomId);
+        loadRoomParticipants(roomId);
+    }
+
+    // Realtime Listener
+    function listenToRoomParticipants(roomId) {
+        if (realtimeRoomSubscription) {
+            supabase.removeChannel(realtimeRoomSubscription);
+        }
+
+        realtimeRoomSubscription = supabase
+            .channel(`room_${roomId}`)
+            .on('postgres_changes', {
+                event: '*',
+                schema: 'public',
+                table: 'hellochiwa_room_participants',
+                filter: `room_id=eq.${roomId}`
+            }, () => {
+                loadRoomParticipants(roomId);
+            })
+            .subscribe();
+    }
+
+    async function loadRoomParticipants(roomId) {
+    const grid = document.getElementById('vrParticipantsGrid');
+    if (!grid) return;
+
+    const { data: participants, error } = await supabase
+        .from('hellochiwa_room_participants')
+        .select(`
+            *,
+            hellochiwa_users (
+                id,
+                full_name,
+                avatar_url
+            )
+        `)
+        .eq('room_id', roomId);
+
+    if (error) {
+        console.error('Error fetching participants:', error);
+        return;
+    }
+
+    grid.innerHTML = '';
+    (participants || []).forEach(p => {
+        const user = p.hellochiwa_users;
+        const avatarSrc = user?.avatar_url || '';
+        const initial = user?.full_name ? user.full_name.charAt(0).toUpperCase() : 'U';
+
+        const item = document.createElement('div');
+        item.className = 'vr-participant';
+        item.style.cssText = 'display: flex; flex-direction: column; align-items: center; text-align: center;';
+
+        item.innerHTML = `
+            <div class="vr-avatar-wrapper ${!p.is_muted ? 'speaking' : ''}" 
+                 style="position: relative; width: 64px; height: 64px; border-radius: 50%; overflow: hidden; background: #27272a; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff; border: ${!p.is_muted ? '3px solid #22c55e' : '2px solid #3f3f46'};">
+                ${avatarSrc 
+                    ? `<img src="${avatarSrc}" alt="${user?.full_name || 'User'}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;" />`
+                    : `<span>${initial}</span>`
+                }
+                <span class="vr-mic-badge" style="position: absolute; bottom: 2px; right: 2px; background: rgba(0, 0, 0, 0.75); border-radius: 50%; padding: 2px 4px; font-size: 11px;">
+                    ${p.is_muted ? '🔇' : '🎙️'}
+                </span>
+            </div>
+            <span style="font-size: 12px; color: #fff; margin-top: 6px; max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                ${user?.full_name || 'User'}
+            </span>
+        `;
+        grid.appendChild(item);
+    });
+}
+
+    // Mic Toggle Logic
+    if (toggleMicBtn) {
+        toggleMicBtn.addEventListener('click', async () => {
+            if (!currentRoomId || !currentUser) return;
+
+            const isCurrentlyMuted = toggleMicBtn.classList.contains('muted');
+            const newMutedState = !isCurrentlyMuted;
+
+            const { error } = await supabase
+                .from('hellochiwa_room_participants')
+                .update({ is_muted: newMutedState })
+                .eq('room_id', currentRoomId)
+                .eq('user_id', currentUser.id);
+
+            if (error) {
+                console.error('Mic toggle error:', error);
+                return;
+            }
+
+            if (newMutedState) {
+                toggleMicBtn.classList.add('muted');
+                toggleMicBtn.classList.remove('active');
+                document.getElementById('micStatusText').textContent = 'Unmute Mic';
+            } else {
+                toggleMicBtn.classList.remove('muted');
+                toggleMicBtn.classList.add('active');
+                document.getElementById('micStatusText').textContent = 'Mute Mic';
+            }
+        });
+    }
+
+    // 4. Leave Room
+    if (leaveRoomBtn) {
+        leaveRoomBtn.addEventListener('click', async () => {
+            if (!currentRoomId) return;
+
+            await supabase
+                .from('hellochiwa_room_participants')
+                .delete()
+                .eq('room_id', currentRoomId)
+                .eq('user_id', currentUser.id);
+
+            if (realtimeRoomSubscription) {
+                supabase.removeChannel(realtimeRoomSubscription);
+            }
+
+            currentRoomId = null;
+            activeRoomPanel.hidden = true;
+            loadVoiceRooms();
+        });
+    }
+
+    // Load initial rooms
+    loadVoiceRooms();
+
+}); // <--- DOMContentLoaded ning yagona va haqiqiy oxirgi yopilish qavsi shu yerda bo'lishi shart!

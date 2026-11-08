@@ -2220,3 +2220,133 @@ select:focus-visible {
     }
 
 }
+
+/* Voice Rooms Layout */
+.community-vr-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.community-vr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.community-vr-card {
+    background: #1e1e24;
+    border: 1px solid #2e2e38;
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.community-vr-card:hover {
+    transform: translateY(-2px);
+    border-color: #4f46e5;
+}
+
+.vr-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.vr-card-meta {
+    font-size: 0.85rem;
+    color: #a1a1aa;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Active Live Panel */
+.community-vr-live-panel {
+    background: #141419;
+    border: 1px solid #333340;
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.vr-live-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.badge-live {
+    background: #ef4444;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+.vr-participants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.vr-participant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vr-avatar-wrapper {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #27272a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #fff;
+}
+
+.vr-avatar-wrapper.speaking {
+    border: 3px solid #22c55e;
+    box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+}
+
+.vr-mic-badge {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    padding: 2px;
+    font-size: 12px;
+}
+
+.vr-controls {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.vr-control-btn {
+    background: #3f3f46;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.vr-control-btn.active {
+    background: #22c55e;
+}
